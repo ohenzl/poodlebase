@@ -1,3 +1,8 @@
-# index:
-#    path: /
-#    controller: App\Controller\HomeController::homepage
+index:
+   path: /
+   controller: App\Controller\HomeController::homepage
+
+
+show:
+   path: /show
+   controller: App\Controller\HomeController::show
