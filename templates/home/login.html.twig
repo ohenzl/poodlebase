@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+{# This will be a comment
+<h1>{{question}}</h1>
+#}
+
+<form action="/logged" method='post'>
+  <label for="name">First name:</label><br>
+  <input type="text" id="fname" name="name"><br>
+  <label for="name">Password:</label><br>
+  <input type="password" id="pw" name="password"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

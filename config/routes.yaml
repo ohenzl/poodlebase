@@ -6,3 +6,12 @@ index:
 show:
    path: /show
    controller: App\Controller\HomeController::show
+
+
+login:
+   path: /login
+   controller: App\Controller\HomeController::login
+
+logged:
+   path: /logged
+   controller: App\Controller\HomeController::logged

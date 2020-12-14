@@ -18,6 +18,26 @@ class HomeController extends AbstractController {
     ]);
 
   }
+
+  public function login() {
+
+    return $this->render('home/login.html.twig', [
+      'question' => 'hey how are you'
+    ]);
+
+  }
+
+  public function logged() {
+
+    require_once('../src/scripts/login.php');
+
+    $person = checkLoginInformation($_POST["name"], $_POST["password"]);
+
+    return $this->render('home/logged.html.twig', [
+      'person' => $person,
+    ]);
+
+  }
 }
 
  ?>
