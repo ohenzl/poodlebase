@@ -1,13 +1,17 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}
+  Welcome {{app.session.get('name')}}!
+{% endblock %}
 
 {% block body %}
-{# This will be a comment
-<h1>{{question}}</h1>
-#}
 
-<div>
-  logging in mr. {{person.name}} and your password is {{person.password}}
-</div>
+  {# This will be a comment
+  <h1>{{question}}</h1>
+  #}
+
+  <div>
+    logging in mr. {{app.session.get('name')}}
+  </div>
 
 {% endblock %}

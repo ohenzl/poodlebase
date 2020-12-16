@@ -4,8 +4,18 @@ namespace App\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+// use Symfony\Component\HttpFoundation\Session\Session;
 
 class HomeController extends AbstractController {
+
+  private $session;
+
+  public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+
   public function homepage() {
 
     return new Response('ASDFG');
@@ -22,21 +32,35 @@ class HomeController extends AbstractController {
   public function login() {
 
     return $this->render('home/login.html.twig', [
-      'question' => 'hey how are you'
     ]);
-
   }
 
   public function logged() {
 
-    require_once('../src/scripts/login.php');
+    if ($this->session->get('logged') === false) {
+      require_once('../src/scripts/login.php');
+      checkLoginInformation($_POST["name"], $_POST["password"], $this->session);
+    }
 
-    $person = checkLoginInformation($_POST["name"], $_POST["password"]);
+    // echo $this->session->get('logged');
+    // echo "<br>mezera<br>";
+    // echo $this->session->get('name');
 
-    return $this->render('home/logged.html.twig', [
-      'person' => $person,
+    // if ($this->session->get('logged') === 'true') {
+      return $this->render('home/logged.html.twig', [
+        // 'person' => $this->session
+      ]);
+    // } else {
+    //   return $this->render('home/login.html.twig', [
+    //   ]);
+    // }
+  }
+
+  public function logout() {
+    $this->session->set('logged', false);
+    $this->session->set('name', '');
+    return $this->render('home/login.html.twig', [
     ]);
-
   }
 }
 
