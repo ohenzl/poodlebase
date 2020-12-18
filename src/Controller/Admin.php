@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class Admin extends AbstractController {
 
+  // require_once('../src/scripts/logincheck.php');
+
+  // require '../src/scripts/logincheck.php';
+
   public $session;
 
   public function __construct(SessionInterface $session)
@@ -17,8 +21,7 @@ class Admin extends AbstractController {
     }
 
   public function admin() {
-
-
+    // loginCheck();
     // $sql = "SELECT count(login) FROM login WHERE datum > '$datum_past' AND IP = '$ip' AND SUCCESS = '0'";
     // $result = $conn->query($sql);
     // if ($result->num_rows > 0) {
@@ -35,6 +38,25 @@ class Admin extends AbstractController {
     }
 
   }
+
+  public function add() {
+    // $sql = "SELECT count(login) FROM login WHERE datum > '$datum_past' AND IP = '$ip' AND SUCCESS = '0'";
+    // $result = $conn->query($sql);
+    // if ($result->num_rows > 0) {
+    //     while($row = $result->fetch_assoc()) {
+    //       $pocet_prihlaseni = $row['count(login)'];
+    //   }
+    // }
+    if ($this->session->get('logged') === true) {
+    return $this->render('home/admin.html.twig', [
+      'admin' => $this->session->get('level')
+    ]);
+    } else {
+      return $this->redirectToRoute('show');
+    }
+  }
+
+
 }
 
  ?>

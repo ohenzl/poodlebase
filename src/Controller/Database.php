@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class Database extends AbstractController {
   public function database() {
 
-    require_once('../src/scripts/login.php');
+    // require_once('../src/scripts/login.php');
 
 
     // $sql = "SELECT count(login) FROM login WHERE datum > '$datum_past' AND IP = '$ip' AND SUCCESS = '0'";
