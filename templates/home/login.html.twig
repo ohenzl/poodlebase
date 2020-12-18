@@ -3,6 +3,12 @@
 
 {% block body %}
 
+{% if error != 0 %}
+
+  {{error}}
+
+{% endif %}
+
 
 <form action="/logged" method='post'>
   <label for="name">First name:</label><br>

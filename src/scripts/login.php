@@ -17,6 +17,7 @@
     $person->name = $name;
     $person->password = $password;
 
+    $error = 0;
     $date = date("Y-m-d H:i:s");
     require 'data.php';
     $datum = strtotime('now') ;
@@ -35,7 +36,7 @@
 
     //logika přihlášení
     if ($pocet_prihlaseni < 5) {
-      $sql = "SELECT jmeno, heslo FROM users WHERE username = '$person->name'";
+      $sql = "SELECT jmeno, heslo, level FROM users WHERE username = '$person->name'";
       $result = $conn->query($sql);
       // echo var_dump($result);
       // echo "number of rows: " . $result->num_rows;
@@ -43,14 +44,17 @@
           while($row = $result->fetch_assoc()) {
           if (password_verify($person->password, $row['heslo'])) {
             $session->set('name', $row['jmeno']);
+            $session->set('level', $row['level']);
             $session->set('logged', true);
           } else {
             $session->set('logged', false);
+            $error = 1;
             break;
           }
         }
       } else {
         $session->set('logged', false);
+        $error = 1;
       }
       //zápis přihlášení do databáze
       $success = $session->get('logged');
@@ -58,8 +62,9 @@
       $result = $conn->query($sql);
       $conn->close();
     } else {
-      echo "překročen počet přihlášení";
+      $error = 2;
     }
+    return $error;
   }
 
  ?>

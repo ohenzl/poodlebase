@@ -12,13 +12,19 @@
     <body>
 
       <nav>
+        <div>
+          <a href='../database'>databáze</a>
+        </div>
+        <div>
+          <a href='../chs'>chovné stanice</a>
+        </div>
       {% if app.session.get('logged') == false %}
         <div>
           <a href='../login'>login</a>
         </div>
       {% else %}
         <div>
-          <a href='../login'>admin</a>
+          <a href='../admin'>admin</a>
         </div>
         <div>
           <a href='../logout'>logout</a>

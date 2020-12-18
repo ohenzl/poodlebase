@@ -19,3 +19,11 @@ logged:
 logout:
    path: /logout
    controller: App\Controller\HomeController::logout
+
+database:
+  path: /database
+  controller: App\Controller\Database::database
+
+admin:
+  path: /admin
+  controller: App\Controller\Admin::admin
