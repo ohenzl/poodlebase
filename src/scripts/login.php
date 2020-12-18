@@ -7,6 +7,10 @@
     public $password;
   }
 
+  function failedLogin() {
+
+  }
+
   function checkLoginInformation($name, $password, $session) {
 
     $person = new Person;
@@ -20,7 +24,8 @@
     $ip = $_SERVER["REMOTE_ADDR"];
 
 
-    $sql = "SELECT count(login) FROM login WHERE datum > '$datum_past' AND IP = '$ip'";
+    //kontrola počtu přihlášení
+    $sql = "SELECT count(login) FROM login WHERE datum > '$datum_past' AND IP = '$ip' AND SUCCESS = '0'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -28,20 +33,29 @@
       }
     }
 
+    //logika přihlášení
     if ($pocet_prihlaseni < 5) {
-      $sql = "SELECT jmeno FROM users WHERE username = '$person->name' and heslo = '$person->password'";
+      $sql = "SELECT jmeno, heslo FROM users WHERE username = '$person->name'";
       $result = $conn->query($sql);
+      // echo var_dump($result);
+      // echo "number of rows: " . $result->num_rows;
       if ($result->num_rows > 0) {
           while($row = $result->fetch_assoc()) {
+          if (password_verify($person->password, $row['heslo'])) {
             $session->set('name', $row['jmeno']);
             $session->set('logged', true);
+          } else {
+            $session->set('logged', false);
+            break;
+          }
         }
       } else {
-        $sql = "INSERT INTO login (IP, datum, login) VALUES ('$ip', '$date', '$person->name')";
-        $result = $conn->query($sql);
         $session->set('logged', false);
-        die;
       }
+      //zápis přihlášení do databáze
+      $success = $session->get('logged');
+      $sql = "INSERT INTO login (IP, datum, login, success) VALUES ('$ip', '$date', '$person->name', '$success')";
+      $result = $conn->query($sql);
       $conn->close();
     } else {
       echo "překročen počet přihlášení";

@@ -6,14 +6,32 @@
           {% block title %}Welcome!{% endblock %}
         </title>
         {% block stylesheets %}
-        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body>
+
       <nav>
-        <a href='../login'>login</a>
+      {% if app.session.get('logged') == false %}
+        <div>
+          <a href='../login'>login</a>
+        </div>
+      {% else %}
+        <div>
+          <a href='../login'>admin</a>
+        </div>
+        <div>
+          <a href='../logout'>logout</a>
+        </div>
+        <div style='flex-basis:100px;'>
+          logged in as {{app.session.get('name')}}
+        </div>
+      {% endif %}
       </nav>
+
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>

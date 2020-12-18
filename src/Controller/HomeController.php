@@ -42,18 +42,14 @@ class HomeController extends AbstractController {
       checkLoginInformation($_POST["name"], $_POST["password"], $this->session);
     }
 
-    // echo $this->session->get('logged');
-    // echo "<br>mezera<br>";
-    // echo $this->session->get('name');
 
-    // if ($this->session->get('logged') === 'true') {
+    if ($this->session->get('logged') === true) {
       return $this->render('home/logged.html.twig', [
-        // 'person' => $this->session
       ]);
-    // } else {
-    //   return $this->render('home/login.html.twig', [
-    //   ]);
-    // }
+    } else {
+      return $this->render('home/login.html.twig', [
+      ]);
+    }
   }
 
   public function logout() {
