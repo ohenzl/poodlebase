@@ -10,7 +10,7 @@ show:
 
 login:
    path: /login
-   controller: App\Controller\HomeController::login
+   controller: App\Controller\AuthController::login
 
 logged:
    path: /logged
