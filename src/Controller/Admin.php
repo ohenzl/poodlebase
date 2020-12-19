@@ -29,13 +29,9 @@ class Admin extends AbstractController {
     //       $pocet_prihlaseni = $row['count(login)'];
     //   }
     // }
-    if ($this->session->get('logged') === true) {
     return $this->render('home/admin.html.twig', [
       'admin' => $this->session->get('level')
     ]);
-    } else {
-      return $this->redirectToRoute('show');
-    }
 
   }
 

@@ -19,7 +19,8 @@ class HomeController extends AbstractController {
 
   public function homepage() {
 
-    return new Response('ASDFG');
+    return $this->render('base.html.twig', [
+    ]);
   }
 
   public function show() {

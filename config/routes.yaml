@@ -16,9 +16,6 @@ logged:
    path: /logged
    controller: App\Controller\HomeController::logged
 
-logout:
-   path: /logout
-   controller: App\Controller\HomeController::logout
 
 database:
   path: /database

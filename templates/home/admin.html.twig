@@ -5,7 +5,11 @@
 
 
 <div>
-  Tvoje úroveň je {{admin}}
+  Tvoje úroveň je
+  {% if app.user.roles.0 == 'ROLE_SUPERADMIN' %}
+  superadmin
+  <!-- {{dump(app.user)}} -->
+  {% endif %}
 </div>
 <div>
   Přidat psa
