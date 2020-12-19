@@ -20,12 +20,11 @@ class AuthController extends AbstractController
         if (!$bruteForceChecker->canLogin($request)) {
             return new Response('Too many login attempts');
         }
-        $msg = $bruteForceChecker->canLogin($request);
-        $error = $authenticationUtils->getLastAuthenticationError();
 
+        $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error, 'msg' => $msg]);
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 
 
