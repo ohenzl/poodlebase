@@ -1,8 +1,24 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+{{ encore_entry_link_tags('admin') }}
+{% endblock %}
 
 {% block body %}
 
+  <h1>Vrh</h1>
+  <h2>Rodiče</h2>
+  <label for="inputUsername">Otec</label>
+  <input type="text" value="" name="otec" id="otec" class="form-add" required autofocus>
+  <label for="inputPassword">Matka</label>
+  <input type="password" name="matka" id="matka" class="form-add" required>
+  <label for="inputUsername">Datum narození</label>
+  <input type="text" value="" name="datum_narozeni" id="datum_narozeni" class="form-add" required autofocus>
 
+
+  <label for="inputPassword">Chovatelská stanice</label>
+  <input type="password" name="chovka" id="chovka" class="form-add" required>
+  <label for="inputUsername">Chovatel</label>
+  <input type="text" value="" name="chovatel" id="chovatel" class="form-add" required autofocus>
 
 {% endblock %}

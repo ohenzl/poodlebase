@@ -32,18 +32,13 @@ class Admin extends AbstractController {
     return $this->render('home/admin.html.twig', [
       'admin' => $this->session->get('level')
     ]);
-
   }
 
   public function add() {
 
-    if ($this->session->get('logged') === true) {
-    return $this->render('home/admin.html.twig', [
+    return $this->render('home/admin/add.html.twig', [
       'admin' => $this->session->get('level')
     ]);
-    } else {
-      return $this->redirectToRoute('show');
-    }
   }
 
 
