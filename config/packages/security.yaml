@@ -1,4 +1,5 @@
 security:
+    enable_authenticator_manager: true
     encoders:
         App\Entity\User:
             algorithm: auto
@@ -16,9 +17,13 @@ security:
         ROLE_SUPERADMIN: [ROLE_ADMIN]
 
     firewalls:
+        default:
+          login_throttling: ~
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+            
         main:
             anonymous: true
             lazy: true
