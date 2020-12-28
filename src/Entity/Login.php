@@ -49,5 +49,58 @@ class Login
      */
     private $success;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getDatum(): ?\DateTimeInterface
+    {
+        return $this->datum;
+    }
+
+    public function setDatum(\DateTimeInterface $datum): self
+    {
+        $this->datum = $datum;
+
+        return $this;
+    }
+
+    public function getIp(): ?string
+    {
+        return $this->ip;
+    }
+
+    public function setIp(string $ip): self
+    {
+        $this->ip = $ip;
+
+        return $this;
+    }
+
+    public function getLogin(): ?string
+    {
+        return $this->login;
+    }
+
+    public function setLogin(string $login): self
+    {
+        $this->login = $login;
+
+        return $this;
+    }
+
+    public function getSuccess(): ?bool
+    {
+        return $this->success;
+    }
+
+    public function setSuccess(bool $success): self
+    {
+        $this->success = $success;
+
+        return $this;
+    }
+
 
 }

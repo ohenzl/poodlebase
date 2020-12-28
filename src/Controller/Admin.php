@@ -36,15 +36,21 @@ class Admin extends AbstractController {
 
   public function add() {
 
-    $product = $this->getDoctrine()
-            ->getRepository(FormAdd::class)
-            ->find($name);
+    // $name = 'narozeni';
+    $form = $this->getDoctrine()
+                ->getRepository(FormAdd::class)->findAll();
+            // ->getRepository(FormAdd::class)->findAll()[0]->getName();
+            // ->find($name);
 
+    // $repository = $this->getDoctrine()->getRepository(FormAdd::class);
+
+    // $product = $repository->find($id);
     // require_once('../src/scripts/form.php');
 
     // $conn->close();
 
     return $this->render('home/admin/add.html.twig', [
+      'forms' => $form
     ]);
   }
 

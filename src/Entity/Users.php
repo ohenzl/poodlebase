@@ -56,5 +56,70 @@ class Users
      */
     private $level;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getJmeno(): ?string
+    {
+        return $this->jmeno;
+    }
+
+    public function setJmeno(string $jmeno): self
+    {
+        $this->jmeno = $jmeno;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getHeslo(): ?string
+    {
+        return $this->heslo;
+    }
+
+    public function setHeslo(string $heslo): self
+    {
+        $this->heslo = $heslo;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getLevel(): ?int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(int $level): self
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
 
 }

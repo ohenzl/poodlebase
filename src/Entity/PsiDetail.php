@@ -63,5 +63,82 @@ class PsiDetail
      */
     private $vlozOsoba;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getVã½å¡ka(): ?string
+    {
+        return $this->vã½å¡ka;
+    }
+
+    public function setVã½å¡ka(string $vã½å¡ka): self
+    {
+        $this->vã½å¡ka = $vã½å¡ka;
+
+        return $this;
+    }
+
+    public function getPå™ezdã­vka(): ?string
+    {
+        return $this->på™ezdã­vka;
+    }
+
+    public function setPå™ezdã­vka(string $på™ezdã­vka): self
+    {
+        $this->på™ezdã­vka = $på™ezdã­vka;
+
+        return $this;
+    }
+
+    public function getMajitel(): ?int
+    {
+        return $this->majitel;
+    }
+
+    public function setMajitel(int $majitel): self
+    {
+        $this->majitel = $majitel;
+
+        return $this;
+    }
+
+    public function getWeb(): ?string
+    {
+        return $this->web;
+    }
+
+    public function setWeb(string $web): self
+    {
+        $this->web = $web;
+
+        return $this;
+    }
+
+    public function getVlozDatum(): ?\DateTimeInterface
+    {
+        return $this->vlozDatum;
+    }
+
+    public function setVlozDatum(\DateTimeInterface $vlozDatum): self
+    {
+        $this->vlozDatum = $vlozDatum;
+
+        return $this;
+    }
+
+    public function getVlozOsoba(): ?int
+    {
+        return $this->vlozOsoba;
+    }
+
+    public function setVlozOsoba(int $vlozOsoba): self
+    {
+        $this->vlozOsoba = $vlozOsoba;
+
+        return $this;
+    }
+
 
 }

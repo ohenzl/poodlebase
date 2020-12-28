@@ -57,5 +57,76 @@ class FormAdd
      */
     private $required;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getNadrazeny(): ?string
+    {
+        return $this->nadrazeny;
+    }
+
+    public function setNadrazeny(string $nadrazeny): self
+    {
+        $this->nadrazeny = $nadrazeny;
+
+        return $this;
+    }
+
+    public function getSubnadpis(): ?string
+    {
+        return $this->subnadpis;
+    }
+
+    public function setSubnadpis(string $subnadpis): self
+    {
+        $this->subnadpis = $subnadpis;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getLabel(): ?string
+    {
+        return $this->label;
+    }
+
+    public function setLabel(string $label): self
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    public function getRequired(): ?string
+    {
+        return $this->required;
+    }
+
+    public function setRequired(string $required): self
+    {
+        $this->required = $required;
+
+        return $this;
+    }
+
+    public function getLine(): ?string
+    {
+      $line = "<label for='{$this->name}'>{$this->label}</label>
+               <input type='text' value='' name='{$this->name}' id='{$this->name}' class='form-add' {$this->required}>";
+        return $line;
+    }
 
 }

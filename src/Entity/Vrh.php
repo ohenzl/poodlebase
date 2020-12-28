@@ -70,5 +70,94 @@ class Vrh
      */
     private $vlozOsoba;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getOtec(): ?int
+    {
+        return $this->otec;
+    }
+
+    public function setOtec(int $otec): self
+    {
+        $this->otec = $otec;
+
+        return $this;
+    }
+
+    public function getMatka(): ?int
+    {
+        return $this->matka;
+    }
+
+    public function setMatka(int $matka): self
+    {
+        $this->matka = $matka;
+
+        return $this;
+    }
+
+    public function getNarozeni(): ?\DateTimeInterface
+    {
+        return $this->narozeni;
+    }
+
+    public function setNarozeni(\DateTimeInterface $narozeni): self
+    {
+        $this->narozeni = $narozeni;
+
+        return $this;
+    }
+
+    public function getStanice(): ?int
+    {
+        return $this->stanice;
+    }
+
+    public function setStanice(int $stanice): self
+    {
+        $this->stanice = $stanice;
+
+        return $this;
+    }
+
+    public function getChovatel(): ?int
+    {
+        return $this->chovatel;
+    }
+
+    public function setChovatel(int $chovatel): self
+    {
+        $this->chovatel = $chovatel;
+
+        return $this;
+    }
+
+    public function getVlozDatum(): ?\DateTimeInterface
+    {
+        return $this->vlozDatum;
+    }
+
+    public function setVlozDatum(\DateTimeInterface $vlozDatum): self
+    {
+        $this->vlozDatum = $vlozDatum;
+
+        return $this;
+    }
+
+    public function getVlozOsoba(): ?int
+    {
+        return $this->vlozOsoba;
+    }
+
+    public function setVlozOsoba(int $vlozOsoba): self
+    {
+        $this->vlozOsoba = $vlozOsoba;
+
+        return $this;
+    }
+
 
 }

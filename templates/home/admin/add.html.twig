@@ -11,11 +11,36 @@
 
 {% block body %}
 
-  <h1>Vrh</h1>
-  <br>
-  <form action="/action_page.php">
-    <label for="narozeni">Datum narozeni</label>
-    <input type="text" value="" name="narozeni" id="narozeni" class="form-add" required>
+  <!-- {{ dump(forms) }} -->
+
+{% set nadpis = '' %}
+{% set podnadpis = '' %}
+
+  <form action="/action_page.php" method="post">
+
+    {% for form in forms %}
+
+      {# Nadpis #}
+      {% if nadpis != form.getNadrazeny() %}
+        <h1>{{form.getNadrazeny()}}</h1>
+        {% set nadpis = form.getNadrazeny() %}
+
+      {% endif %}
+
+      {# Podnadpis #}
+      {% if podnadpis != form.getSubnadpis() %}
+        <h2>{{form.getSubnadpis()}}</h2>
+        {% set podnadpis = form.getSubnadpis() %}
+      {% endif %}
+
+      <label for="{{form.getName()}}">{{form.getLabel()}}</label>
+      <input type="text" value="" name="{{form.getName()}}" id="{{form.getName()}}" class="form-add" {{form.getRequired()}}>
+      <br>
+
+    {% endfor %}
+
+    <!-- <label for="narozeni">Datum narozeni</label>
+    <input type="text" value="" name="narozeni" id="narozeni" class="form-add" required=>
     <h2>Rodiče</h2>
     <h3>Otec</h3>
     <label for="otec">Jméno</label>
@@ -35,8 +60,8 @@
     <label for="inputUsername">Chovatel jméno</label>
     <input type="text" value="" name="chovatel_jmeno" id="chovatel_jmeno" class="form-add">
     <label for="inputUsername">Chovatel příjmení</label>
-    <input type="text" value="" name="chovatel_prijmeni" id="chovatel_prijmeni" class="form-add">
+    <input type="text" value="" name="chovatel_prijmeni" id="chovatel_prijmeni" class="form-add"> -->
 
-    <input type="submit" disabled>
+    <input type="submit">
   </form>
 {% endblock %}

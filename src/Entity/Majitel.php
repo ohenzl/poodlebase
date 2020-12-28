@@ -77,5 +77,106 @@ class Majitel
      */
     private $vlozOsoba;
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getJmeno(): ?string
+    {
+        return $this->jmeno;
+    }
+
+    public function setJmeno(string $jmeno): self
+    {
+        $this->jmeno = $jmeno;
+
+        return $this;
+    }
+
+    public function getPrijmeni(): ?string
+    {
+        return $this->prijmeni;
+    }
+
+    public function setPrijmeni(string $prijmeni): self
+    {
+        $this->prijmeni = $prijmeni;
+
+        return $this;
+    }
+
+    public function getTelefon(): ?string
+    {
+        return $this->telefon;
+    }
+
+    public function setTelefon(string $telefon): self
+    {
+        $this->telefon = $telefon;
+
+        return $this;
+    }
+
+    public function getAdresa(): ?string
+    {
+        return $this->adresa;
+    }
+
+    public function setAdresa(string $adresa): self
+    {
+        $this->adresa = $adresa;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getWeb(): ?string
+    {
+        return $this->web;
+    }
+
+    public function setWeb(string $web): self
+    {
+        $this->web = $web;
+
+        return $this;
+    }
+
+    public function getVlozDatum(): ?\DateTimeInterface
+    {
+        return $this->vlozDatum;
+    }
+
+    public function setVlozDatum(\DateTimeInterface $vlozDatum): self
+    {
+        $this->vlozDatum = $vlozDatum;
+
+        return $this;
+    }
+
+    public function getVlozOsoba(): ?int
+    {
+        return $this->vlozOsoba;
+    }
+
+    public function setVlozOsoba(int $vlozOsoba): self
+    {
+        $this->vlozOsoba = $vlozOsoba;
+
+        return $this;
+    }
+
 
 }
