@@ -34,7 +34,7 @@
       {% endif %}
 
       <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-      <input type="text" value="" name="{{form.getName()}}" id="{{form.getName()}}" class="form-add" {{form.getRequired()}}>
+      <input type="text" value="{{form.getValue()}}" name="{{form.getName()}}" id="{{form.getName()}}" class="form-add" {{form.getRequired()}}>
       <br>
 
     {% endfor %}
