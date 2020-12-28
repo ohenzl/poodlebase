@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use App\Entity\FormAdd;
 
 class Admin extends AbstractController {
 
@@ -30,14 +31,20 @@ class Admin extends AbstractController {
     //   }
     // }
     return $this->render('home/admin.html.twig', [
-      'admin' => $this->session->get('level')
     ]);
   }
 
   public function add() {
 
+    $product = $this->getDoctrine()
+            ->getRepository(FormAdd::class)
+            ->find($name);
+
+    // require_once('../src/scripts/form.php');
+
+    // $conn->close();
+
     return $this->render('home/admin/add.html.twig', [
-      'admin' => $this->session->get('level')
     ]);
   }
 
