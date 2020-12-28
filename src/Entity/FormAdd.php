@@ -57,6 +57,13 @@ class FormAdd
      */
     private $required;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="value", type="string", length=30, nullable=false)
+     */
+    private $value;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,11 +129,17 @@ class FormAdd
         return $this;
     }
 
-    public function getLine(): ?string
+    public function getValue(): ?string
     {
-      $line = "<label for='{$this->name}'>{$this->label}</label>
-               <input type='text' value='' name='{$this->name}' id='{$this->name}' class='form-add' {$this->required}>";
-        return $line;
+        return $this->value;
     }
+
+    public function setValue(string $value): self
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
 
 }

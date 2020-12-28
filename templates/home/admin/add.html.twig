@@ -6,17 +6,17 @@
 {% endblock %}
 
 {% block stylesheets %}
-  {{ encore_entry_link_tags('admin') }}
+  {{ encore_entry_link_tags('form_check') }}
 {% endblock %}
 
 {% block body %}
 
   <!-- {{ dump(forms) }} -->
 
-{% set nadpis = '' %}
-{% set podnadpis = '' %}
+{% set nadpis = 'default' %}
+{% set podnadpis = 'default' %}
 
-  <form action="/action_page.php" method="post">
+  <form action="/adding.php" method="post" class='form'>
 
     {% for form in forms %}
 
@@ -30,15 +30,26 @@
       {# Podnadpis #}
       {% if podnadpis != form.getSubnadpis() %}
         <h2>{{form.getSubnadpis()}}</h2>
+                <div>
         {% set podnadpis = form.getSubnadpis() %}
       {% endif %}
 
-      <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-      <input type="text" value="{{form.getValue()}}" name="{{form.getName()}}" id="{{form.getName()}}" class="form-add" {{form.getRequired()}}>
+      {% if form.getName() == 'CMKU' %}
+        <label for="CMKU_pref">Prefix zápisu</label>
+        <input type="text" value="{{form.getValue()}}" name="CMKU_pref" id="CMKU_pref" class="form-add" {{form.getRequired()}}>
+        <br>
+        <label for="{{form.getName()}}">{{form.getLabel()}}</label>
+        <input type="text" value="" name="{{form.getName()}}" id="{{form.getName()}}" class="form-add" {{form.getRequired()}}>
+
+      {% else %}
+        <label for="{{form.getName()}}">{{form.getLabel()}}</label>
+        <input type="text" value="{{form.getValue()}}" name="{{form.getName()}}" id="{{form.getName()}}" class="form-add" {{form.getRequired()}}>
+      {% endif %}
+
       <br>
 
     {% endfor %}
-
+  </div>
     <!-- <label for="narozeni">Datum narozeni</label>
     <input type="text" value="" name="narozeni" id="narozeni" class="form-add" required=>
     <h2>Rodiče</h2>
@@ -64,4 +75,10 @@
 
     <input type="submit">
   </form>
+  <button>Zkontrolovat</button>
+{% endblock %}
+
+
+{% block javascripts %}
+{{ encore_entry_script_tags('app') }}
 {% endblock %}

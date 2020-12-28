@@ -28,3 +28,7 @@ admin:
 add:
   path: /admin/add
   controller: App\Controller\Admin::add
+
+adding:
+  path: /admin/adding
+  controller: App\Controller\Admin::adding

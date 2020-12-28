@@ -54,6 +54,14 @@ class Admin extends AbstractController {
     ]);
   }
 
+  public function adding() {
+
+
+    return $this->render('home/admin/add.html.twig', [
+      'forms' => $form
+    ]);
+  }
+
 
 }
 
