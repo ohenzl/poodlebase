@@ -1,14 +1,13 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
+let body = document.getElementById('pridatButton');
+body.addEventListener('click', pridatPsa);
 
-// any CSS you import will output into a single css file (app.css in this case)
-// import './styles/app.scss';
-
-// Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
-// import $ from 'jquery';
-
-// console.log('Hello Webpack Encore! Edit me in assets/app.js');
+function pridatPsa() {
+  pes = document.getElementsByClassName('Psi');
+  let newPes = pes[(pes.length-1)].cloneNode(true);
+    newPes.getElementsByClassName('form-add').forEach(changeNumber => {
+      changeNumber.name = changeNumber.name.slice(0, -1) + ((changeNumber.name.slice(-1)*1)+1)
+    })
+  let nadpis = newPes.getElementsByClassName('subnadpis')[0].innerHTML;
+  newPes.getElementsByClassName('subnadpis')[0].innerHTML = nadpis.slice(0, -1) + ((nadpis.slice(-1)*1)+1);
+  document.getElementById("form").appendChild(newPes);
+}

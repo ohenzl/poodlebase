@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-  {{ encore_entry_link_tags('form_check') }}
+  {{ encore_entry_link_tags('admin') }}
 {% endblock %}
 
 {% block body %}
@@ -15,70 +15,49 @@
 
 {% set nadpis = 'default' %}
 {% set podnadpis = 'default' %}
-
-  <form action="/adding.php" method="post" class='form'>
+{% set counter = 0 %}
+  <form action="/admin/adding" method="post" class='form'>
+    <div id='form'>
+    <div>
 
     {% for form in forms %}
 
       {# Nadpis #}
       {% if nadpis != form.getNadrazeny() %}
-        <h1>{{form.getNadrazeny()}}</h1>
+        </div>
+          <h1>{{form.getNadrazeny()}}</h1>
+        <div class='{{form.getNadrazeny()}}'>
         {% set nadpis = form.getNadrazeny() %}
-
+        {% set counter = counter + 1 %}
       {% endif %}
-
       {# Podnadpis #}
       {% if podnadpis != form.getSubnadpis() %}
-        <h2>{{form.getSubnadpis()}}</h2>
-                <div>
+        <h2 class='subnadpis'>{{form.getSubnadpis()}}</h2>
         {% set podnadpis = form.getSubnadpis() %}
       {% endif %}
-
       {% if form.getName() == 'CMKU' %}
         <label for="CMKU_pref">Prefix zápisu</label>
-        <input type="text" value="{{form.getValue()}}" name="CMKU_pref" id="CMKU_pref" class="form-add" {{form.getRequired()}}>
+        <input type="text" value="{{form.getValue()}}" name="CMKU_pref{{ counter }}" id="CMKU_pref{{ counter }}" class="form-add" {{form.getRequired()}}>
         <br>
         <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-        <input type="text" value="" name="{{form.getName()}}" id="{{form.getName()}}" class="form-add" {{form.getRequired()}}>
-
+        <input type="text" value="" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add" {{form.getRequired()}}>
       {% else %}
         <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-        <input type="text" value="{{form.getValue()}}" name="{{form.getName()}}" id="{{form.getName()}}" class="form-add" {{form.getRequired()}}>
+        <input type="text" value="{{form.getValue()}}" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add" {{form.getRequired()}}>
       {% endif %}
 
       <br>
 
     {% endfor %}
+    </div>
   </div>
-    <!-- <label for="narozeni">Datum narozeni</label>
-    <input type="text" value="" name="narozeni" id="narozeni" class="form-add" required=>
-    <h2>Rodiče</h2>
-    <h3>Otec</h3>
-    <label for="otec">Jméno</label>
-    <input type="text" value="" name="otec" id="otec" class="form-add">
-    <label for="otec_chov">Chovatelská stanice</label>
-    <input type="text" value="" name="otec_chov" id="otec_chov" class="form-add">
-    <br>
-    <h3>Matka</h3>
-    <label for="inputPassword">Jméno</label>
-    <input type="text" name="matka" id="matka" class="form-add">
-    <label for="inputPassword">Chovatelská stanice</label>
-    <input type="text" name="matka_chov" id="matka_chov" class="form-add">
-    <h2>Původ</h2>
-    <label for="inputPassword">Chovatelská stanice</label>
-    <input type="text" name="chovka" id="chovka" class="form-add">
-    <br>
-    <label for="inputUsername">Chovatel jméno</label>
-    <input type="text" value="" name="chovatel_jmeno" id="chovatel_jmeno" class="form-add">
-    <label for="inputUsername">Chovatel příjmení</label>
-    <input type="text" value="" name="chovatel_prijmeni" id="chovatel_prijmeni" class="form-add"> -->
-
     <input type="submit">
   </form>
   <button>Zkontrolovat</button>
+  <div id='pridatButton'>Přidat psa</div>
 {% endblock %}
 
 
 {% block javascripts %}
-{{ encore_entry_script_tags('app') }}
+  {{ encore_entry_script_tags('form_check') }}
 {% endblock %}

@@ -56,9 +56,10 @@ class Admin extends AbstractController {
 
   public function adding() {
 
+    $post = $_POST;
 
-    return $this->render('home/admin/add.html.twig', [
-      'forms' => $form
+    return $this->render('home/admin/adding.html.twig', [
+      'post' => $post
     ]);
   }
 
