@@ -28,7 +28,7 @@ namespace App\scripts;
     }
 
     function addOrEdit($conn, $user) {
-      $sql = "SELECT * FROM vrh v LEFT JOIN psi p ON v.matka=p.ID WHERE p.jmeno = '$this->matka_jmeno' AND v.stanice = '$this->stanice' AND v.narozeni = '$this->narozeni'";
+      $sql = "SELECT v.ID ID FROM vrh v LEFT JOIN psi p ON v.matka=p.ID WHERE p.jmeno = '$this->matka_jmeno' AND v.stanice = '$this->stanice' AND v.narozeni = '$this->narozeni'";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -47,6 +47,8 @@ namespace App\scripts;
       $sql = $kam . $co;
       //zápis psa, získání ID rodiče
       if ($conn->query($sql) === TRUE) {
+        $this->id = $conn->insert_id;
+        echo "LA" . $this->id;
         return $conn->insert_id;  //získání ID
       } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

@@ -54,7 +54,11 @@ class Admin extends AbstractController {
     $form_handle = new FormToSQL;
     // $form_handle->addVrh($_POST, $conn, $user);
     $vrh = $form_handle->parsePostVrh($_POST, $conn, $user);
-    $post = $vrh->addOrEdit($conn, $user);
+    $vrh_input = $vrh->addOrEdit($conn, $user);
+    $psi = $form_handle->parsePostPes($_POST, $conn, $user);
+    foreach ($psi as $pes) {
+      $psi_input[] = $pes->addOrEdit($conn, $user, $vrh);
+    }
     // $post = $vrh->addVrh($conn, $user);
 
     // $pes = $form_handle->pridatPsa();
@@ -63,9 +67,9 @@ class Admin extends AbstractController {
     // $post = $form_handle->addPost($_POST, $conn, $user);
 
     return $this->render('home/admin/adding.html.twig', [
-      'post' => $post
+      'post' => $vrh
       // 'post' => $_POST
-      // 'post' => $pes
+      // 'post' => $psi
     ]);
   }
 

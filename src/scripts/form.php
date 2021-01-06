@@ -57,12 +57,10 @@ class FormToSQL {
         $vrh->$name = $value;
       }
     }
-
     //kontrola otce
     if ($input['otec_jmeno1'] !== '') {
       $vrh->otec_ID = $this->kontrolaDatabaze($input['otec_jmeno1'], $input['otec_chov1'], $conn, 'pes', $user);
     }
-
     //kontrola matky
     if ($input['matka_jmeno1'] !== '') {
       $vrh->matka_ID = $this->kontrolaDatabaze($input['matka_jmeno1'], $input['matka_chov1'], $conn, 'fena', $user);
@@ -70,55 +68,21 @@ class FormToSQL {
     return $vrh;
   }
 
-  // function addPost($input, $conn, $user) {
-  //
-  //   $inner_co = '';
-  //   $inner_kam = '';
-  //
-  //   foreach($input as $key => $value) {
-  //     if ((int)substr($key,-1) === 1 && $value !== '') {
-  //       $vrh[$key] = trim($value);
-  //
-  //       $inner_co .= "'" . $value . "', ";
-  //       $inner_kam .= substr($key, 0, -1) . ", ";
-  //
-  //     }
-  //   }
-  //
-  //   $inner_co = substr($inner_co, 0, -2);
-  //   $inner_kam = substr($inner_kam, 0, -2);
-  //   $datetime = date("Y-m-d H:i:s");
-  //
-  //   $co = "VALUES ($inner_co, '$user', '$datetime');";
-  //   $kam = "INSERT INTO vrh ($inner_kam, vloz_osoba, vloz_datum) ";
-  //   $sql = $kam . $co;
-  //
-  //   foreach($input as $key => $value) {
-  //     if ((int)substr($key,-1) === 1 && $value !== '') {
-  //       $vrh[$key] = $value;
-  //     } elseif ((int)substr($key,-1) !== 1 && $value !== '')  {
-  //
-  //     }
-  //   }
-  //   // echo $sql;
-  //   if(isset($vrh)) {
-  //     if ($conn->query($sql) === TRUE) {
-  //     $last_id = $conn->insert_id;
-  //     echo "New record created successfully. Last inserted ID is: " . $last_id;
-  //     echo $last_id;
-  //     } else {
-  //       echo "Error: " . $sql . "<br>" . $conn->error;
-  //     }
-  //
-  //     // echo var_dump($vrh) . "<br>";
-  //   } else {
-  //     echo "nevkládám, protože není vrh";
-  //   }
-  //
-  //     $post = $sql;
-  //     // $post = $input;
-  //     return $post;
-  // }
+  function parsePostPes($input, $conn, $user) {
+
+    foreach($input as $key => $value) {
+      $cislo_psa = (int)substr($key,-1);
+      if ($cislo_psa > 1 && $value !== '') {
+        if(!isset($pes[$cislo_psa])) {
+          $pes[$cislo_psa] = new Pes;
+        }
+        $name = substr($key, 0, -1);
+        $pes[$cislo_psa]->$name = $value;
+      }
+    }
+    return $pes;
+  }
+
 }
 
 
