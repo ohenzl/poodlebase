@@ -52,18 +52,19 @@ class Admin extends AbstractController {
     $db = new SQLHandle;
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
-    $form_handle->addVrh($_POST, $conn, $user);
+    // $form_handle->addVrh($_POST, $conn, $user);
+    $vrh = $form_handle->parsePostVrh($_POST, $conn, $user);
+    $form_handle->addVrh($vrh, $conn, $user);
+
+    // $pes = $form_handle->pridatPsa();
 
 
-    $pes = $form_handle->pridatPsa();
-
-
-    $post = $form_handle->addPost($_POST, $conn, $user);
+    // $post = $form_handle->addPost($_POST, $conn, $user);
 
     return $this->render('home/admin/adding.html.twig', [
-      // 'post' => $post
+      'post' => $post
       // 'post' => $_POST
-      'post' => $pes
+      // 'post' => $pes
     ]);
   }
 

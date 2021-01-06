@@ -25,8 +25,8 @@ namespace App\scripts;
       $this->stanice = '';
       $this->chovatel_jmeno = '';
       $this->chovatel_prijmeni = '';
-
     }
+
   }
 
 ?>

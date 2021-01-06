@@ -22,22 +22,20 @@ class FormToSQL {
     } else {
       echo "Error: " . $sql . "<br>" . $conn->error;
     }
-
     //zapsání rodiče
     $co = "VALUES ('$jmeno', '$pohlavi', '$vrh_id', '$user', '$datetime');";
     $kam = "INSERT INTO psi (jmeno, pohlavi, vrh, vloz_osoba, vloz_datum) ";
     $sql = $kam . $co;
-
     //zápis psa, získání ID rodiče
     if ($conn->query($sql) === TRUE) {
-      $vrh_id = $conn->insert_id;  //získání ID
+      $pes_id = $conn->insert_id;
+      return $pes_id;  //získání ID
     } else {
       echo "Error: " . $sql . "<br>" . $conn->error;
     }
   }
 
-  function kontrolaDatabaze($jmeno, $chovatelska_stanice, $conn, $pohlavi) {
-
+  function kontrolaDatabaze($jmeno, $chovatelska_stanice, $conn, $pohlavi, $user) {
     $sql = "SELECT * FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.jmeno = '$jmeno' and v.stanice = '$chovatelska_stanice'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
@@ -45,23 +43,47 @@ class FormToSQL {
         return $row['ID'];
       }
     } else {
-      $this->pridatPsa($jmeno, $chovatelska_stanice, $conn, $user, $pohlavi);
+      return $this->pridatPsa($jmeno, $chovatelska_stanice, $conn, $user, $pohlavi);
     }
   }
 
-  function addVrh($input, $conn, $user) {
+  function addVrh($vrh, $conn, $user) {
+
+    // $co = "VALUES ('$jmeno', '$pohlavi', '$vrh_id', '$user', '$datetime');";
+    // $kam = "INSERT INTO psi (jmeno, pohlavi, vrh, vloz_osoba, vloz_datum) ";
+    // $sql = $kam . $co;
+    // //zápis psa, získání ID rodiče
+    // if ($conn->query($sql) === TRUE) {
+    //   return $conn->insert_id;  //získání ID
+    // } else {
+    //   echo "Error: " . $sql . "<br>" . $conn->error;
+    // }
+
+
+  }
+
+
+  function parsePostVrh($input, $conn, $user) {
     $vrh = new Vrh;
+
+    foreach($input as $key => $value) {
+      if ((int)substr($key,-1) === 1 && $value !== '') {
+        $name = substr($key, 0, -1);
+        $vrh->$name = $value;
+      }
+    }
+
     //kontrola otce
     if ($input['otec_jmeno1'] !== '') {
-      $vrh->otec_ID = $this->kontrolaDatabaze($input['otec_jmeno1'], $input['otec_chov1'], $conn, 'pes');
+      $vrh->otec_ID = $this->kontrolaDatabaze($input['otec_jmeno1'], $input['otec_chov1'], $conn, 'pes', $user);
     }
+
     //kontrola matky
     if ($input['matka_jmeno1'] !== '') {
-      $vrh->matka_ID = $this->kontrolaDatabaze($input['matka_jmeno1'], $input['matka_chov1'], $conn, 'fena');
+      $vrh->matka_ID = $this->kontrolaDatabaze($input['matka_jmeno1'], $input['matka_chov1'], $conn, 'fena', $user);
     }
-
+    return $vrh;
   }
-
 
   function addPost($input, $conn, $user) {
 
