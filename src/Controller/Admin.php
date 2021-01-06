@@ -7,6 +7,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Entity\FormAdd;
+use App\scripts\SQLHandle;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use App\scripts\FormToSQL;
 
 class Admin extends AbstractController {
 
@@ -22,21 +25,11 @@ class Admin extends AbstractController {
     }
 
   public function admin() {
-    // loginCheck();
-    // $sql = "SELECT count(login) FROM login WHERE datum > '$datum_past' AND IP = '$ip' AND SUCCESS = '0'";
-    // $result = $conn->query($sql);
-    // if ($result->num_rows > 0) {
-    //     while($row = $result->fetch_assoc()) {
-    //       $pocet_prihlaseni = $row['count(login)'];
-    //   }
-    // }
     return $this->render('home/admin.html.twig', [
     ]);
   }
 
   public function add() {
-
-    // $name = 'narozeni';
     $form = $this->getDoctrine()
                 ->getRepository(FormAdd::class)->findAll();
             // ->getRepository(FormAdd::class)->findAll()[0]->getName();
@@ -46,7 +39,6 @@ class Admin extends AbstractController {
 
     // $product = $repository->find($id);
     // require_once('../src/scripts/form.php');
-
     // $conn->close();
 
     return $this->render('home/admin/add.html.twig', [
@@ -54,12 +46,24 @@ class Admin extends AbstractController {
     ]);
   }
 
-  public function adding() {
+  public function adding(AuthenticationUtils $authenticationUtils) {
 
-    $post = $_POST;
+    $user = $authenticationUtils->getLastUsername();
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
+    $form_handle = new FormToSQL;
+    $form_handle->addVrh($_POST, $conn, $user);
+
+
+    $pes = $form_handle->pridatPsa();
+
+
+    $post = $form_handle->addPost($_POST, $conn, $user);
 
     return $this->render('home/admin/adding.html.twig', [
-      'post' => $post
+      // 'post' => $post
+      // 'post' => $_POST
+      'post' => $pes
     ]);
   }
 
