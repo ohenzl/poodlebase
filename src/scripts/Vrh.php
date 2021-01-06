@@ -29,16 +29,14 @@ namespace App\scripts;
 
     function addOrEdit($conn, $user) {
       $sql = "SELECT * FROM vrh v LEFT JOIN psi p ON v.matka=p.ID WHERE p.jmeno = '$this->matka_jmeno' AND v.stanice = '$this->stanice' AND v.narozeni = '$this->narozeni'";
-      echo $sql . "<br>";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          echo "editace";
           $this->editVrh($row['ID']);
+          return $row['ID'];
         }
       } else {
-        $this->addVrh($conn, $user);
-        echo "přidávání";
+        return $this->addVrh($conn, $user);
       }
     }
 
@@ -56,7 +54,7 @@ namespace App\scripts;
     }
 
     function editVrh($ID) {
-      return "ahoj";
+      // nutné udělat editaci
     }
 
   }
