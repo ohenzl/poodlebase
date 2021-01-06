@@ -64,6 +64,13 @@ class FormAdd
      */
     private $value;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="typ", type="string", length=10, nullable=false)
+     */
+    private $typ;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,6 +144,18 @@ class FormAdd
     public function setValue(string $value): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    public function getTyp(): ?string
+    {
+        return $this->typ;
+    }
+
+    public function setTyp(string $typ): self
+    {
+        $this->typ = $typ;
 
         return $this;
     }

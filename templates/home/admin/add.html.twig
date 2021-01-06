@@ -37,13 +37,13 @@
       {% endif %}
       {% if form.getName() == 'CMKU' %}
         <label for="CMKU_pref">Prefix zápisu</label>
-        <input type="text" value="{{form.getValue()}}" name="CMKU_pref{{ counter }}" id="CMKU_pref{{ counter }}" class="form-add" {{form.getRequired()}}>
+        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="CMKU_pref{{ counter }}" id="CMKU_pref{{ counter }}" class="form-add" {{form.getRequired()}}>
         <br>
         <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-        <input type="text" value="" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add" {{form.getRequired()}}>
+        <input type="{{form.getTyp()}}" value="" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add" {{form.getRequired()}}>
       {% else %}
         <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-        <input type="text" value="{{form.getValue()}}" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add" {{form.getRequired()}}>
+        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add" {{form.getRequired()}}>
       {% endif %}
 
       <br>

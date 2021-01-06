@@ -47,21 +47,6 @@ class FormToSQL {
     }
   }
 
-  function addVrh($vrh, $conn, $user) {
-
-    // $co = "VALUES ('$jmeno', '$pohlavi', '$vrh_id', '$user', '$datetime');";
-    // $kam = "INSERT INTO psi (jmeno, pohlavi, vrh, vloz_osoba, vloz_datum) ";
-    // $sql = $kam . $co;
-    // //zápis psa, získání ID rodiče
-    // if ($conn->query($sql) === TRUE) {
-    //   return $conn->insert_id;  //získání ID
-    // } else {
-    //   echo "Error: " . $sql . "<br>" . $conn->error;
-    // }
-
-
-  }
-
 
   function parsePostVrh($input, $conn, $user) {
     $vrh = new Vrh;
@@ -85,55 +70,55 @@ class FormToSQL {
     return $vrh;
   }
 
-  function addPost($input, $conn, $user) {
-
-    $inner_co = '';
-    $inner_kam = '';
-
-    foreach($input as $key => $value) {
-      if ((int)substr($key,-1) === 1 && $value !== '') {
-        $vrh[$key] = $value;
-
-        $inner_co .= "'" . $value . "', ";
-        $inner_kam .= substr($key, 0, -1) . ", ";
-
-      }
-    }
-
-    $inner_co = substr($inner_co, 0, -2);
-    $inner_kam = substr($inner_kam, 0, -2);
-    $datetime = date("Y-m-d H:i:s");
-
-    $co = "VALUES ($inner_co, '$user', '$datetime');";
-    $kam = "INSERT INTO vrh ($inner_kam, vloz_osoba, vloz_datum) ";
-    $sql = $kam . $co;
-
-    foreach($input as $key => $value) {
-      if ((int)substr($key,-1) === 1 && $value !== '') {
-        $vrh[$key] = $value;
-      } elseif ((int)substr($key,-1) !== 1 && $value !== '')  {
-
-      }
-    }
-    // echo $sql;
-    if(isset($vrh)) {
-      if ($conn->query($sql) === TRUE) {
-      $last_id = $conn->insert_id;
-      echo "New record created successfully. Last inserted ID is: " . $last_id;
-      echo $last_id;
-      } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-      }
-
-      // echo var_dump($vrh) . "<br>";
-    } else {
-      echo "nevkládám, protože není vrh";
-    }
-
-      $post = $sql;
-      // $post = $input;
-      return $post;
-  }
+  // function addPost($input, $conn, $user) {
+  //
+  //   $inner_co = '';
+  //   $inner_kam = '';
+  //
+  //   foreach($input as $key => $value) {
+  //     if ((int)substr($key,-1) === 1 && $value !== '') {
+  //       $vrh[$key] = trim($value);
+  //
+  //       $inner_co .= "'" . $value . "', ";
+  //       $inner_kam .= substr($key, 0, -1) . ", ";
+  //
+  //     }
+  //   }
+  //
+  //   $inner_co = substr($inner_co, 0, -2);
+  //   $inner_kam = substr($inner_kam, 0, -2);
+  //   $datetime = date("Y-m-d H:i:s");
+  //
+  //   $co = "VALUES ($inner_co, '$user', '$datetime');";
+  //   $kam = "INSERT INTO vrh ($inner_kam, vloz_osoba, vloz_datum) ";
+  //   $sql = $kam . $co;
+  //
+  //   foreach($input as $key => $value) {
+  //     if ((int)substr($key,-1) === 1 && $value !== '') {
+  //       $vrh[$key] = $value;
+  //     } elseif ((int)substr($key,-1) !== 1 && $value !== '')  {
+  //
+  //     }
+  //   }
+  //   // echo $sql;
+  //   if(isset($vrh)) {
+  //     if ($conn->query($sql) === TRUE) {
+  //     $last_id = $conn->insert_id;
+  //     echo "New record created successfully. Last inserted ID is: " . $last_id;
+  //     echo $last_id;
+  //     } else {
+  //       echo "Error: " . $sql . "<br>" . $conn->error;
+  //     }
+  //
+  //     // echo var_dump($vrh) . "<br>";
+  //   } else {
+  //     echo "nevkládám, protože není vrh";
+  //   }
+  //
+  //     $post = $sql;
+  //     // $post = $input;
+  //     return $post;
+  // }
 }
 
 

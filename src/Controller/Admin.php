@@ -54,7 +54,8 @@ class Admin extends AbstractController {
     $form_handle = new FormToSQL;
     // $form_handle->addVrh($_POST, $conn, $user);
     $vrh = $form_handle->parsePostVrh($_POST, $conn, $user);
-    $form_handle->addVrh($vrh, $conn, $user);
+    $post = $vrh->addOrEdit($conn, $user);
+    // $post = $vrh->addVrh($conn, $user);
 
     // $pes = $form_handle->pridatPsa();
 
