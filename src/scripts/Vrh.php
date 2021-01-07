@@ -56,7 +56,9 @@ namespace App\scripts;
     }
 
     function editVrh($ID) {
-      // nutné udělat editaci
+      // "UPDATE vrh
+      // SET column1=value, column2=value2,
+      // WHERE ID='$ID'";
     }
 
   }
