@@ -36,7 +36,7 @@ class FormToSQL {
   }
 
   function kontrolaDatabaze($jmeno, $chovatelska_stanice, $conn, $pohlavi, $user) {
-    $sql = "SELECT * FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.jmeno = '$jmeno' and v.stanice = '$chovatelska_stanice'";
+    $sql = "SELECT p.ID ID FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.jmeno = '$jmeno' and v.stanice = '$chovatelska_stanice'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
       while($row = $result->fetch_assoc()) {

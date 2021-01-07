@@ -32,7 +32,7 @@ namespace App\scripts;
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          $this->editVrh($row['ID']);
+          $this->editVrh($row['ID'], $user, $conn);
           return $row['ID'];
         }
       } else {
@@ -48,17 +48,22 @@ namespace App\scripts;
       //zápis psa, získání ID rodiče
       if ($conn->query($sql) === TRUE) {
         $this->id = $conn->insert_id;
-        echo "LA" . $this->id;
         return $conn->insert_id;  //získání ID
       } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
       }
     }
 
-    function editVrh($ID) {
-      // "UPDATE vrh
-      // SET column1=value, column2=value2,
-      // WHERE ID='$ID'";
+    function editVrh($ID, $user, $conn) {
+      $datetime = date("Y-m-d H:i:s");
+      $sql = "UPDATE vrh
+      SET otec='$this->otec_ID', matka='$this->matka_ID', narozeni='$this->narozeni', stanice='$this->stanice', chovatel='$this->chovatel_jmeno', vloz_osoba='$user', vloz_datum='$datetime'
+      WHERE ID='$ID'";
+
+      if ($conn->query($sql) === TRUE) {
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
     }
 
   }
