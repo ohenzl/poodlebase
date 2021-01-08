@@ -11,8 +11,6 @@
 
 {% block body %}
 
-  <!-- {{ dump(forms) }} -->
-
 {% set nadpis = 'default' %}
 {% set podnadpis = 'default' %}
 {% set counter = 0 %}
@@ -37,13 +35,13 @@
       {% endif %}
       {% if form.getName() == 'CMKU' %}
         <label for="CMKU_pref">Prefix zápisu</label>
-        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="CMKU_pref{{ counter }}" id="CMKU_pref{{ counter }}" class="form-add" {{form.getRequired()}}>
+        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="CMKU_pref{{ counter }}" id="CMKU_pref{{ counter }}" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
         <br>
         <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-        <input type="{{form.getTyp()}}" value="" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add" {{form.getRequired()}}>
+        <input type="{{form.getTyp()}}" value="" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
       {% else %}
         <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add" {{form.getRequired()}}>
+        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
       {% endif %}
 
       <br>
@@ -51,9 +49,9 @@
     {% endfor %}
     </div>
   </div>
-    <input type="submit">
+    <input id='odeslat' type="submit" disabled>
   </form>
-  <button>Zkontrolovat</button>
+  <button id='kontrola'>Zkontrolovat</button>
   <div id='pridatButton'>Přidat psa</div>
 {% endblock %}
 
