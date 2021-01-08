@@ -26,12 +26,12 @@ namespace App\scripts;
     }
 
     function addOrEdit($conn, $user, $vrh) {
-      $sql = "SELECT * FROM vrh v JOIN psi p ON p.vrh=v.ID WHERE p.jmeno = '$this->pes_jmeno' AND v.stanice = '$vrh->stanice'";
-      // echo $sql . "<br>";
+      $sql = "SELECT p.ID ID FROM vrh v JOIN psi p ON p.vrh=v.ID WHERE p.jmeno = '$this->pes_jmeno' AND v.stanice = '$vrh->stanice'";
+      echo $sql . "<br>";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          $this->edit($row['ID']);
+          $this->edit($row['ID'], $user, $conn);
         }
       } else {
         return $this->add($conn, $user, $vrh);
@@ -51,8 +51,16 @@ namespace App\scripts;
       }
     }
 
-    function edit($ID) {
-      // nutné udělat editaci
+    function edit($ID, $user, $conn) {
+      $datetime = date("Y-m-d H:i:s");
+      $sql = "UPDATE psi
+      SET jmeno='$this->pes_jmeno', pohlavi='$this->pohlavi', barva='$this->barva', srst='$this->srst', cmku_pref='$this->CMKU_pref', cmku='$this->CMKU', cip='$this->cip', vloz_osoba='$user', vloz_datum='$datetime'
+      WHERE ID='$ID'";
+
+      if ($conn->query($sql) === TRUE) {
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
     }
   }
 
