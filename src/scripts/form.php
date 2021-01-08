@@ -58,13 +58,13 @@ class FormToSQL {
       }
     }
     //kontrola otce
-    if ($input['otec_jmeno1'] !== '') {
-      $vrh->otec_ID = $this->kontrolaDatabaze($input['otec_jmeno1'], $input['otec_chov1'], $conn, 'pes', $user);
-    }
-    //kontrola matky
-    if ($input['matka_jmeno1'] !== '') {
-      $vrh->matka_ID = $this->kontrolaDatabaze($input['matka_jmeno1'], $input['matka_chov1'], $conn, 'fena', $user);
-    }
+    // if ($input['otec_jmeno1'] !== '') {
+    //   $vrh->otec_ID = $this->kontrolaDatabaze($input['otec_jmeno1'], $input['otec_chov1'], $conn, 'pes', $user);
+    // }
+    // //kontrola matky
+    // if ($input['matka_jmeno1'] !== '') {
+    //   $vrh->matka_ID = $this->kontrolaDatabaze($input['matka_jmeno1'], $input['matka_chov1'], $conn, 'fena', $user);
+    // }
     return $vrh;
   }
 

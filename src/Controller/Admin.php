@@ -53,7 +53,7 @@ class Admin extends AbstractController {
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
     $vrh = $form_handle->parsePostVrh($_POST, $conn, $user);
-    $vrh_input = $vrh->addOrEdit($conn, $user);
+    $vrh->id = $vrh->addOrEdit($conn, $user);
     $psi = $form_handle->parsePostPes($_POST, $conn, $user);
     foreach ($psi as $pes) {
       $psi_input[] = $pes->addOrEdit($conn, $user, $vrh);
