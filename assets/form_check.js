@@ -18,19 +18,33 @@ forms.forEach(addListener => {
   });
 });
 
-let cip = document.getElementById('cip2');
-cip.addEventListener('keypress', numbersOnly => {
-  return event.charCode >= 48 && event.charCode <= 57;
-});
-console.log(cip)
+// let cip = document.getElementById('[cip]');
+// cip.addEventListener('keypress', numbersOnly => {
+//   return event.charCode >= 48 && event.charCode <= 57;
+// });
+// console.log(cip)
 
+
+// function pridatPsa() {
+//   pes = document.getElementsByClassName('Psi');
+//   let newPes = pes[(pes.length-1)].cloneNode(true);
+//     newPes.getElementsByClassName('form-add').forEach(changeNumber => {
+//       changeNumber.name = changeNumber.name.slice(0, -1) + ((changeNumber.name.slice(-1)*1)+1);
+//       if (changeNumber.name.slice(0, -1) === 'pes_jmeno' || changeNumber.name.slice(0, -1) === 'pohlavi') {
+//         changeNumber.value = '';
+//       }
+//     })
+//   let nadpis = newPes.getElementsByClassName('subnadpis')[0].innerHTML;
+//   newPes.getElementsByClassName('subnadpis')[0].innerHTML = nadpis.slice(0, -1) + ((nadpis.slice(-1)*1)+1);
+//   document.getElementById("form").appendChild(newPes);
+// }
 
 function pridatPsa() {
   pes = document.getElementsByClassName('Psi');
-  let newPes = pes[(pes.length-1)].cloneNode(true);
+  let newPes = pes[(pes.length)-1].cloneNode(true);
     newPes.getElementsByClassName('form-add').forEach(changeNumber => {
-      changeNumber.name = changeNumber.name.slice(0, -1) + ((changeNumber.name.slice(-1)*1)+1);
-      if (changeNumber.name.slice(0, -1) === 'pes_jmeno' || changeNumber.name.slice(0, -1) === 'pohlavi') {
+      changeNumber.name = 'pes[' + (parseInt(changeNumber.name.slice(4, 5)) + 1) + changeNumber.name.slice(5);
+      if (changeNumber.name.slice(6) === 'pes_jmeno' || changeNumber.name.slice(6) === 'pohlavi') {
         changeNumber.value = '';
       }
     })

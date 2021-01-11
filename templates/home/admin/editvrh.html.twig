@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+  Přidání psů
+{% endblock %}
+
+{% block stylesheets %}
+  {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+
+{% set nadpis = 'default' %}
+{% set podnadpis = 'default' %}
+{% set counter = 0 %}
+  <form action="/admin/adding" method="post" class='form'>
+    <div id='form'>
+    <div>
+
+      <br>
+
+    </div>
+  </div>
+    <input id='odeslat' type="submit" disabled>
+  </form>
+  <button id='kontrola'>Zkontrolovat</button>
+  <div id='pridatButton'>Přidat psa</div>
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('form_check') }}
+{% endblock %}

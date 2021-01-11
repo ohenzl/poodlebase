@@ -13,7 +13,7 @@
 
 {% set nadpis = 'default' %}
 {% set podnadpis = 'default' %}
-{% set counter = 0 %}
+{% set count = 0 %}
   <form action="/admin/adding" method="post" class='form'>
     <div id='form'>
     <div>
@@ -26,8 +26,15 @@
           <h1>{{form.getNadrazeny()}}</h1>
         <div class='{{form.getNadrazeny()}}'>
         {% set nadpis = form.getNadrazeny() %}
-        {% set counter = counter + 1 %}
+        {% set count = count + 1 %}
       {% endif %}
+
+      {% if count == 1 %}
+        {% set counter = 'vrh' %}
+      {% else %}
+        {% set counter = "pes[#{count-1}]" %}
+      {% endif %}
+
       {# Podnadpis #}
       {% if podnadpis != form.getSubnadpis() %}
         <h2 class='subnadpis'>{{form.getSubnadpis()}}</h2>
@@ -35,13 +42,13 @@
       {% endif %}
       {% if form.getName() == 'CMKU' %}
         <label for="CMKU_pref">Prefix zápisu</label>
-        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="CMKU_pref{{ counter }}" id="CMKU_pref{{ counter }}" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
+        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[CMKU_pref]" id="{{ counter }}CMKU_pref" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
         <br>
         <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-        <input type="{{form.getTyp()}}" value="" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
+        <input type="{{form.getTyp()}}" value="" name="{{ counter }}[{{form.getName()}}]" id="{{ counter }}{{form.getName()}}" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
       {% else %}
         <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{form.getName()}}{{ counter }}" id="{{form.getName()}}{{ counter }}" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
+        <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[{{form.getName()}}]" id="{{ counter }}{{form.getName()}}" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
       {% endif %}
 
       <br>

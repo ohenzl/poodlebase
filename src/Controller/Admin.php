@@ -32,14 +32,6 @@ class Admin extends AbstractController {
   public function add() {
     $form = $this->getDoctrine()
                 ->getRepository(FormAdd::class)->findAll();
-            // ->getRepository(FormAdd::class)->findAll()[0]->getName();
-            // ->find($name);
-
-    // $repository = $this->getDoctrine()->getRepository(FormAdd::class);
-
-    // $product = $repository->find($id);
-    // require_once('../src/scripts/form.php');
-    // $conn->close();
 
     return $this->render('home/admin/add.html.twig', [
       'forms' => $form
@@ -48,22 +40,35 @@ class Admin extends AbstractController {
 
   public function adding(AuthenticationUtils $authenticationUtils) {
 
+
+    //ODKOMENTOVAT PRO ZNOVUZPŘÍSTUPNĚNÍ PŘIDÁVÁNÍ DO DATABÁZE
+
     $user = $authenticationUtils->getLastUsername();
     $db = new SQLHandle;
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
-    $vrh = $form_handle->parsePostVrh($_POST, $conn, $user);
-    $vrh->id = $vrh->addOrEdit($conn, $user);
-    $psi = $form_handle->parsePostPes($_POST, $conn, $user);
-    foreach ($psi as $pes) {
-      $psi_input[] = $pes->addOrEdit($conn, $user, $vrh);
-    }
+    // $vrh = $form_handle->parsePostVrh($_POST, $conn, $user);
+    // $vrh->id = $vrh->addOrEdit($conn, $user);
+    // $psi = $form_handle->parsePostPes($_POST, $conn, $user);
+    // foreach ($psi as $pes) {
+    //   $psi_input[] = $pes->addOrEdit($conn, $user, $vrh);
+    // }
+
+    // $test = $_POST;
+    $test = $form_handle->parsePostPes($_POST, $conn, $user);
 
     return $this->render('home/admin/adding.html.twig', [
-      'post' => $vrh
-      // 'post' => $_POST
-      // 'post' => $psi
+      // 'post' => $vrh
+      'post' => $test
     ]);
+  }
+
+  public function editVrh() {
+
+    return $this->render('home/admin/editvrh.html.twig', [
+      // 'forms' => $form
+    ]);
+
   }
 
 
