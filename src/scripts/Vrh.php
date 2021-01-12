@@ -81,16 +81,18 @@ namespace App\scripts;
       $sql = "SELECT * FROM vrh {$sql}";
 
       $result = $conn->query($sql);
-      if (!$result || $result->num_rows > 1) {
+      if (!$result || $result->num_rows === 0) {
         $vysl['error'] = true;
-        return $vysl;
+        $vysl['errormsg'] = 'Tomuto zadání neodpovídá žádný vrh v databázi.';
+      } elseif ($result->num_rows > 1) {
+        $vysl['error'] = true;
+        $vysl['errormsg'] = 'Tomuto zadání odpovídá více vrhů v databázi. Upřesněte údaje.';
       } else {
         while($row = $result->fetch_assoc()) {
           $vysl = json_encode($row);
-          return $vysl;
         }
     }
-
+    return $vysl;
   }
 }
 

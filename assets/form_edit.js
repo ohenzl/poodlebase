@@ -21,10 +21,12 @@ document.getElementById("kontrola").onclick = function () {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("errorMsg").innerHTML = this.responseText;
+        console.log(this.responseText)
         let vysl = JSON.parse(this.responseText);
         //zpracování informací z SQL do formulářů
+        console.log(vysl)
         if (vysl.error === true) {
+          document.getElementById("errorMsg").innerHTML = vysl.errormsg;
           console.log('byl error')
         } else {
           let input = JSON.parse(vysl);
