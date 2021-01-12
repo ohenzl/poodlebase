@@ -21,6 +21,10 @@
     <div id='form'>
     <div>
 
+      <label for="vrh['ID']">ID</label>
+      <input type="text" value="" name="{{ counter }}['ID']" id="ID" class="form-add" readonly>
+      <br>
+
     {% for form in forms %}
 
     {% if nadpis != form.getNadrazeny() %}
@@ -44,7 +48,7 @@
     <input id='odeslat' type="submit" disabled>
   </form>
   <button id='deleteForm'>Vymazat formulář</button>
-  <button id='kontrola'>Zkontrolovat</button>
+  <button id='kontrola'>Doplnit formulář</button>
 {% endblock %}
 
 

@@ -31,7 +31,7 @@ document.getElementById("kontrola").onclick = function () {
           let input = JSON.parse(vysl);
           for (output in input) {
             console.log(output, input[output])
-            if (output !== 'ID' && output !== 'vloz_datum' && output !== 'vloz_osoba') {
+            if (output !== 'vloz_datum' && output !== 'vloz_osoba') {
                 document.getElementById(output).value = input[output]
             }
           }
