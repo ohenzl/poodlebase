@@ -11,7 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class FormToSQL {
 
 
-  function parsePostVrh($input, $conn, $user) {
+  function parsePostVrh($input) {
     $vrh = new Vrh;
 
     foreach($input['vrh'] as $key => $value) {
@@ -20,7 +20,7 @@ class FormToSQL {
     return $vrh;
   }
 
-  function parsePostPes($input, $conn, $user) {
+  function parsePostPes($input) {
     foreach($input['pes'] as $number => $dog) {
       $pes[$number] = new Pes;
       foreach($dog as $nazev => $data) {

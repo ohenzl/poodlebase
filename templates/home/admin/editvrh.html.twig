@@ -2,7 +2,7 @@
 
 
 {% block title %}
-  Přidání psů
+  Úprava vrhu
 {% endblock %}
 
 {% block stylesheets %}
@@ -36,7 +36,7 @@
     {% endif %}
 
     <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-    <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[{{form.getName()}}]" id="{{form.getName()}}" class="form-add {{form.getClass()}}" {{form.getRequired()}}>
+    <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[{{form.getName()}}]" id="{{form.getName()}}" class="form-add {{form.getClass()}}">
     <br>
     {% endfor %}
     </div>

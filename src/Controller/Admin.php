@@ -48,9 +48,9 @@ class Admin extends AbstractController {
     $db = new SQLHandle;
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
-    $vrh = $form_handle->parsePostVrh($_POST, $conn, $user);
+    $vrh = $form_handle->parsePostVrh($_POST);
     $vrh->id = $vrh->addOrEdit($conn, $user);
-    $psi = $form_handle->parsePostPes($_POST, $conn, $user);
+    $psi = $form_handle->parsePostPes($_POST);
     foreach ($psi as $pes) {
       $psi_input[] = $pes->addOrEdit($conn, $user, $vrh);
     }
@@ -80,12 +80,27 @@ class Admin extends AbstractController {
     $request = Request::createFromGlobals();
 
     // echo var_dump($test->request->all()) . "<br><br>";
-    $rq = $request->query->all();
-    $form = $this->getDoctrine()
-                ->getRepository(FormAdd::class)->findAll();
 
-    return new JsonResponse(array(
-            'status' => var_dump($rq)),
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
+    $form_handle = new FormToSQL;
+
+    $rq = $request->query->all();
+
+    $vrh = $form_handle->parsePostVrh($rq);
+    $sql = $vrh->checkVrh($conn);
+    // $sql = '';
+    // foreach ($rq as $data => $value) {
+    //   $sql .= "AND {$data} = '{$value}' ";
+    // }
+
+    // $ry = get_object_vars ( $rq );
+    //
+    // $form = $this->getDoctrine()
+    //             ->getRepository(FormAdd::class)->findAll();
+
+    return new JsonResponse(
+            $sql,
         200);
   }
 
