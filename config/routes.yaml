@@ -16,7 +16,6 @@ logged:
    path: /logged
    controller: App\Controller\HomeController::logged
 
-
 database:
   path: /database
   controller: App\Controller\Database::database
@@ -36,3 +35,7 @@ adding:
 editVrh:
   path: /admin/editVrh
   controller: App\Controller\Admin::editVrh
+
+checkSql:
+  path: /admin/checkSql
+  controller: App\Controller\Admin::checkSql
