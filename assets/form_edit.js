@@ -35,6 +35,7 @@ document.getElementById("kontrola").onclick = function () {
                 document.getElementById(output).value = input[output]
             }
           }
+          document.getElementById('odeslat').disabled = false;
         }
       }
     };
@@ -60,5 +61,6 @@ clearButton.onclick = function () {
     })
     clearButton.innerHTML = 'Vymazat formulář';
     alreadyClicked = false;
+    document.getElementById('odeslat').disabled = true;
   }
 }
