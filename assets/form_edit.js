@@ -27,22 +27,38 @@ document.getElementById("kontrola").onclick = function () {
         console.log(vysl)
         if (vysl.error === true) {
           document.getElementById("errorMsg").innerHTML = vysl.errormsg;
-          console.log('byl error')
         } else {
           let input = JSON.parse(vysl);
           for (output in input) {
-              console.log(output, input[output])
-              if (output !== 'ID' && output !== 'vloz_datum' && output !== 'vloz_osoba') {
-                  document.getElementById(output).value = input[output]
-                }
-              }
+            console.log(output, input[output])
+            if (output !== 'ID' && output !== 'vloz_datum' && output !== 'vloz_osoba') {
+                document.getElementById(output).value = input[output]
+            }
+          }
         }
-
-
-
       }
     };
     xmlhttp.open('GET',"checkSql?"+dotaz,true);
     xmlhttp.send();
   }
-};
+}
+
+let alreadyClicked = false;
+let clearButton = document.getElementById("deleteForm");
+clearButton.onclick = function () {
+  if (alreadyClicked === false) {
+    alreadyClicked = true;
+    clearButton.innerHTML = 'Opravdu chcete vymazat formulář?';
+    window.setTimeout(vratitDoPuvodnihoStavu => {
+      clearButton.innerHTML = 'Vymazat formulář';
+      alreadyClicked = false;
+    }, 2000);
+  } else {
+    let forms = document.getElementsByClassName('form-add');
+    forms.forEach(del => {
+      del.value = '';
+    })
+    clearButton.innerHTML = 'Vymazat formulář';
+    alreadyClicked = false;
+  }
+}
