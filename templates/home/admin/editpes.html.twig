@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+  Úprava vrhu
+{% endblock %}
+
+{% block stylesheets %}
+  {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+
+{% set nadpis = 'default' %}
+{% set podnadpis = 'default' %}
+{% set counter = 'vrh' %}
+
+<div id='errorMsg'></div>
+
+  <form action="/admin/editingVrh" method="post" class='form'>
+    <div id='form'>
+    <div>
+
+      <label for="vrh['ID']">ID</label>
+      <input type="text" value="" name="{{ counter }}[id]" id="ID" class="form-add" readonly>
+      <br>
+
+    {% for form in forms %}
+
+    {% if nadpis != form.getNadrazeny() %}
+      </div>
+        <h1>{{form.getNadrazeny()}}</h1>
+      <div class='{{form.getNadrazeny()}}'>
+      {% set nadpis = form.getNadrazeny() %}
+    {% endif %}
+
+    {% if podnadpis != form.getSubnadpis() %}
+      <h2 class='subnadpis'>{{form.getSubnadpis()}}</h2>
+      {% set podnadpis = form.getSubnadpis() %}
+    {% endif %}
+
+    <label for="{{form.getName()}}">{{form.getLabel()}}</label>
+    <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[{{form.getName()}}]" id="{{form.getName()}}" class="form-add {{form.getClass()}}">
+    <br>
+    {% endfor %}
+    </div>
+  </div>
+    <input id='odeslat' type="submit" disabled>
+  </form>
+  <button id='deleteForm'>Vymazat formulář</button>
+  <button id='kontrola'>Doplnit formulář</button>
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('form_edit') }}
+{% endblock %}

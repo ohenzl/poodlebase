@@ -45,3 +45,15 @@ checkSqlVrh:
 editingVrh:
   path: /admin/editingVrh
   controller: App\Controller\Admin::editingVrh
+
+editPes:
+  path: /admin/editPes
+  controller: App\Controller\Admin::editPes
+
+checkSqlPes:
+  path: /admin/checkSqlPes
+  controller: App\Controller\Admin::checkSqlPes
+
+editingPes:
+  path: /admin/editingPes
+  controller: App\Controller\Admin::editingPes

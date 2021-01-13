@@ -12,6 +12,7 @@ use App\scripts\SQLHandle;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\scripts\FormToSQL;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Doctrine\ORM\EntityManagerInterface;
 
 class Admin extends AbstractController {
 
@@ -92,30 +93,82 @@ class Admin extends AbstractController {
   public function checkSqlVrh(Request $request) {
     $request = Request::createFromGlobals();
 
-    // echo var_dump($test->request->all()) . "<br><br>";
-
     $db = new SQLHandle;
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
-
     $rq = $request->query->all();
-
     $vrh = $form_handle->parsePostVrh($rq);
     $sql = $vrh->checkVrh($conn);
-    // $sql = '';
-    // foreach ($rq as $data => $value) {
-    //   $sql .= "AND {$data} = '{$value}' ";
-    // }
-
-    // $ry = get_object_vars ( $rq );
-    //
-    // $form = $this->getDoctrine()
-    //             ->getRepository(FormAdd::class)->findAll();
 
     return new JsonResponse(
             $sql,
         200);
   }
 
+  public function editPes(EntityManagerInterface $em) {
+    //
+    // $form = $this->getDoctrine()
+    //             ->getRepository(FormAdd::class)->findBy(
+    //               ['name' => 'stanice']
+    //           );
+    $this->entityManager = $em;
+    // $querybuilder = $this->entityManager->createQueryBuilder();
+    // $prepare = $querybuilder
+    //         ->select('f')
+    //         ->from('FormAdd', 'f');
+    //         // ->where('f.nadrazeny = psi');
+    // $query = $prepare->getQuery();
+    // $form = $query->execute();
+
+    $query = $this->entityManager->createQuery(
+            'SELECT f
+            FROM App\Entity\FormAdd f
+            WHERE f.nadrazeny = :nadrazeny OR f.name = :name'
+        )->setParameter('nadrazeny', 'psi')->setParameter('name', 'stanice');
+
+        // returns an array of Product objects
+        $form = $query->getResult();
+
+    // $form = $this->getDoctrine()
+    //             ->getRepository(FormAdd::class)->findBy(
+    //               ['nadrazeny' => 'Psi'],
+    //           );
+
+    return $this->render('home/admin/editpes.html.twig', [
+      'forms' => $form
+    ]);
+  }
+
+
+  public function editingPes(AuthenticationUtils $authenticationUtils, Request $request) {
+
+    //ÚPRAVA DATABÁZE
+    $user = $authenticationUtils->getLastUsername();
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
+    $form_handle = new FormToSQL;
+    $vrh = $form_handle->parsePostVrh($_POST);
+    $vrh->editVrh($vrh->id, $user, $conn);
+
+    return $this->render('home/admin/adding.html.twig', [
+      'post' => $vrh
+    ]);
+  }
+
+
+  public function checkSqlPes(Request $request) {
+    $request = Request::createFromGlobals();
+
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
+    $form_handle = new FormToSQL;
+    $rq = $request->query->all();
+    $vrh = $form_handle->parsePostVrh($rq);
+    $sql = $vrh->checkVrh($conn);
+
+    return new JsonResponse(
+            $sql,
+        200);
+  }
 }
  ?>
