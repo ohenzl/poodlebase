@@ -17,12 +17,12 @@
 
 <div id='errorMsg'></div>
 
-  <form action="/admin/adding" method="post" class='form'>
+  <form action="/admin/editingVrh" method="post" class='form'>
     <div id='form'>
     <div>
 
       <label for="vrh['ID']">ID</label>
-      <input type="text" value="" name="{{ counter }}['ID']" id="ID" class="form-add" readonly>
+      <input type="text" value="" name="{{ counter }}[id]" id="ID" class="form-add" readonly>
       <br>
 
     {% for form in forms %}

@@ -40,7 +40,7 @@ class Admin extends AbstractController {
     ]);
   }
 
-  public function adding(AuthenticationUtils $authenticationUtils) {
+  public function adding(AuthenticationUtils $authenticationUtils, Request $request) {
 
 
     //PŘIDÁVÁNÍ DO DATABÁZE
@@ -55,12 +55,8 @@ class Admin extends AbstractController {
       $psi_input[] = $pes->addOrEdit($conn, $user, $vrh);
     }
 
-    // $test = $_POST;
-    // $test = $form_handle->parsePostPes($_POST, $conn, $user);
-
     return $this->render('home/admin/adding.html.twig', [
       'post' => $vrh
-      // 'post' => $test
     ]);
   }
 
@@ -75,6 +71,23 @@ class Admin extends AbstractController {
       'forms' => $form
     ]);
   }
+
+
+  public function editingVrh(AuthenticationUtils $authenticationUtils, Request $request) {
+
+    //ÚPRAVA DATABÁZE
+    $user = $authenticationUtils->getLastUsername();
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
+    $form_handle = new FormToSQL;
+    $vrh = $form_handle->parsePostVrh($_POST);
+    $vrh->editVrh($vrh->id, $user, $conn);
+
+    return $this->render('home/admin/adding.html.twig', [
+      'post' => $vrh
+    ]);
+  }
+
 
   public function checkSql(Request $request) {
     $request = Request::createFromGlobals();

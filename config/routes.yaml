@@ -39,3 +39,7 @@ editVrh:
 checkSql:
   path: /admin/checkSql
   controller: App\Controller\Admin::checkSql
+
+editingVrh:
+  path: /admin/editingVrh
+  controller: App\Controller\Admin::editingVrh

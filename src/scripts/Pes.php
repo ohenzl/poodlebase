@@ -27,7 +27,7 @@ namespace App\scripts;
 
     function addOrEdit($conn, $user, $vrh) {
       $sql = "SELECT p.ID ID FROM vrh v JOIN psi p ON p.vrh=v.ID WHERE p.jmeno = '$this->pes_jmeno' AND v.stanice = '$vrh->stanice'";
-      echo $sql . "<br>";
+      // echo $sql . "<br>";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
