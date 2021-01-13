@@ -89,7 +89,7 @@ class Admin extends AbstractController {
   }
 
 
-  public function checkSql(Request $request) {
+  public function checkSqlVrh(Request $request) {
     $request = Request::createFromGlobals();
 
     // echo var_dump($test->request->all()) . "<br><br>";

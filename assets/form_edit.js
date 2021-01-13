@@ -39,7 +39,7 @@ document.getElementById("kontrola").onclick = function () {
         }
       }
     };
-    xmlhttp.open('GET',"checkSql?"+dotaz,true);
+    xmlhttp.open('GET',"checkSqlVrh?"+dotaz,true);
     xmlhttp.send();
   }
 }

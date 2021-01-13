@@ -2,7 +2,6 @@ index:
    path: /
    controller: App\Controller\HomeController::homepage
 
-
 show:
    path: /show
    controller: App\Controller\HomeController::show
@@ -20,6 +19,9 @@ database:
   path: /database
   controller: App\Controller\Database::database
 
+
+#admin area
+
 admin:
   path: /admin
   controller: App\Controller\Admin::admin
@@ -36,9 +38,9 @@ editVrh:
   path: /admin/editVrh
   controller: App\Controller\Admin::editVrh
 
-checkSql:
-  path: /admin/checkSql
-  controller: App\Controller\Admin::checkSql
+checkSqlVrh:
+  path: /admin/checkSqlVrh
+  controller: App\Controller\Admin::checkSqlVrh
 
 editingVrh:
   path: /admin/editingVrh
