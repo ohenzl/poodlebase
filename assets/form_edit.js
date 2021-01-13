@@ -29,9 +29,10 @@ document.getElementById("kontrola").onclick = function () {
           document.getElementById("errorMsg").innerHTML = vysl.errormsg;
         } else {
           let input = JSON.parse(vysl);
+          console.log(input)
           for (output in input) {
             console.log(output, input[output])
-            if (output !== 'vloz_datum' && output !== 'vloz_osoba') {
+            if (output !== 'vloz_datum' && output !== 'vloz_osoba' && output !== 'vrh') {
                 document.getElementById(output).value = input[output]
             }
           }
@@ -39,7 +40,7 @@ document.getElementById("kontrola").onclick = function () {
         }
       }
     };
-    xmlhttp.open('GET',"checkSqlVrh?"+dotaz,true);
+    xmlhttp.open('GET',this.value+dotaz,true);
     xmlhttp.send();
   }
 }

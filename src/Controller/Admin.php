@@ -106,19 +106,8 @@ class Admin extends AbstractController {
   }
 
   public function editPes(EntityManagerInterface $em) {
-    //
-    // $form = $this->getDoctrine()
-    //             ->getRepository(FormAdd::class)->findBy(
-    //               ['name' => 'stanice']
-    //           );
+
     $this->entityManager = $em;
-    // $querybuilder = $this->entityManager->createQueryBuilder();
-    // $prepare = $querybuilder
-    //         ->select('f')
-    //         ->from('FormAdd', 'f');
-    //         // ->where('f.nadrazeny = psi');
-    // $query = $prepare->getQuery();
-    // $form = $query->execute();
 
     $query = $this->entityManager->createQuery(
             'SELECT f
@@ -126,13 +115,8 @@ class Admin extends AbstractController {
             WHERE f.nadrazeny = :nadrazeny OR f.name = :name'
         )->setParameter('nadrazeny', 'psi')->setParameter('name', 'stanice');
 
-        // returns an array of Product objects
         $form = $query->getResult();
 
-    // $form = $this->getDoctrine()
-    //             ->getRepository(FormAdd::class)->findBy(
-    //               ['nadrazeny' => 'Psi'],
-    //           );
 
     return $this->render('home/admin/editpes.html.twig', [
       'forms' => $form
@@ -147,11 +131,11 @@ class Admin extends AbstractController {
     $db = new SQLHandle;
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
-    $vrh = $form_handle->parsePostVrh($_POST);
+    $pes = $form_handle->parsePostPes($_POST);
     $vrh->editVrh($vrh->id, $user, $conn);
 
     return $this->render('home/admin/adding.html.twig', [
-      'post' => $vrh
+      'post' => $pes
     ]);
   }
 
@@ -163,8 +147,8 @@ class Admin extends AbstractController {
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
     $rq = $request->query->all();
-    $vrh = $form_handle->parsePostVrh($rq);
-    $sql = $vrh->checkVrh($conn);
+    $pes = $form_handle->parsePostPes($rq);
+    $sql = current($pes)->checkSql($conn);
 
     return new JsonResponse(
             $sql,

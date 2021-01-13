@@ -2,7 +2,7 @@
 
 
 {% block title %}
-  Úprava vrhu
+  Úprava psa
 {% endblock %}
 
 {% block stylesheets %}
@@ -13,11 +13,11 @@
 
 {% set nadpis = 'default' %}
 {% set podnadpis = 'default' %}
-{% set counter = 'vrh' %}
+{% set counter = 'pes' %}
 
 <div id='errorMsg'></div>
 
-  <form action="/admin/editingVrh" method="post" class='form'>
+  <form action="/admin/editingPes" method="post" class='form'>
     <div id='form'>
     <div>
 
@@ -34,21 +34,36 @@
       {% set nadpis = form.getNadrazeny() %}
     {% endif %}
 
+    {% if nadpis == 'Psi' %}
+      {% set counter = 'pes[1]' %}
+    {% elseif nadpis == 'Vrh' %}
+      {% set counter = 'vrh' %}
+    {% endif %}
+
     {% if podnadpis != form.getSubnadpis() %}
       <h2 class='subnadpis'>{{form.getSubnadpis()}}</h2>
       {% set podnadpis = form.getSubnadpis() %}
     {% endif %}
 
-    <label for="{{form.getName()}}">{{form.getLabel()}}</label>
-    <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[{{form.getName()}}]" id="{{form.getName()}}" class="form-add {{form.getClass()}}">
-    <br>
+    {% if form.getName() == 'cmku' %}
+      <label for="CMKU_pref">Prefix zápisu</label>
+      <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[cmku_pref]" id="cmku_pref" class="form-add {{form.getClass()}}">
+      <br>
+      <label for="{{form.getName()}}">{{form.getLabel()}}</label>
+      <input type="{{form.getTyp()}}" value="" name="{{ counter }}[{{form.getName()}}]" id="{{form.getName()}}" class="form-add {{form.getClass()}}">
+      <br>
+    {% else %}
+      <label for="{{form.getName()}}">{{form.getLabel()}}</label>
+      <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[{{form.getName()}}]" id="{{form.getName()}}" class="form-add {{form.getClass()}}">
+      <br>
+    {% endif %}
     {% endfor %}
     </div>
   </div>
     <input id='odeslat' type="submit" disabled>
   </form>
   <button id='deleteForm'>Vymazat formulář</button>
-  <button id='kontrola'>Doplnit formulář</button>
+  <button value='checkSqlPes?' id='kontrola'>Doplnit formulář</button>
 {% endblock %}
 
 

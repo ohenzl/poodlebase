@@ -57,7 +57,7 @@ namespace App\scripts;
       $sql = "UPDATE vrh
       SET otec_jmeno='$this->otec_jmeno', otec_chov='$this->otec_chov', matka_jmeno='$this->matka_jmeno', matka_chov='$this->matka_chov', narozeni='$this->narozeni', stanice='$this->stanice', chovatel_jmeno='$this->chovatel_jmeno', vloz_osoba='$user', vloz_datum='$datetime'
       WHERE ID='$ID'";
-      echo $sql;
+      // echo $sql;
 
       if ($conn->query($sql) === TRUE) {
       } else {
