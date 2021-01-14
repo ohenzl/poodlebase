@@ -20,7 +20,7 @@ class FormAdd
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    private $ID;
 
     /**
      * @var string
@@ -78,9 +78,16 @@ class FormAdd
      */
     private $class;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ucel", type="integer", length=11, nullable=false)
+     */
+    private $ucel;
+
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->ID;
     }
 
     public function getNadrazeny(): ?string
@@ -175,6 +182,18 @@ class FormAdd
     public function setClass(string $class): self
     {
         $this->class = $class;
+
+        return $this;
+    }
+
+    public function getUcel(): ?string
+    {
+        return $this->ucel;
+    }
+
+    public function setUcel(string $ucel): self
+    {
+        $this->ucel = $ucel;
 
         return $this;
     }

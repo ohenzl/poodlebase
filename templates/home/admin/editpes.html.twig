@@ -21,8 +21,8 @@
     <div id='form'>
     <div>
 
-      <label for="vrh['ID']">ID</label>
-      <input type="text" value="" name="{{ counter }}[id]" id="ID" class="form-add" readonly>
+      <label for="ID">ID</label>
+      <input type="text" value="" name="pes[1][ID]" id="ID" class="form-add" readonly>
       <br>
 
     {% for form in forms %}
@@ -37,16 +37,13 @@
     {% if nadpis == 'Psi' %}
       {% set counter = 'pes[1]' %}
     {% elseif nadpis == 'Vrh' %}
-      {% set counter = 'vrh' %}
+      {% set counter = 'pes[1]' %}
     {% endif %}
 
-    {% if podnadpis != form.getSubnadpis() %}
-      <h2 class='subnadpis'>{{form.getSubnadpis()}}</h2>
-      {% set podnadpis = form.getSubnadpis() %}
-    {% endif %}
+
 
     {% if form.getName() == 'cmku' %}
-      <label for="CMKU_pref">Prefix zápisu</label>
+      <label for="cmku_pref">Prefix zápisu</label>
       <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[cmku_pref]" id="cmku_pref" class="form-add {{form.getClass()}}">
       <br>
       <label for="{{form.getName()}}">{{form.getLabel()}}</label>

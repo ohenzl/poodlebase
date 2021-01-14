@@ -34,7 +34,9 @@ class Admin extends AbstractController {
 
   public function add() {
     $form = $this->getDoctrine()
-                ->getRepository(FormAdd::class)->findAll();
+                ->getRepository(FormAdd::class)->findBy(
+                  ['ucel' => '0']
+              );
 
     return $this->render('home/admin/add.html.twig', [
       'forms' => $form
@@ -50,7 +52,7 @@ class Admin extends AbstractController {
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
     $vrh = $form_handle->parsePostVrh($_POST);
-    $vrh->id = $vrh->addOrEdit($conn, $user);
+    $vrh->ID = $vrh->addOrEdit($conn, $user);
     $psi = $form_handle->parsePostPes($_POST);
     foreach ($psi as $pes) {
       $psi_input[] = $pes->addOrEdit($conn, $user, $vrh);
@@ -82,7 +84,7 @@ class Admin extends AbstractController {
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
     $vrh = $form_handle->parsePostVrh($_POST);
-    $vrh->editVrh($vrh->id, $user, $conn);
+    $vrh->editVrh($vrh->ID, $user, $conn);
 
     return $this->render('home/admin/adding.html.twig', [
       'post' => $vrh
@@ -117,7 +119,6 @@ class Admin extends AbstractController {
 
         $form = $query->getResult();
 
-
     return $this->render('home/admin/editpes.html.twig', [
       'forms' => $form
     ]);
@@ -132,7 +133,7 @@ class Admin extends AbstractController {
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
     $pes = $form_handle->parsePostPes($_POST);
-    $vrh->editVrh($vrh->id, $user, $conn);
+    current($pes)->edit(current($pes)->ID, $user, $conn);
 
     return $this->render('home/admin/adding.html.twig', [
       'post' => $pes
@@ -148,6 +149,7 @@ class Admin extends AbstractController {
     $form_handle = new FormToSQL;
     $rq = $request->query->all();
     $pes = $form_handle->parsePostPes($rq);
+    // echo var_dump($form_handle);
     $sql = current($pes)->checkSql($conn);
 
     return new JsonResponse(

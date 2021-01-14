@@ -3,7 +3,7 @@
 namespace App\scripts;
 
   class Vrh {
-    public $id;
+    public $ID;
     public $narozeni;
     public $otec_jmeno;
     public $otec_chov;
@@ -14,7 +14,7 @@ namespace App\scripts;
     public $chovatel_prijmeni;
 
     function __construct() {
-      $this->id = '';
+      $this->ID = '';
       $this->narozeni = '';
       $this->otec_jmeno = '';
       $this->otec_chov = '';
@@ -45,7 +45,7 @@ namespace App\scripts;
       $sql = $kam . $co;
       //zápis psa, získání ID rodiče
       if ($conn->query($sql) === TRUE) {
-        $this->id = $conn->insert_id;
+        $this->ID = $conn->insert_id;
         return $conn->insert_id;  //získání ID
       } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

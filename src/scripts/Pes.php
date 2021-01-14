@@ -3,7 +3,7 @@
 namespace App\scripts;
 
   class Pes {
-    public $id;
+    public $ID;
     public $pes_jmeno;
     public $pohlavi;
     public $barva;
@@ -12,9 +12,16 @@ namespace App\scripts;
     public $cmku;
     public $cip;
     public $vrh;
+    public $stanice;
+    public $prezdivka;
+    public $vyska;
+    public $majitel;
+    public $web;
+    public $patella_l;
+    public $patella_r;
 
     function __construct() {
-      $this->id = '';
+      $this->ID = '';
       $this->pes_jmeno = '';
       $this->pohlavi = '';
       $this->barva = '';
@@ -23,6 +30,13 @@ namespace App\scripts;
       $this->cmku = '';
       $this->cip = '';
       $this->vrh = '';
+      $this->stanice = '';
+      $this->prezdivka = '';
+      $this->vyska = '';
+      $this->majitel = '';
+      $this->web = '';
+      $this->patella_l = '';
+      $this->patella_r = '';
     }
 
     function addOrEdit($conn, $user, $vrh) {
@@ -41,7 +55,7 @@ namespace App\scripts;
 
     function add($conn, $user, $vrh) {
       $datetime = date("Y-m-d H:i:s");
-      $co = "VALUES ('$this->pes_jmeno', '$this->pohlavi', '$this->barva', '$this->srst', '$vrh->id', '$this->cmku_pref', '$this->cmku', '$this->cip', '$user', '$datetime');";
+      $co = "VALUES ('$this->pes_jmeno', '$this->pohlavi', '$this->barva', '$this->srst', '$vrh->ID', '$this->cmku_pref', '$this->cmku', '$this->cip', '$user', '$datetime');";
       $kam = "INSERT INTO psi (pes_jmeno, pohlavi, barva, srst, vrh, cmku_pref, cmku, cip, vloz_osoba, vloz_datum) ";
       $sql = $kam . $co;
       //zápis psa, získání ID rodiče
@@ -54,9 +68,17 @@ namespace App\scripts;
 
     function edit($ID, $user, $conn) {
       $datetime = date("Y-m-d H:i:s");
-      $sql = "UPDATE psi
-      SET pes_jmeno='$this->pes_jmeno', pohlavi='$this->pohlavi', barva='$this->barva', srst='$this->srst', cmku_pref='$this->cmku_pref', cmku='$this->cmku', cip='$this->cip', vloz_osoba='$user', vloz_datum='$datetime'
-      WHERE ID='$ID'";
+      $objects = get_object_vars($this);
+      $sql = "UPDATE psi SET ";
+      foreach ($objects as $nazev => $hodnota) {
+        if ($nazev !== 'ID' && $nazev !== 'stanice') {
+          $sql .= "{$nazev} = '{$hodnota}', ";
+        }
+      }
+      $sql .= "vloz_osoba='$user', vloz_datum='$datetime' WHERE ID='$ID'";
+      // $sql = "UPDATE psi
+      // SET pes_jmeno='$this->pes_jmeno', pohlavi='$this->pohlavi', barva='$this->barva', srst='$this->srst', cmku_pref='$this->cmku_pref', cmku='$this->cmku', cip='$this->cip', vloz_osoba='$user', vloz_datum='$datetime'
+      // WHERE ID='$ID'";
 
       if ($conn->query($sql) === TRUE) {
       } else {
@@ -79,6 +101,7 @@ namespace App\scripts;
         }
       }
       $sql = "SELECT p.*, v.stanice FROM psi p join vrh v on v.ID=p.vrh {$sql}";
+      // echo $sql;
       $result = $conn->query($sql);
       if (!$result || $result->num_rows === 0) {
         $vysl['error'] = true;
