@@ -76,9 +76,6 @@ namespace App\scripts;
         }
       }
       $sql .= "vloz_osoba='$user', vloz_datum='$datetime' WHERE ID='$ID'";
-      // $sql = "UPDATE psi
-      // SET pes_jmeno='$this->pes_jmeno', pohlavi='$this->pohlavi', barva='$this->barva', srst='$this->srst', cmku_pref='$this->cmku_pref', cmku='$this->cmku', cip='$this->cip', vloz_osoba='$user', vloz_datum='$datetime'
-      // WHERE ID='$ID'";
 
       if ($conn->query($sql) === TRUE) {
       } else {
@@ -116,6 +113,7 @@ namespace App\scripts;
     }
     return $vysl;
   }
+
 }
 
  ?>

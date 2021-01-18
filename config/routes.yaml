@@ -57,3 +57,19 @@ checkSqlPes:
 editingPes:
   path: /admin/editingPes
   controller: App\Controller\Admin::editingPes
+
+removePes:
+  path: /admin/removePes
+  controller: App\Controller\Admin::removePes
+
+removingPes:
+  path: /admin/removingPes
+  controller: App\Controller\Admin::removingPes
+
+removeVrh:
+  path: /admin/removeVrh
+  controller: App\Controller\Admin::removeVrh
+
+removingVrh:
+  path: /admin/removingVrh
+  controller: App\Controller\Admin::removingVrh

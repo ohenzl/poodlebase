@@ -55,7 +55,7 @@ class Admin extends AbstractController {
     $vrh->ID = $vrh->addOrEdit($conn, $user);
     $psi = $form_handle->parsePostPes($_POST);
     foreach ($psi as $pes) {
-      $psi_input[] = $pes->addOrEdit($conn, $user, $vrh);
+      $pes->addOrEdit($conn, $user, $vrh);
     }
 
     return $this->render('home/admin/adding.html.twig', [
@@ -71,7 +71,8 @@ class Admin extends AbstractController {
               );
 
     return $this->render('home/admin/editvrh.html.twig', [
-      'forms' => $form
+      'forms' => $form,
+      'typ' => '/admin/editingVrh'
     ]);
   }
 
@@ -120,7 +121,9 @@ class Admin extends AbstractController {
         $form = $query->getResult();
 
     return $this->render('home/admin/editpes.html.twig', [
-      'forms' => $form
+      'forms' => $form,
+      'typ' => '/admin/editingPes',
+      'nadpise' => 'Úprava psa'
     ]);
   }
 
@@ -156,5 +159,82 @@ class Admin extends AbstractController {
             $sql,
         200);
   }
+
+  public function removePes(EntityManagerInterface $em) {
+    $this->entityManager = $em;
+
+    $query = $this->entityManager->createQuery(
+            'SELECT f
+            FROM App\Entity\FormAdd f
+            WHERE f.nadrazeny = :nadrazeny OR f.name = :name'
+        )->setParameter('nadrazeny', 'psi')->setParameter('name', 'stanice');
+
+        $form = $query->getResult();
+
+    return $this->render('home/admin/editpes.html.twig', [
+      'forms' => $form,
+      'typ' => '/admin/removingPes',
+      'nadpise' => 'Mazání psa'
+    ]);
+  }
+
+  public function removingPes(AuthenticationUtils $authenticationUtils, Request $request) {
+
+    $request = Request::createFromGlobals();
+    $rq = $request->request->all()['pes'][1]['ID'];
+
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
+    $sql = "DELETE FROM psi WHERE ID = '$rq'";
+
+    if ($conn->query($sql) === TRUE) {
+    } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    return $this->render('home/admin/adding.html.twig', [
+      'post' => $sql
+    ]);
+  }
+
+  public function removeVrh(EntityManagerInterface $em) {
+    $form = $this->getDoctrine()
+                ->getRepository(FormAdd::class)->findBy(
+                  ['nadrazeny' => 'Vrh']
+              );
+
+    return $this->render('home/admin/editvrh.html.twig', [
+      'forms' => $form,
+      'typ' => '/admin/removingVrh',
+      'nadpise' => 'Mazání vrhu'
+    ]);
+  }
+
+  public function removingVrh(AuthenticationUtils $authenticationUtils, Request $request) {
+
+    $request = Request::createFromGlobals();
+    $rq = $request->request->all()['vrh']['ID'];
+
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
+    $sql = "DELETE FROM vrh WHERE ID = '$rq'";
+
+    if ($conn->query($sql) === TRUE) {
+    } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    $sql = "DELETE FROM psi WHERE vrh = '$rq'";
+
+    if ($conn->query($sql) === TRUE) {
+    } else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+
+    return $this->render('home/admin/adding.html.twig', [
+      'post' => $sql
+    ]);
+  }
+
 }
  ?>

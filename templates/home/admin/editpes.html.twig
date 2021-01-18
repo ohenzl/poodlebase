@@ -2,7 +2,7 @@
 
 
 {% block title %}
-  Úprava psa
+  {{nadpise}}
 {% endblock %}
 
 {% block stylesheets %}
@@ -15,14 +15,19 @@
 {% set podnadpis = 'default' %}
 {% set counter = 'pes' %}
 
+<h1>{{nadpise}}</h1>
+
 <div id='errorMsg'></div>
 
-  <form action="/admin/editingPes" method="post" class='form'>
+  <form action="{{typ}}" method="post" class='form' onsubmit="return confirm('Opravdu?')">
     <div id='form'>
     <div>
 
       <label for="ID">ID</label>
       <input type="text" value="" name="pes[1][ID]" id="ID" class="form-add" readonly>
+      <br>
+      <label for="vrh">Vrh ID</label>
+      <input type="text" value="" name="pes[1][vrh]" id="vrh" class="form-add" readonly>
       <br>
 
     {% for form in forms %}

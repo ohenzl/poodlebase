@@ -32,7 +32,7 @@ document.getElementById("kontrola").onclick = function () {
           console.log(input)
           for (output in input) {
             console.log(output, input[output])
-            if (output !== 'vloz_datum' && output !== 'vloz_osoba' && output !== 'vrh') {
+            if (output !== 'vloz_datum' && output !== 'vloz_osoba') {
                 document.getElementById(output).value = input[output]
             }
           }
@@ -50,7 +50,8 @@ let clearButton = document.getElementById("deleteForm");
 clearButton.onclick = function () {
   if (alreadyClicked === false) {
     alreadyClicked = true;
-    clearButton.innerHTML = 'Opravdu chcete vymazat formulář?';
+    // clearButton.innerHTML = 'Opravdu chcete vymazat formulář?';
+    clearButton.innerHTML = 'Opravdu chcete ' + clearButton.innerHTML.toLowerCase() + '?';
     window.setTimeout(vratitDoPuvodnihoStavu => {
       clearButton.innerHTML = 'Vymazat formulář';
       alreadyClicked = false;
