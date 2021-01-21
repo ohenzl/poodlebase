@@ -17,7 +17,7 @@ logged:
 
 database:
   path: /database
-  controller: App\Controller\Database::database
+  controller: App\Controller\Database::overview
 
 
 #admin area

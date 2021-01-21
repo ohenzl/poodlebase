@@ -5,9 +5,29 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
 // use Symfony\Component\HttpFoundation\Session\Session;
 
 class Database extends AbstractController {
+
+  public function overview(EntityManagerInterface $em) {
+    $this->entityManager = $em;
+
+    $query = $em->createQuery(
+            'SELECT p
+            FROM psi p'
+        );
+
+        $result = $query->getResult();
+
+
+    return $this->render('home/overview.html.twig', [
+      'result' => $result
+    ]);
+  }
+
+
   public function database() {
 
     // require_once('../src/scripts/login.php');
