@@ -14,16 +14,30 @@ class Database extends AbstractController {
   public function overview(EntityManagerInterface $em) {
     $this->entityManager = $em;
 
-    $query = $em->createQuery(
-            'SELECT p
-            FROM psi p'
-        );
 
-        $result = $query->getResult();
+    $qb = $this->entityManager->createQueryBuilder();
+    $qb
+        ->select('a', 'u')
+        ->from('App\Entity\Psi', 'a')
+        ->join('a.vrh', 'u');
+    $result = $qb->getQuery()->getResult();
+
+    // $query = $em->createQueryBuilder();
+    //
+    // $query->select('p', 'v')
+    //     ->from('App\Entity\Psi', 'p')
+    //     ->join(
+    //         'App\Entity\Vrh',
+    //         'v',
+    //         \Doctrine\ORM\Query\Expr\Join::WITH,
+    //         'p.vrh = v.id'
+    //     );
+
+        // $result = $query->getQuery()->getResult();
 
 
     return $this->render('home/overview.html.twig', [
-      'result' => $result
+      'psi' => $result
     ]);
   }
 

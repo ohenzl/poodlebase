@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-// use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,7 +19,14 @@ class FormAdd
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $ID;
+    private $id;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="ucel", type="integer", nullable=false)
+     */
+    private $ucel;
 
     /**
      * @var string
@@ -67,9 +73,9 @@ class FormAdd
     /**
      * @var string
      *
-     * @ORM\Column(name="typ", type="string", length=10, nullable=false)
+     * @ORM\Column(name="typ", type="string", length=10, nullable=false, options={"default"="text"})
      */
-    private $typ;
+    private $typ = 'text';
 
     /**
      * @var string
@@ -78,16 +84,21 @@ class FormAdd
      */
     private $class;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="ucel", type="integer", length=11, nullable=false)
-     */
-    private $ucel;
-
     public function getId(): ?int
     {
-        return $this->ID;
+        return $this->id;
+    }
+
+    public function getUcel(): ?int
+    {
+        return $this->ucel;
+    }
+
+    public function setUcel(int $ucel): self
+    {
+        $this->ucel = $ucel;
+
+        return $this;
     }
 
     public function getNadrazeny(): ?string
@@ -182,18 +193,6 @@ class FormAdd
     public function setClass(string $class): self
     {
         $this->class = $class;
-
-        return $this;
-    }
-
-    public function getUcel(): ?string
-    {
-        return $this->ucel;
-    }
-
-    public function setUcel(string $ucel): self
-    {
-        $this->ucel = $ucel;
 
         return $this;
     }

@@ -72,7 +72,9 @@ namespace App\scripts;
       $sql = "UPDATE psi SET ";
       foreach ($objects as $nazev => $hodnota) {
         if ($nazev !== 'ID' && $nazev !== 'stanice') {
-          $sql .= "{$nazev} = '{$hodnota}', ";
+          if ($nazev !== 'vrh' || $hodnota !== '') {
+            $sql .= "{$nazev} = '{$hodnota}', ";
+          }
         }
       }
       $sql .= "vloz_osoba='$user', vloz_datum='$datetime' WHERE ID='$ID'";

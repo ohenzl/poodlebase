@@ -24,14 +24,14 @@ class Psi
     /**
      * @var string
      *
-     * @ORM\Column(name="jmeno", type="string", length=60, nullable=false)
+     * @ORM\Column(name="pes_jmeno", type="string", length=60, nullable=false)
      */
-    private $jmeno;
+    private $pesJmeno;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pohlavi", type="string", length=2, nullable=false)
+     * @ORM\Column(name="pohlavi", type="string", length=10, nullable=false)
      */
     private $pohlavi;
 
@@ -52,9 +52,17 @@ class Psi
     /**
      * @var int
      *
-     * @ORM\Column(name="vrh", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Vrh")
+     * @ORM\JoinColumn(name="vrh", referencedColumnName="ID")
      */
     private $vrh;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cmku_pref", type="string", length=30, nullable=false)
+     */
+    private $cmkuPref;
 
     /**
      * @var string
@@ -71,16 +79,58 @@ class Psi
     private $cip;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="vyska", type="integer", nullable=false)
+     */
+    private $vyska;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="prezdivka", type="string", length=50, nullable=false)
+     */
+    private $prezdivka;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="majitel", type="string", length=50, nullable=false)
+     */
+    private $majitel;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="web", type="string", length=50, nullable=false)
+     */
+    private $web;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="patella_l", type="string", length=2, nullable=false)
+     */
+    private $patellaL;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="patella_r", type="string", length=2, nullable=false)
+     */
+    private $patellaR;
+
+    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="vloz_datum", type="date", nullable=false)
+     * @ORM\Column(name="vloz_datum", type="datetime", nullable=false)
      */
     private $vlozDatum;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="vloz_osoba", type="integer", nullable=false)
+     * @ORM\Column(name="vloz_osoba", type="string", length=30, nullable=false)
      */
     private $vlozOsoba;
 
@@ -89,14 +139,14 @@ class Psi
         return $this->id;
     }
 
-    public function getJmeno(): ?string
+    public function getPesJmeno(): ?string
     {
-        return $this->jmeno;
+        return $this->pesJmeno;
     }
 
-    public function setJmeno(string $jmeno): self
+    public function setPesJmeno(string $pesJmeno): self
     {
-        $this->jmeno = $jmeno;
+        $this->pesJmeno = $pesJmeno;
 
         return $this;
     }
@@ -149,6 +199,18 @@ class Psi
         return $this;
     }
 
+    public function getCmkuPref(): ?string
+    {
+        return $this->cmkuPref;
+    }
+
+    public function setCmkuPref(string $cmkuPref): self
+    {
+        $this->cmkuPref = $cmkuPref;
+
+        return $this;
+    }
+
     public function getCmku(): ?string
     {
         return $this->cmku;
@@ -173,6 +235,78 @@ class Psi
         return $this;
     }
 
+    public function getVyska(): ?int
+    {
+        return $this->vyska;
+    }
+
+    public function setVyska(int $vyska): self
+    {
+        $this->vyska = $vyska;
+
+        return $this;
+    }
+
+    public function getPrezdivka(): ?string
+    {
+        return $this->prezdivka;
+    }
+
+    public function setPrezdivka(string $prezdivka): self
+    {
+        $this->prezdivka = $prezdivka;
+
+        return $this;
+    }
+
+    public function getMajitel(): ?string
+    {
+        return $this->majitel;
+    }
+
+    public function setMajitel(string $majitel): self
+    {
+        $this->majitel = $majitel;
+
+        return $this;
+    }
+
+    public function getWeb(): ?string
+    {
+        return $this->web;
+    }
+
+    public function setWeb(string $web): self
+    {
+        $this->web = $web;
+
+        return $this;
+    }
+
+    public function getPatellaL(): ?string
+    {
+        return $this->patellaL;
+    }
+
+    public function setPatellaL(string $patellaL): self
+    {
+        $this->patellaL = $patellaL;
+
+        return $this;
+    }
+
+    public function getPatellaR(): ?string
+    {
+        return $this->patellaR;
+    }
+
+    public function setPatellaR(string $patellaR): self
+    {
+        $this->patellaR = $patellaR;
+
+        return $this;
+    }
+
     public function getVlozDatum(): ?\DateTimeInterface
     {
         return $this->vlozDatum;
@@ -185,12 +319,12 @@ class Psi
         return $this;
     }
 
-    public function getVlozOsoba(): ?int
+    public function getVlozOsoba(): ?string
     {
         return $this->vlozOsoba;
     }
 
-    public function setVlozOsoba(int $vlozOsoba): self
+    public function setVlozOsoba(string $vlozOsoba): self
     {
         $this->vlozOsoba = $vlozOsoba;
 

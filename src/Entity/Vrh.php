@@ -22,18 +22,32 @@ class Vrh
     private $id;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="otec", type="integer", nullable=false)
+     * @ORM\Column(name="otec_jmeno", type="string", length=50, nullable=false)
      */
-    private $otec;
+    private $otecJmeno;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="matka", type="integer", nullable=false)
+     * @ORM\Column(name="otec_chov", type="string", length=50, nullable=false)
      */
-    private $matka;
+    private $otecChov;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="matka_jmeno", type="string", length=50, nullable=false)
+     */
+    private $matkaJmeno;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="matka_chov", type="string", length=50, nullable=false)
+     */
+    private $matkaChov;
 
     /**
      * @var \DateTime
@@ -43,30 +57,30 @@ class Vrh
     private $narozeni;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="stanice", type="integer", nullable=false)
+     * @ORM\Column(name="stanice", type="string", length=50, nullable=false)
      */
     private $stanice;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="chovatel", type="integer", nullable=false)
+     * @ORM\Column(name="chovatel_jmeno", type="string", length=80, nullable=false)
      */
-    private $chovatel;
+    private $chovatelJmeno;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="vloz_datum", type="date", nullable=false)
+     * @ORM\Column(name="vloz_datum", type="datetime", nullable=false)
      */
     private $vlozDatum;
 
     /**
-     * @var int
+     * @var string
      *
-     * @ORM\Column(name="vloz_osoba", type="integer", nullable=false)
+     * @ORM\Column(name="vloz_osoba", type="string", length=30, nullable=false)
      */
     private $vlozOsoba;
 
@@ -75,26 +89,50 @@ class Vrh
         return $this->id;
     }
 
-    public function getOtec(): ?int
+    public function getOtecJmeno(): ?string
     {
-        return $this->otec;
+        return $this->otecJmeno;
     }
 
-    public function setOtec(int $otec): self
+    public function setOtecJmeno(string $otecJmeno): self
     {
-        $this->otec = $otec;
+        $this->otecJmeno = $otecJmeno;
 
         return $this;
     }
 
-    public function getMatka(): ?int
+    public function getOtecChov(): ?string
     {
-        return $this->matka;
+        return $this->otecChov;
     }
 
-    public function setMatka(int $matka): self
+    public function setOtecChov(string $otecChov): self
     {
-        $this->matka = $matka;
+        $this->otecChov = $otecChov;
+
+        return $this;
+    }
+
+    public function getMatkaJmeno(): ?string
+    {
+        return $this->matkaJmeno;
+    }
+
+    public function setMatkaJmeno(string $matkaJmeno): self
+    {
+        $this->matkaJmeno = $matkaJmeno;
+
+        return $this;
+    }
+
+    public function getMatkaChov(): ?string
+    {
+        return $this->matkaChov;
+    }
+
+    public function setMatkaChov(string $matkaChov): self
+    {
+        $this->matkaChov = $matkaChov;
 
         return $this;
     }
@@ -111,26 +149,26 @@ class Vrh
         return $this;
     }
 
-    public function getStanice(): ?int
+    public function getStanice(): ?string
     {
         return $this->stanice;
     }
 
-    public function setStanice(int $stanice): self
+    public function setStanice(string $stanice): self
     {
         $this->stanice = $stanice;
 
         return $this;
     }
 
-    public function getChovatel(): ?int
+    public function getChovatelJmeno(): ?string
     {
-        return $this->chovatel;
+        return $this->chovatelJmeno;
     }
 
-    public function setChovatel(int $chovatel): self
+    public function setChovatelJmeno(string $chovatelJmeno): self
     {
-        $this->chovatel = $chovatel;
+        $this->chovatelJmeno = $chovatelJmeno;
 
         return $this;
     }
@@ -147,12 +185,12 @@ class Vrh
         return $this;
     }
 
-    public function getVlozOsoba(): ?int
+    public function getVlozOsoba(): ?string
     {
         return $this->vlozOsoba;
     }
 
-    public function setVlozOsoba(int $vlozOsoba): self
+    public function setVlozOsoba(string $vlozOsoba): self
     {
         $this->vlozOsoba = $vlozOsoba;
 
