@@ -2,12 +2,66 @@
 
 
 {% block body %}
+<table>
+  <tr>
+    <td>
+      Jméno
+    </td>
+    <td>
+      Chovná stanice
+    </td>
+    <td>
+      Barva
+    </td>
+    <td>
+      Pohlaví
+    </td>
+    <td>
+      Narození
+    </td>
+    <td>
+      Otec
+    </td>
+    <td>
+      Matka
+    </td>
+    <td>
+      Chovatel
+    </td>
+  </tr>
 
 {% for pes in psi %}
-
+  <tr>
+    <td>
+      {{pes.pesJmeno}}
+    </td>
+    <td>
+      {{pes.getJoinedVrh.stanice}}
+    </td>
+    <td>
+      {{pes.barva}}
+    </td>
+    <td>
+      {{pes.pohlavi}}
+    </td>
+    <td>
+      {{pes.getJoinedVrh.narozeni|date("d.m.Y")}}
+    </td>
+    <td>
+      {{pes.getJoinedVrh.otecJmeno}} {{pes.getJoinedVrh.otecChov}}
+    </td>
+    <td>
+      {{pes.getJoinedVrh.matkaJmeno}} {{pes.getJoinedVrh.matkaChov}}
+    </td>
+    <td>
+      {{pes.getJoinedVrh.chovatelJmeno}}
+    </td>
+  </tr>
 {% endfor %}
 
+</table>
 {{dump(psi)}}
+{{dump(psi[0].getJoinedVrh)}}
 
 <div>
   There is a div

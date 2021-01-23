@@ -192,6 +192,13 @@ class Psi
         return $this->vrh;
     }
 
+
+    public function getJoinedVrh(): ?object
+    {
+        return $this->vrh;
+    }
+
+
     public function setVrh(int $vrh): self
     {
         $this->vrh = $vrh;
