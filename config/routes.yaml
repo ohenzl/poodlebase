@@ -15,9 +15,20 @@ logged:
    path: /logged
    controller: App\Controller\HomeController::logged
 
+
+#database and showing dogs
+
 database:
   path: /database
   controller: App\Controller\Database::overview
+
+displayDogWithDog:
+  path: /pes/{dogID}/{dogname}
+  controller: App\Controller\Database::displayDog
+
+displayDog:
+  path: /pes/{dogID}
+  controller: App\Controller\Database::makeRouteWithDogsName
 
 
 #admin area

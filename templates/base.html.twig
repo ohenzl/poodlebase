@@ -13,24 +13,24 @@
 
       <nav>
         <div>
-          <a href='../database'>databáze</a>
+          <a href='../../database'>databáze</a>
         </div>
         <div>
-          <a href='../chs'>chovné stanice</a>
+          <a href='../../chs'>chovné stanice</a>
         </div>
       {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
         <div>
-          <a href='../admin'>admin</a>
+          <a href='../../admin'>admin</a>
         </div>
         <div>
-          <a href='../logout'>logout</a>
+          <a href='../../logout'>logout</a>
         </div>
         <div style='flex-basis:100px;'>
           {{app.user.username}}
         </div>
       {% else %}
         <div>
-          <a href='../login'>login</a>
+          <a href='../../login'>login</a>
         </div>
       {% endif %}
       </nav>

@@ -18,7 +18,9 @@ function pridatPsa() {
   let newPes = pes[(pes.length)-1].cloneNode(true);
     newPes.getElementsByClassName('form-add').forEach(changeNumber => {
       changeNumber.name = 'pes[' + (parseInt(changeNumber.name.slice(4, 5)) + 1) + changeNumber.name.slice(5);
-      if (changeNumber.name.slice(6) === 'pes_jmeno' || changeNumber.name.slice(6) === 'pohlavi') {
+      console.log(changeNumber.name.slice(6))
+      if (changeNumber.name.slice(6) === '[barva]' || changeNumber.name.slice(6) === '[srst]' || changeNumber.name.slice(6) === '[cmku_pref]') {
+      } else {
         changeNumber.value = '';
       }
     })
@@ -50,7 +52,7 @@ function kontrolaData(umoznitZapis) {
   if (datum[0].valueAsDate > now || datum[0].valueAsDate === null) {
     datum[0].style.background = failColor;
     // console.log(datum[0].style.background)
-    umoznitZapis.push("čas");
+    // umoznitZapis.push("čas");
   } else if (datum[0].valueAsDate < before) {
     datum[0].style.background = warningColor;
     // console.log(datum[0].style.background)

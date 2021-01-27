@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
+use App\scripts\PesDetail;
+use App\scripts\SQLHandle;
 // use Symfony\Component\HttpFoundation\Session\Session;
 
 class Database extends AbstractController {
@@ -22,19 +24,6 @@ class Database extends AbstractController {
         ->join('a.vrh', 'u');
     $result = $qb->getQuery()->getResult();
 
-    // $query = $em->createQueryBuilder();
-    //
-    // $query->select('p', 'v')
-    //     ->from('App\Entity\Psi', 'p')
-    //     ->join(
-    //         'App\Entity\Vrh',
-    //         'v',
-    //         \Doctrine\ORM\Query\Expr\Join::WITH,
-    //         'p.vrh = v.id'
-    //     );
-
-        // $result = $query->getQuery()->getResult();
-
 
     return $this->render('home/overview.html.twig', [
       'psi' => $result
@@ -42,23 +31,64 @@ class Database extends AbstractController {
   }
 
 
-  public function database() {
+  public function displayDog($dogID, EntityManagerInterface $em) {
 
-    // require_once('../src/scripts/login.php');
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
 
 
-    // $sql = "SELECT count(login) FROM login WHERE datum > '$datum_past' AND IP = '$ip' AND SUCCESS = '0'";
-    // $result = $conn->query($sql);
-    // if ($result->num_rows > 0) {
-    //     while($row = $result->fetch_assoc()) {
-    //       $pocet_prihlaseni = $row['count(login)'];
+    $dogs[0][0] = new PesDetail;
+    $dogs[0][0]->getAllInfo($conn, $dogID);
+    $dogs[1][0] = $dogs[0][0]->createParent($conn, 'otec');
+    $dogs[1][1] = $dogs[0][0]->createParent($conn, 'matka');
+    $dogs[2][0] = $dogs[1][0]->createParent($conn, 'matka');
+
+    // for ($gen = 1; $gen < 3; $gen++) {
+    //   $dogNumberWithinGen = 0;
+    //   foreach ($dogs[$gen-1] as $dog) {
+    //     $dogs[$gen][$dogNumberWithinGen] = new PesDetail;
+    //     $dogs[$gen][$dogNumberWithinGen]->ID = $dogs[$gen-1]
+    //     $dog->getAllInfo($conn, $dogID);
+    //     $dogNumberWithinGen++;
     //   }
     // }
 
-    return $this->render('home/database.html.twig', [
+    // $this->entityManager = $em;
+    // $qb = $this->entityManager->createQueryBuilder();
+    // $qb
+    //     ->select('a', 'u')
+    //     ->from('App\Entity\Psi', 'a')
+    //     ->join('a.vrh', 'u')
+    //     ->where("a.id = {$dogID}");
+    // $dog = $qb->getQuery()->getResult()[0];
+
+    return $this->render('home/dogpage.html.twig', [
+      'dogs' => $dogs
     ]);
 
   }
+
+  public function makeRouteWithDogsName($dogID, EntityManagerInterface $em) {
+
+    $this->entityManager = $em;
+    $qb = $this->entityManager->createQueryBuilder();
+    $qb
+        ->select('a', 'u')
+        ->from('App\Entity\Psi', 'a')
+        ->join('a.vrh', 'u')
+        ->where("a.id = {$dogID}");
+    $dog = $qb->getQuery()->getResult()[0];
+    $dogname = $dog->getPesJmeno();
+    $dogname .= "-" . $dog->getJoinedVrh()->getStanice();
+    $dogname = (str_replace(' ', '-', $dogname));
+
+    $location = "database/pes/$dogID/$dogname";
+
+
+    return $this->redirectToRoute("displayDogWithDog", ['dogID' => $dogID, 'dogname' => $dogname]);
+  }
+
+
 }
 
  ?>
