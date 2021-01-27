@@ -5,12 +5,12 @@ use App\scripts\PesBase;
 
   class PesDetail extends PesBase {
 
-    private $otec_jmeno;
-    private $otec_chov;
-    private $otec_ID;
-    private $matka_jmeno;
-    private $matka_chov;
-    private $matka_ID;
+    public $otec_jmeno;
+    public $otec_chov;
+    public $matka_jmeno;
+    public $matka_chov;
+    public $otec;
+    public $matka;
 
     function getAllInfo($conn, $ID) {
       $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
@@ -25,14 +25,25 @@ use App\scripts\PesBase;
       }
     }
 
+    function createParents($conn) {
+      $this->otec = $this->createParent($conn, 'otec');
+      $this->matka = $this->createParent($conn, 'matka');
+
+      $parents[] = $this->otec;
+      $parents[] = $this->matka;
+      return $parents;
+    }
+
     function createParent($conn, $parent) {
-      
+
       $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov FROM psi p JOIN vrh v ON p.vrh=v.ID";
       if ($parent === 'otec') {
          $sql .= " WHERE p.pes_jmeno = '$this->otec_jmeno' AND v.stanice = '$this->otec_chov'";
       } else {
         $sql .= " WHERE p.pes_jmeno = '$this->matka_jmeno' AND v.stanice = '$this->matka_chov'";
       }
+
+      // echo $sql . "<br>";
 
       $result = $conn->query($sql);
       $parent = new PesDetail;
