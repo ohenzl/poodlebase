@@ -5,6 +5,10 @@ use App\scripts\PesBase;
 
   class PesDetail extends PesBase {
 
+    function __construct() {
+
+    }
+
     public $otec_jmeno;
     public $otec_chov;
     public $matka_jmeno;
@@ -14,7 +18,7 @@ use App\scripts\PesBase;
 
     function getAllInfo($conn, $ID) {
       $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
-      echo $sql;
+      // echo $sql;
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -56,6 +60,12 @@ use App\scripts\PesBase;
       }
       return $parent;
     }
+
+    function printInfo() {
+      // return "<div>{$this->pes_jmeno}</div>";
+      return $this->pes_jmeno;
+    }
+
 
 }
 

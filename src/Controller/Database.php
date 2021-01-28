@@ -40,20 +40,33 @@ class Database extends AbstractController {
 
     $dog = new PesDetail;
     $dog->getAllInfo($conn, $dogID);
-    $parents_next = array_merge($parents_next,$dog->createParents($conn));
+    // $parents_next = array_merge($parents_next,$dog->createParents($conn));
 
     //gen = depth
-    for ($gen = 1; $gen < 6; $gen++) {
-      $parents = $parents_next;
-      $parents_next = [];
-      foreach ($parents as $parent) {
-        $parents_next = array_merge($parents_next,$parent->createParents($conn));
+    // for ($gen = 1; $gen < 6; $gen++) {
+    //   $parents = $parents_next;
+    //   $parents_next = [];
+    //   foreach ($parents as $parent) {
+    //     $parents_next = array_merge($parents_next,$parent->createParents($conn));
+    //   }
+    //   $parents = [];
+    // }
+
+
+    for ($i = 1; $i < 6; $i++) {
+      $parents[$i] = [];
+    }
+    $parents[1] = array_merge($parents_next,$dog->createParents($conn));
+
+    //gen = depth
+    for ($gen = 2; $gen < 6; $gen++) {
+      foreach ($parents[$gen-1] as $parent) {
+        $parents[$gen] = array_merge($parents[$gen],$parent->createParents($conn));
       }
-      $parents = [];
     }
 
     return $this->render('home/dogpage.html.twig', [
-      'dogs' => $dog
+      'dogs' => $parents
     ]);
 
   }

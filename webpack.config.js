@@ -27,6 +27,7 @@ Encore
     .addEntry('admin', './assets/admin.js')
     .addEntry('form_check', './assets/form_check.js')
     .addEntry('form_edit', './assets/form_edit.js')
+    .addEntry('overview', './assets/overview.js')
     //.addEntry('page1', './assets/page1.js')
     //.addEntry('page2', './assets/page2.js')
 

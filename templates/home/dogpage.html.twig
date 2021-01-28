@@ -1,23 +1,52 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+  {{ encore_entry_link_tags('overview') }}
+  {{ encore_entry_link_tags('app') }}
+{% endblock %}
 
 {% block body %}
 
-<table>
+{% set gens = 5 %}
+{% set rows = 2 ** gens %}
+{% set nextColumn = dogs %}
 
-  <tr>
-    <td>
-      {{dump(dogs.otec)}}
-    </td>
-  </tr>
 
+<table id='pedigree'>
+
+{% for g in 0 .. (rows)-1 %}
   <tr>
-    <td>
-      {{dump(dogs.matka)}}
-    </td>
+  {% set a = 0 %}
+    {% for i in 1 .. gens %}
+{#
+      {% if dogs[i][g] is defined %}
+        <td rowspan='{{rows/dogs[i]|length}}'>
+          {{dogs[i][g].printInfo}}
+        </td>
+      {% endif %}
+#}
+
+      {% if g % (rows/dogs[i]|length) == 0 %}
+        <td rowspan='{{rows/dogs[i]|length}}'>
+          {{dogs[i][(g/(rows/dogs[i]|length))].printInfo}}
+        </td>
+      {% endif %}
+
+      {% set a = a + 1 %}
+    {% endfor %}
   </tr>
+{% endfor %}
+
+
+
 
 </table>
 {{dump(dogs)}}
+{# {{dump(dogs.getParents)}} #}
 
+{% endblock %}
+
+
+{% block javascripts %}
+  {{ encore_entry_script_tags('overview') }}
 {% endblock %}
