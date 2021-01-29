@@ -6,7 +6,17 @@ table, th, td {
   border: 1px solid black;
 }
 
+table {
+  width: 80%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  text-align:center;
+}
 
 td {
-  min-height: 20px;
+  min-height: 30px;
+}
+
+table div {
+  padding:5px;
 }

@@ -15,9 +15,10 @@ use App\scripts\PesBase;
     public $matka_chov;
     public $otec;
     public $matka;
+    public $stanice;
 
     function getAllInfo($conn, $ID) {
-      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
+      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov, v.stanice FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
       // echo $sql;
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
@@ -38,10 +39,10 @@ use App\scripts\PesBase;
       return $parents;
     }
 
-    function createParent($conn, $parent) {
+    function createParent($conn, $parent_sex) {
 
-      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov FROM psi p JOIN vrh v ON p.vrh=v.ID";
-      if ($parent === 'otec') {
+      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov, v.stanice FROM psi p JOIN vrh v ON p.vrh=v.ID";
+      if ($parent_sex === 'otec') {
          $sql .= " WHERE p.pes_jmeno = '$this->otec_jmeno' AND v.stanice = '$this->otec_chov'";
       } else {
         $sql .= " WHERE p.pes_jmeno = '$this->matka_jmeno' AND v.stanice = '$this->matka_chov'";
@@ -57,15 +58,26 @@ use App\scripts\PesBase;
             $parent->$key = $value;
           }
         }
+      } else {
+        if ($parent_sex === 'otec') {
+          $parent->pes_jmeno = $this->otec_jmeno;
+          $parent->stanice = $this->otec_chov;
+        } else {
+          $parent->pes_jmeno = $this->matka_jmeno;
+          $parent->stanice = $this->matka_chov;
+        }
       }
       return $parent;
     }
 
     function printInfo() {
-      // return "<div>{$this->pes_jmeno}</div>";
-      return $this->pes_jmeno;
+      return "<div>{$this->pes_jmeno} {$this->stanice}</div>";
+      // return $this->pes_jmeno;
     }
 
+    function getJmeno() {
+      return $this->pes_jmeno . " " . $this->stanice;
+    }
 
 }
 

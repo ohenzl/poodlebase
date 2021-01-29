@@ -1,11 +1,15 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}{{dog.jmeno}}{% endblock %}
+
 {% block stylesheets %}
   {{ encore_entry_link_tags('overview') }}
   {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
 {% block body %}
+
+{{dump(dog)}}
 
 {% set gens = 5 %}
 {% set rows = 2 ** gens %}
@@ -20,7 +24,7 @@
 
       {% if g % (rows/dogs[i]|length) == 0 %}
         <td rowspan='{{rows/dogs[i]|length}}'>
-          {{dogs[i][(g/(rows/dogs[i]|length))].printInfo}}
+          {{dogs[i][(g/(rows/dogs[i]|length))].printInfo | raw }}
         </td>
       {% endif %}
 

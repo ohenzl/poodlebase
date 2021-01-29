@@ -65,7 +65,9 @@ class Database extends AbstractController {
       }
     }
 
+
     return $this->render('home/dogpage.html.twig', [
+      'dog' => $dog,
       'dogs' => $parents
     ]);
 
