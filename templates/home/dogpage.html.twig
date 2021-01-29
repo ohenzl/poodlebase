@@ -9,11 +9,12 @@
 
 {% block body %}
 
-{{dump(dog)}}
+{# {{dump(dog)}} #}
 
-{% set gens = 5 %}
+{% set gens = 4 %}
 {% set rows = 2 ** gens %}
 
+<h1>{{dog.getJmeno}}</h1>
 
 <table id='pedigree'>
 

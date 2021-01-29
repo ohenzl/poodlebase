@@ -33,7 +33,9 @@
 {% for pes in psi %}
   <tr>
     <td>
-      {{pes.pesJmeno}}
+      <a href="../../pes/{{pes.ID}}/{{pes.pesJmeno|replace({' ': '-'})}}-{{pes.getJoinedVrh.stanice}} ">
+        {{pes.pesJmeno}}
+    </a>
     </td>
     <td>
       {{pes.getJoinedVrh.stanice}}

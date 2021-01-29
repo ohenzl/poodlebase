@@ -53,13 +53,13 @@ class Database extends AbstractController {
     // }
 
 
-    for ($i = 1; $i < 6; $i++) {
+    for ($i = 1; $i < 5; $i++) {
       $parents[$i] = [];
     }
     $parents[1] = array_merge($parents_next,$dog->createParents($conn));
 
     //gen = depth
-    for ($gen = 2; $gen < 6; $gen++) {
+    for ($gen = 2; $gen < 5; $gen++) {
       foreach ($parents[$gen-1] as $parent) {
         $parents[$gen] = array_merge($parents[$gen],$parent->createParents($conn));
       }

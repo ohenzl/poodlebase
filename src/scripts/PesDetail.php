@@ -71,8 +71,11 @@ use App\scripts\PesBase;
     }
 
     function printInfo() {
-      return "<div>{$this->pes_jmeno} {$this->stanice}</div>";
-      // return $this->pes_jmeno;
+      if ($this->ID !== null) {
+        return "<div><a href='../../pes/{$this->ID}/" . str_replace(' ', '-', ($this->pes_jmeno . " " . $this->stanice)) . "'>{$this->pes_jmeno} {$this->stanice}</a></div>";
+      } else {
+        return "<div>{$this->pes_jmeno} {$this->stanice}</div>";
+      }
     }
 
     function getJmeno() {
