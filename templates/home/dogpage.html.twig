@@ -16,6 +16,27 @@
 
 <h1>{{dog.getJmeno}}</h1>
 
+<table id='info'>
+  <tr>
+    <td>
+      Barva
+    </td>
+    <td>
+      {{dog.getColor}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Srst
+    </td>
+    <td>
+      {{dog.getHair}}
+    </td>
+  </tr>
+</table>
+
+<br>
+
 <table id='pedigree'>
 
 {% for g in 0 .. (rows)-1 %}

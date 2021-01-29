@@ -79,7 +79,23 @@ use App\scripts\PesBase;
     }
 
     function getJmeno() {
-      return $this->pes_jmeno . " " . $this->stanice;
+      if($this->prezdivka) {
+        return $this->pes_jmeno . " '{$this->prezdivka}' " . $this->stanice;
+      } else {
+        return $this->pes_jmeno . " " . $this->stanice;
+      }
+    }
+
+    function getColor() {
+      return $this->barva;
+    }
+
+    function getHair() {
+      return $this->srst;
+    }
+
+    function getSex() {
+      return $this->pohlavi;
     }
 
 }
