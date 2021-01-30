@@ -16,9 +16,10 @@ use App\scripts\PesBase;
     public $otec;
     public $matka;
     public $stanice;
+    public $narozeni;
 
     function getAllInfo($conn, $ID) {
-      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov, v.stanice FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
+      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov, v.stanice, v.narozeni FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
       // echo $sql;
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
@@ -41,7 +42,7 @@ use App\scripts\PesBase;
 
     function createParent($conn, $parent_sex) {
 
-      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov, v.stanice FROM psi p JOIN vrh v ON p.vrh=v.ID";
+      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov, v.stanice, v.narozeni FROM psi p JOIN vrh v ON p.vrh=v.ID";
       if ($parent_sex === 'otec') {
          $sql .= " WHERE p.pes_jmeno = '$this->otec_jmeno' AND v.stanice = '$this->otec_chov'";
       } else {
@@ -96,6 +97,10 @@ use App\scripts\PesBase;
 
     function getSex() {
       return $this->pohlavi;
+    }
+
+    function getBirthday() {
+      return $this->narozeni;
     }
 
 }
