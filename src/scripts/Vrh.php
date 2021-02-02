@@ -7,8 +7,10 @@ namespace App\scripts;
     public $narozeni;
     public $otec_jmeno;
     public $otec_chov;
+    public $otec_id;
     public $matka_jmeno;
     public $matka_chov;
+    public $matka_id;
     public $stanice;
     public $chovatel_jmeno;
     public $chovatel_prijmeni;
@@ -26,7 +28,8 @@ namespace App\scripts;
     }
 
     function addOrEdit($conn, $user) {
-      $sql = "SELECT * FROM vrh WHERE matka_jmeno = '$this->matka_jmeno' AND matka_chov = '$this->matka_chov' AND stanice = '$this->stanice' AND narozeni = '$this->narozeni'";
+      $sql = "SELECT v.ID FROM vrh v JOIN psi p ON v.ID=p.vrh WHERE matka_id = '$this->matka_id' AND narozeni = '$this->narozeni'";
+      // echo $sql;
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
@@ -40,8 +43,8 @@ namespace App\scripts;
 
     function addVrh($conn, $user) {
       $datetime = date("Y-m-d H:i:s");
-      $co = "VALUES ('$this->otec_jmeno', '$this->otec_chov', '$this->matka_jmeno', '$this->matka_chov', '$this->narozeni', '$this->stanice', '$this->chovatel_jmeno', '$user', '$datetime');";
-      $kam = "INSERT INTO vrh (otec_jmeno, otec_chov, matka_jmeno, matka_chov, narozeni, stanice, chovatel_jmeno, vloz_osoba, vloz_datum) ";
+      $co = "VALUES ('$this->otec_id', '$this->matka_id', '$this->narozeni', '$this->stanice', '$this->chovatel_jmeno', '$user', '$datetime');";
+      $kam = "INSERT INTO vrh (otec_id, matka_id, narozeni, stanice, chovatel_jmeno, vloz_osoba, vloz_datum) ";
       $sql = $kam . $co;
       //zápis psa, získání ID rodiče
       if ($conn->query($sql) === TRUE) {

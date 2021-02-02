@@ -11,12 +11,43 @@
 
 {% block body %}
 
+{% set gens = 4 %}
+{% set rows = 2 ** gens %}
+
 {% set nadpis = 'default' %}
 {% set podnadpis = 'default' %}
 {% set count = 0 %}
   <form action="/admin/adding" method="post" class='form'>
     <div id='form'>
     <div>
+      <table>
+        {% for g in 0 .. (rows)-1 %}
+          <tr>
+            {% for i in 1 .. gens %}
+
+
+              {% if g % (rows/pedigree[i]) == 0 %}
+                <td name='gen[{{i}}][{{g/(rows/pedigree[i])}}]' rowspan='{{rows/pedigree[i]}}'>
+                  {{i}} {{g/(rows/pedigree[i])}}
+                  {% if g % ((rows*2)/pedigree[i]) == 0 %}
+                    otec
+                    <input type="text" value="Pes" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][pohlavi]" id="pohlavi{{g}}{{i}}" class="form-add" style='display:none;'>
+                  {% else %}
+                    matka
+                    <input type="text" value="Fena" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][pohlavi]" id="pohlavi{{g}}{{i}}" class="form-add" style='display:none;'>
+                  {% endif %}
+                  <br>
+                  <label for="jmeno{{g}}{{i}}">Jméno</label>
+                  <input type="text" value="" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][jmeno]" id="jmeno{{g}}{{i}}" class="form-add">
+                  <label for="stanice{{g}}{{i}}">Stanice</label>
+                  <input type="text" value="" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][stanice]" id="stanice{{g}}{{i}}" class="form-add">
+                </td>
+              {% endif %}
+
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </table>
 
     {% for form in forms %}
 
@@ -32,6 +63,8 @@
       {% if count == 1 %}
         {% set counter = 'vrh' %}
       {% else %}
+
+
         {% set counter = "pes[#{count-1}]" %}
       {% endif %}
 

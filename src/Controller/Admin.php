@@ -38,8 +38,10 @@ class Admin extends AbstractController {
                   ['ucel' => '0']
               );
 
+
     return $this->render('home/admin/add.html.twig', [
-      'forms' => $form
+      'forms' => $form,
+      'pedigree' => array(1, 2, 4, 8, 16)
     ]);
   }
 
@@ -51,15 +53,24 @@ class Admin extends AbstractController {
     $db = new SQLHandle;
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
+
+    //rodokmen
+    $pedigree = $form_handle->parsePostPedigree($_POST);
+    $form_handle->pedigreeIntoDatabase($pedigree, $conn, $user);
+
     $vrh = $form_handle->parsePostVrh($_POST);
+    $vrh->matka_id = $pedigree->matka_id;
+    $vrh->otec_id = $pedigree->otec_id;
     $vrh->ID = $vrh->addOrEdit($conn, $user);
     $psi = $form_handle->parsePostPes($_POST);
     foreach ($psi as $pes) {
       $pes->addOrEdit($conn, $user, $vrh);
     }
 
+
+
     return $this->render('home/admin/adding.html.twig', [
-      'post' => $vrh
+      'post' => $pedigree
     ]);
   }
 

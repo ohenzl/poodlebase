@@ -26,7 +26,7 @@ use App\scripts\PesBase;
       $sql = $kam . $co;
       //zápis psa, získání ID rodiče
       if ($conn->query($sql) === TRUE) {
-        // return $conn->insert_id;  //získání ID
+        return $conn->insert_id;  //získání ID
       } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
       }

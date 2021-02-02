@@ -3,7 +3,7 @@
 namespace App\scripts;
 use App\scripts\PesBase;
 
-  class PesDetail extends PesBase {
+  class PesDetail extends Pes {
 
     function __construct() {
 
@@ -17,9 +17,11 @@ use App\scripts\PesBase;
     public $matka;
     public $stanice;
     public $narozeni;
+    public $otec_id;
+    public $matka_id;
 
     function getAllInfo($conn, $ID) {
-      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov, v.stanice, v.narozeni FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
+      $sql = "SELECT p.*, v.otec_id, v.matka_id, v.stanice, v.narozeni FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
       // echo $sql;
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
@@ -42,14 +44,22 @@ use App\scripts\PesBase;
 
     function createParent($conn, $parent_sex) {
 
-      $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov, v.stanice, v.narozeni FROM psi p JOIN vrh v ON p.vrh=v.ID";
+      // $sql = "SELECT p.*, v.otec_jmeno, v.otec_chov, v.matka_jmeno, v.matka_chov, v.stanice, v.narozeni FROM psi p JOIN vrh v ON p.vrh=v.ID join psi otec on v.otec_id=otec.id";
+      // if ($parent_sex === 'otec') {
+      //    $sql .= " WHERE p.pes_jmeno = '$this->otec_jmeno' AND v.stanice = '$this->otec_chov'";
+      // } else {
+      //   $sql .= " WHERE p.pes_jmeno = '$this->matka_jmeno' AND v.stanice = '$this->matka_chov'";
+      // }
+
+
+      $sql = "SELECT p.*, v.otec_id, v.matka_id, v.stanice, v.narozeni FROM psi p JOIN vrh v ON p.vrh=v.ID";
       if ($parent_sex === 'otec') {
-         $sql .= " WHERE p.pes_jmeno = '$this->otec_jmeno' AND v.stanice = '$this->otec_chov'";
+        $sql .= " WHERE p.id = '$this->otec_id'";
       } else {
-        $sql .= " WHERE p.pes_jmeno = '$this->matka_jmeno' AND v.stanice = '$this->matka_chov'";
+        $sql .= " WHERE p.id = '$this->matka_id'";
       }
 
-      // echo $sql . "<br>";
+      echo $sql . "<br>";
 
       $result = $conn->query($sql);
       $parent = new PesDetail;
@@ -61,15 +71,19 @@ use App\scripts\PesBase;
         }
       } else {
         if ($parent_sex === 'otec') {
-          $parent->pes_jmeno = $this->otec_jmeno;
-          $parent->stanice = $this->otec_chov;
+          $parent->otec_id = $this->otec_id;
+          // $parent->pes_jmeno = $this->otec_jmeno;
+          // $parent->stanice = $this->otec_chov;
         } else {
-          $parent->pes_jmeno = $this->matka_jmeno;
-          $parent->stanice = $this->matka_chov;
+          // $parent->pes_jmeno = $this->matka_jmeno;
+          // $parent->stanice = $this->matka_chov;
         }
       }
       return $parent;
     }
+
+
+    //printing and outputting
 
     function printInfo() {
       if ($this->ID !== null) {

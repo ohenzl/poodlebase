@@ -38,6 +38,17 @@ namespace App\scripts;
       $this->patella_l = '';
       $this->patella_r = '';
     }
+
+    function exists($conn, $stanice)  {
+      $sql = "SELECT p.ID ID FROM vrh v JOIN psi p ON p.vrh=v.ID WHERE p.pes_jmeno = '$this->pes_jmeno' AND v.stanice = '$stanice'";
+      $result = $conn->query($sql);
+      if ($result->num_rows > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
   }
 
  ?>
