@@ -38,6 +38,14 @@ class Vrh
     /**
      * @var string
      *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Psi")
+     * @ORM\JoinColumn(name="otec_id", referencedColumnName="ID")
+     */
+    private $otecid;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="matka_jmeno", type="string", length=50, nullable=false)
      */
     private $matkaJmeno;
@@ -48,6 +56,14 @@ class Vrh
      * @ORM\Column(name="matka_chov", type="string", length=50, nullable=false)
      */
     private $matkaChov;
+
+    /**
+     * @var string
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Psi")
+     * @ORM\JoinColumn(name="matka_id", referencedColumnName="ID")
+     */
+    private $matkaid;
 
     /**
      * @var \DateTime
@@ -195,6 +211,10 @@ class Vrh
         $this->vlozOsoba = $vlozOsoba;
 
         return $this;
+    }
+
+    public function getFather() {
+      $this->stanice;
     }
 
 

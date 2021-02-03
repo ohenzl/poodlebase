@@ -199,6 +199,12 @@ class Psi
     }
 
 
+    public function getJoinedFather(): ?object
+    {
+        return $this->vrh->getFather();
+    }
+
+
     public function setVrh(int $vrh): self
     {
         $this->vrh = $vrh;

@@ -21,7 +21,7 @@ use App\scripts\PesBase;
     public $matka_id;
 
     function getAllInfo($conn, $ID) {
-      $sql = "SELECT p.*, v.otec_id, v.matka_id, v.stanice, v.narozeni FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
+      $sql = "SELECT p.*, v.otec_id, v.matka_id, v.stanice, v.narozeni, v.chovatel_jmeno FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.ID = $ID";
       // echo $sql;
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
@@ -59,7 +59,7 @@ use App\scripts\PesBase;
         $sql .= " WHERE p.id = '$this->matka_id'";
       }
 
-      echo $sql . "<br>";
+      // echo $sql . "<br>";
 
       $result = $conn->query($sql);
       $parent = new PesDetail;

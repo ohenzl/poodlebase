@@ -1,69 +1,84 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Databáze pudlů{% endblock %}
+
+{% block stylesheets %}
+  {{ encore_entry_link_tags('overview') }}
+  {{ encore_entry_link_tags('app') }}
+{% endblock %}
 
 {% block body %}
 <table>
   <tr>
-    <td>
+    <th>
       Jméno
-    </td>
-    <td>
+    </th>
+    <th>
       Chovná stanice
-    </td>
-    <td>
+    </th>
+    <th>
       Barva
-    </td>
-    <td>
+    </th>
+    <th>
       Pohlaví
-    </td>
-    <td>
+    </th>
+    <th>
       Narození
-    </td>
-    <td>
+    </th>
+    <th>
       Otec
-    </td>
-    <td>
+    </th>
+    <th>
       Matka
-    </td>
-    <td>
+    </th>
+    <th>
       Chovatel
-    </td>
+    </th>
+    <th>
+      Majitel
+    </th>
   </tr>
 
-{% for pes in psi %}
-  <tr>
-    <td>
-      <a href="../../pes/{{pes.ID}}/{{pes.pesJmeno|replace({' ': '-'})}}-{{pes.getJoinedVrh.stanice}}">
-        {{pes.pesJmeno}}
-    </a>
-    </td>
-    <td>
-      {{pes.getJoinedVrh.stanice}}
-    </td>
-    <td>
-      {{pes.barva}}
-    </td>
-    <td>
-      {{pes.pohlavi}}
-    </td>
-    <td>
-      {{pes.getJoinedVrh.narozeni|date("d.m.Y")}}
-    </td>
-    <td>
-      {{pes.getJoinedVrh.otecJmeno}} {{pes.getJoinedVrh.otecChov}}
-    </td>
-    <td>
-      {{pes.getJoinedVrh.matkaJmeno}} {{pes.getJoinedVrh.matkaChov}}
-    </td>
-    <td>
-      {{pes.getJoinedVrh.chovatelJmeno}}
-    </td>
-  </tr>
-{% endfor %}
+  {% for pes in psi %}
+    <tr>
+      <td>
+        <a href="../../pes/{{pes.ID}}/{{pes.pes_jmeno|replace({' ': '-'})}}-{{pes.stanice|replace({' ': '-'})}}">
+        {{pes.pes_jmeno}}
+      </td>
+      <td>
+        {{pes.stanice}}
+      </td>
+      <td>
+        {{pes.barva}}
+      </td>
+      <td>
+        {{pes.pohlavi}}
+      </td>
+      <td>
+        {% if pes.narozeni != '0000-00-00' %}
+          {{pes.narozeni|date("d.m.Y")}}
+        {% else %}
+          neudáno
+        {% endif %}
+      </td>
+      <td>
+        {{pes.matka_jmeno}} {{pes.matka_stanice}}
+      </td>
+      <td>
+        {{pes.otec_jmeno}} {{pes.otec_stanice}}
+      </td>
+      <td>
+        {{pes.chovatel_jmeno}}
+      </td>
+      <td>
+        {{pes.majitel}}
+      </td>
+    </tr>
+  {% endfor %}
+
 
 </table>
 {{dump(psi)}}
-{{dump(psi[0].getJoinedVrh)}}
 
 <div>
   There is a div

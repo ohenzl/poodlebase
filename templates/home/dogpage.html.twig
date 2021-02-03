@@ -3,7 +3,7 @@
 {% block title %}{{dog.jmeno}}{% endblock %}
 
 {% block stylesheets %}
-  {{ encore_entry_link_tags('overview') }}
+  {{ encore_entry_link_tags('dogpage') }}
   {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
@@ -16,6 +16,7 @@
 
 <h1>{{dog.getJmeno}}</h1>
 
+<h2>Informace</h2>
 <table id='info'>
   <tr>
     <td>
@@ -30,7 +31,9 @@
       Datum narození
     </td>
     <td>
-      {{dog.getBirthday|date("d.m.Y")}}
+      {% if dog.getBirthday != '0000-00-00' %}
+        {{dog.getBirthday|date("d.m.Y")}}
+      {% endif %}
     </td>
   </tr>
   <tr>
@@ -48,11 +51,58 @@
     <td>
       {{dog.getHair}}
     </td>
+    </tr>
+    <tr>
+      <td>
+        Čip
+      </td>
+      <td>
+        {% if dog.cip != '0' %}
+          {{dog.cip}}
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Číslo zápisu
+      </td>
+      <td>
+        {% if dog.cmku != '' %}
+          {{dog.cmku_pref}}{{dog.cmku}}
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Výška
+      </td>
+      <td>
+        {% if dog.vyska != '0.00' %}
+          {{dog.vyska}} cm
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Chovatel
+      </td>
+      <td>
+        {{dog.chovatel_jmeno}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Majitel
+      </td>
+      <td>
+        {{dog.majitel}}
+      </td>
   </tr>
 </table>
 
 <br>
 
+<h2>Rodokmen</h2>
 <table id='pedigree'>
 
 {% for g in 0 .. (rows)-1 %}

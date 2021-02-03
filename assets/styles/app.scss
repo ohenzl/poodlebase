@@ -1,5 +1,6 @@
 body {
-    background-color: lightgray;
+    background-color: lightgrey;
+    margin: 0;
 }
 
 a {
@@ -7,18 +8,30 @@ a {
 }
 
 a:visited, a {
-  color:initial;
+  color: inherit;
   text-decoration:none;
 }
 
+
 nav {
+  background-color: black;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-}
+  margin-bottom: 40px;
 
-nav {
   div {
+    color:white;
     padding:15px;
+
+    * {
+      color:white;
+    }
+  }
+
+  div:first-child {
+    font-size:25px;
+    flex-grow:100;
+    padding-left:30px;
   }
 }
