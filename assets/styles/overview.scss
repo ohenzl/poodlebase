@@ -13,10 +13,19 @@ table {
   border-collapse: collapse;
   table-layout: fixed;
   text-align:center;
+  background: #F1F1F1;
+  margin:auto;
 }
 
 th {
   font-weight: bold;
+  padding:10px;
+  font-size:20px;
+}
+
+td, th {
+  padding-left:20px;
+  text-align: left;
 }
 
 td {
@@ -25,4 +34,14 @@ td {
 
 table div {
   padding:5px;
+}
+
+tr:last-child {
+  td {
+    // padding-bottom:20px;
+  }
+}
+
+tr:nth-child(2n) {
+  background: #FCFCFC;
 }
