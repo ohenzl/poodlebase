@@ -9,6 +9,10 @@
   {{ encore_entry_link_tags('admin') }}
 {% endblock %}
 
+{% block javascripts %}
+  {{ encore_entry_script_tags('form_edit') }}
+{% endblock %}
+
 {% block body %}
 
 {% set nadpis = 'default' %}
@@ -67,15 +71,5 @@
   <button id='deleteForm'>Vymazat formulář</button>
   <button value='checkSqlPes?' id='kontrola'>Doplnit formulář</button>
 
-  <!-- <script type="text/javascript">
-    window.onload = function() {
 
-    }
-  </script> -->
-
-{% endblock %}
-
-
-{% block javascripts %}
-  {{ encore_entry_script_tags('form_edit') }}
 {% endblock %}

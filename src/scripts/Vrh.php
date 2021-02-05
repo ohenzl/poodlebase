@@ -25,6 +25,8 @@ namespace App\scripts;
       $this->stanice = '';
       $this->chovatel_jmeno = '';
       $this->chovatel_prijmeni = '';
+      $this->otec_id = '';
+      $this->matka_id = '';
     }
 
     function addOrEdit($conn, $user) {
@@ -96,6 +98,7 @@ namespace App\scripts;
           $vysl = json_encode($row);
         }
     }
+    // $vysl = json_encode($sql);
     return $vysl;
   }
 }

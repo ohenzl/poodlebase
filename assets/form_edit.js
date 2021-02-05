@@ -2,8 +2,7 @@ let failColor = 'red';
 let warningColor = 'yellow';
 let okayColor = 'lightgreen';
 
-
-document.getElementById("kontrola").onclick = function () {
+function checkForm() {
   let kolonky = document.getElementsByClassName('form-add');
   let dotaz = '';
   //vytváření dotazu
@@ -12,6 +11,7 @@ document.getElementById("kontrola").onclick = function () {
       dotaz += kontrola.name + "=" + kontrola.value + "&";
     }
   })
+
   //kontrola, že dotaz není prázdný
   if (dotaz === '') {
     document.getElementById("errorMsg").innerHTML = "";
@@ -32,7 +32,7 @@ document.getElementById("kontrola").onclick = function () {
           // console.log(input)
           for (output in input) {
             // console.log(output, input[output])
-            if (output !== 'vloz_datum' && output !== 'vloz_osoba') {
+            if (output !== 'vloz_datum' && output !== 'vloz_osoba' && output !== 'matka_id' && output !== 'otec_id') {
                 document.getElementById(output).value = input[output]
             }
           }
@@ -40,10 +40,55 @@ document.getElementById("kontrola").onclick = function () {
         }
       }
     };
-    xmlhttp.open('GET',"/../../admin/"+this.value+dotaz,true);
+    xmlhttp.open('GET',"/../../admin/"+document.getElementById("kontrola").value+dotaz,true);
+    // console.log("/../../admin/"+document.getElementById("kontrola").value+dotaz)
     xmlhttp.send();
   }
 }
+
+document.getElementById("kontrola").onclick = checkForm;
+
+// document.getElementById("kontrola").onclick = function () {
+//   let kolonky = document.getElementsByClassName('form-add');
+//   let dotaz = '';
+//   //vytváření dotazu
+//   kolonky.forEach(kontrola => {
+//     if (kontrola.value !== '') {
+//       dotaz += kontrola.name + "=" + kontrola.value + "&";
+//     }
+//   })
+//   //kontrola, že dotaz není prázdný
+//   if (dotaz === '') {
+//     document.getElementById("errorMsg").innerHTML = "";
+//     return;
+//   } else {
+//   //ajax
+//     var xmlhttp = new XMLHttpRequest();
+//     xmlhttp.onreadystatechange = function() {
+//       if (this.readyState == 4 && this.status == 200) {
+//         // console.log(this.responseText)
+//         let vysl = JSON.parse(this.responseText);
+//         //zpracování informací z SQL do formulářů
+//         // console.log(vysl)
+//         if (vysl.error === true) {
+//           document.getElementById("errorMsg").innerHTML = vysl.errormsg;
+//         } else {
+//           let input = JSON.parse(vysl);
+//           // console.log(input)
+//           for (output in input) {
+//             // console.log(output, input[output])
+//             if (output !== 'vloz_datum' && output !== 'vloz_osoba') {
+//                 document.getElementById(output).value = input[output]
+//             }
+//           }
+//           document.getElementById('odeslat').disabled = false;
+//         }
+//       }
+//     };
+//     xmlhttp.open('GET',"/../../admin/"+this.value+dotaz,true);
+//     xmlhttp.send();
+//   }
+// }
 
 let alreadyClicked = false;
 let clearButton = document.getElementById("deleteForm");
@@ -66,3 +111,5 @@ clearButton.onclick = function () {
     document.getElementById('odeslat').disabled = true;
   }
 }
+
+window.onload = checkForm;
