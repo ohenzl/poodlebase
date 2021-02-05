@@ -1,35 +1,81 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+  {{ encore_entry_link_tags('admin') }}
+{% endblock %}
 
 {% block body %}
 
 
-<div>
+<div style='margin-bottom:80px;'>
   Tvoje úroveň je
   {% if app.user.roles.0 == 'ROLE_SUPERADMIN' %}
   superadmin
   <!-- {{dump(app.user)}} -->
   {% endif %}
 </div>
-<a href='/admin/add'>
-  Přidat vrh
-</a>
-<br>
-<a href='/admin/editVrh'>
-  Upravit vrh
-</a>
-<br>
-<a href='/admin/editPes'>
-  Upravit psa
-</a>
-<br>
-<a href='/admin/removeVrh'>
-  Odebrat vrh
-</a>
-<br>
-<a href='/admin/removePes'>
-  Odebrat psa
-</a>
+<div class='grid'>
+  <div>
+    <h1 style='margin-bottom:70px;'>Úpravy databáze</h1>
+    <div class='flex flex-outer'>
+      <div class='flex flex-inner'>
+        <div class='adminbutton add'>
+          <a href='/admin/add'>
+            Přidat vrh
+          </a>
+        </div>
+      </div>
+      <div class='flex flex-inner'>
+        <div class='adminbutton edit'>
+          <a href='/admin/editVrh'>
+            Upravit vrh
+          </a>
+        </div>
+        <div class='adminbutton edit'>
+          <a href='/admin/editPes'>
+            Upravit psa
+          </a>
+        </div>
+      </div>
+      <div class='flex flex-inner'>
+        <div class='adminbutton remove'>
+          <a href='/admin/removeVrh'>
+            Odebrat vrh
+          </a>
+        </div>
+        <div class='adminbutton remove'>
+          <a href='/admin/removePes'>
+            Odebrat psa
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h1>Poslední úpravy</h1>
+    <h2>Psi</h2>
+      <table>
+        <tr>
+          <td>
+            Jméno
+          </td>
+          <td>
+            Změna
+          </td>
+          <td>
+          </td>
+        </tr>
+        {% for dog in last_dogs %}
+          <tr>
+            <td><a href='../../pes/{{dog.ID}}/{{dog.name|replace({' ': '-'})}}'>{{dog.name}}</a></td>
+            <td>{{dog.date}}</td>
+            <td>upravit</td>
+          </tr>
+        {% endfor %}
+      </table>
+    <h2>Vrhy</h2>
+  </div>
+</div>
 
 
 {% endblock %}

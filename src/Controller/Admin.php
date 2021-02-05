@@ -13,6 +13,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use App\scripts\FormToSQL;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
+use App\scripts\AdminArea;
 
 class Admin extends AbstractController {
 
@@ -27,8 +28,17 @@ class Admin extends AbstractController {
         $this->session = $session;
     }
 
-  public function admin() {
+  public function admin(AuthenticationUtils $authenticationUtils) {
+
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
+    $admin_info = new AdminArea($conn, $authenticationUtils->getLastUsername());
+    $last_dogs = $admin_info->getLastDogs();
+
+    // $user = $authenticationUtils->getLastUsername();
+
     return $this->render('home/admin.html.twig', [
+      'last_dogs' => $last_dogs
     ]);
   }
 

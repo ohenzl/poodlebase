@@ -34,4 +34,93 @@ h2 {
   font-size:25px;
 }
 
+// buttons in admin area
+
+.flex {
+  display:flex;
+}
+
+.flex-inner {
+  flex-direction: column;
+  padding-bottom:15px;
+}
+
+.flex-outer {
+  align-items:start;
+  justify-content: center;
+  margin:auto;
+}
+
+@media only screen and (max-width: 900px) {
+  .flex-outer {
+    flex-direction: column;
+  }
+  .flex-inner {
+    margin:auto;
+  }
+  .adminbutton {
+    width:350px;
+    padding:30px 50px 30px 50px;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .adminbutton {
+    width:165px;
+    padding:60px 50px 60px 50px;
+  }
+}
+
+
+
+.adminbutton {
+  margin-left:10px;
+  font-size:30px;
+  text-align:center;
+  margin-bottom:10px;
+}
+
+.adminbutton:hover {
+  // padding:62px 52px 62px 52px;
+  // margin-left:7px;
+}
+
+.add {
+  box-shadow: 4px 4px 10px rgba(76,175,80 ,0.5);
+}
+
+.add:hover {
+  box-shadow: 4px 4px 10px rgba(76,175,80 ,0.8);
+}
+
+.edit {
+  box-shadow: 4px 4px 10px rgba(255,167,38 ,0.5);
+}
+
+.edit:hover {
+  box-shadow: 4px 4px 10px rgba(255,167,38 ,0.8);
+}
+
+.remove {
+  box-shadow: 4px 4px 10px rgba(229,57,53 ,0.5);
+}
+
+.remove:hover {
+  box-shadow: 4px 4px 10px rgba(229,57,53 ,0.8);
+}
+
+.grid {
+  display:grid;
+  grid-template-columns: auto 500px;
+  width:100%;
+  margin:auto;
+  text-align: center;
+}
+
+@media only screen and (max-width: 1200px) {
+  .grid {
+    display:inline-block;
+  }
+}
+
 @import 'app.scss'

@@ -1,6 +1,8 @@
 body {
     background-color: white;
     margin: 0;
+    font-family: 'Lato';
+    overflow-x:hidden;
 }
 
 a {
@@ -18,7 +20,6 @@ nav {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-bottom: 40px;
 
   div {
     color:white;
@@ -34,4 +35,88 @@ nav {
     flex-grow:100;
     padding-left:30px;
   }
+}
+
+#logo {
+  font-family: 'PT-sans';
+}
+
+$base-top: 200px;
+$base-height: 40px;
+
+.stripe {
+  position:absolute;
+  width:200%;
+  left:-100px;
+  height:$base-height;
+  transform: rotate(-8deg);
+  z-index: -10;
+  opacity: 0.9;
+}
+#stripe {
+  background-color:#FBCEB1;
+  top:$base-top;
+}
+
+#stripe2 {
+  background-color:rgba(121,85,72 ,1);
+  top:$base-top+$base-height+3;
+}
+
+#stripe3 {
+  background-color:white;
+  top:$base-top+(2*($base-height+3));
+}
+
+#stripe4 {
+  background-color:grey;
+  top:$base-top+(3*($base-height+3));
+}
+
+#stripe5 {
+  background-color:black;
+  top:$base-top+(4*($base-height+3));
+}
+
+#background {
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:-2;
+  opacity:0.5;
+  // background-image: linear-gradient(red, yellow);
+}
+
+
+//login
+#login {
+  text-align:center;
+}
+
+.input-login {
+
+  width:230px;
+}
+
+#login-submit {
+  border:0px;
+  background-color:black;
+  color:white;
+  text-align:center;
+  margin:auto;
+  display:block;
+  width:236px;
+}
+
+#login-box {
+  border: 1px solid grey;
+  width: 30%;
+  margin: auto;
+  margin-top: 50px;
+  height: 400px;
+}
+
+.input-login, #login-submit {
+  font-size:20px;
+  padding:10px;
 }
