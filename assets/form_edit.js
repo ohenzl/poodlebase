@@ -21,17 +21,17 @@ document.getElementById("kontrola").onclick = function () {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
-        console.log(this.responseText)
+        // console.log(this.responseText)
         let vysl = JSON.parse(this.responseText);
         //zpracování informací z SQL do formulářů
-        console.log(vysl)
+        // console.log(vysl)
         if (vysl.error === true) {
           document.getElementById("errorMsg").innerHTML = vysl.errormsg;
         } else {
           let input = JSON.parse(vysl);
-          console.log(input)
+          // console.log(input)
           for (output in input) {
-            console.log(output, input[output])
+            // console.log(output, input[output])
             if (output !== 'vloz_datum' && output !== 'vloz_osoba') {
                 document.getElementById(output).value = input[output]
             }
@@ -40,7 +40,7 @@ document.getElementById("kontrola").onclick = function () {
         }
       }
     };
-    xmlhttp.open('GET',this.value+dotaz,true);
+    xmlhttp.open('GET',"/../../admin/"+this.value+dotaz,true);
     xmlhttp.send();
   }
 }

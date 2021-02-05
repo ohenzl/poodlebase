@@ -93,7 +93,7 @@ class Admin extends AbstractController {
 
     return $this->render('home/admin/editvrh.html.twig', [
       'forms' => $form,
-      'typ' => '/admin/editingVrh'
+      'typ' => 'editingVrh'
     ]);
   }
 
@@ -129,7 +129,12 @@ class Admin extends AbstractController {
         200);
   }
 
-  public function editPes(EntityManagerInterface $em) {
+  public function editPes(EntityManagerInterface $em, $dogID) {
+    if ($dogID !== '') {
+      $request = $dogID;
+    } else {
+      $request = 'nic';
+    }
 
     $this->entityManager = $em;
 
@@ -143,8 +148,9 @@ class Admin extends AbstractController {
 
     return $this->render('home/admin/editpes.html.twig', [
       'forms' => $form,
-      'typ' => '/admin/editingPes',
-      'nadpise' => 'Úprava psa'
+      'typ' => 'editingPes',
+      'nadpise' => 'Úprava psa',
+      'dogID' => $dogID
     ]);
   }
 

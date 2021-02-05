@@ -7,9 +7,13 @@ show:
    controller: App\Controller\HomeController::show
 
 
-login:
+app_login:
    path: /login
    controller: App\Controller\AuthController::login
+
+app_logout:
+   path: /logout
+   controller: App\Controller\AuthController::logout
 
 logged:
    path: /logged
@@ -58,8 +62,10 @@ editingVrh:
   controller: App\Controller\Admin::editingVrh
 
 editPes:
-  path: /admin/editPes
+  path: /admin/editPes/{dogID}
   controller: App\Controller\Admin::editPes
+  defaults:
+    dogID: ''
 
 checkSqlPes:
   path: /admin/checkSqlPes

@@ -20,31 +20,31 @@
     <div class='flex flex-outer'>
       <div class='flex flex-inner'>
         <div class='adminbutton add'>
-          <a href='/admin/add'>
+          <a href='{{path('add')}}'>
             Přidat vrh
           </a>
         </div>
       </div>
       <div class='flex flex-inner'>
         <div class='adminbutton edit'>
-          <a href='/admin/editVrh'>
+          <a href='{{path('editVrh')}}'>
             Upravit vrh
           </a>
         </div>
         <div class='adminbutton edit'>
-          <a href='/admin/editPes'>
+          <a href='{{path('editPes')}}'>
             Upravit psa
           </a>
         </div>
       </div>
       <div class='flex flex-inner'>
         <div class='adminbutton remove'>
-          <a href='/admin/removeVrh'>
+          <a href='{{path('removeVrh')}}'>
             Odebrat vrh
           </a>
         </div>
         <div class='adminbutton remove'>
-          <a href='/admin/removePes'>
+          <a href='{{path('removePes')}}'>
             Odebrat psa
           </a>
         </div>
@@ -67,9 +67,9 @@
         </tr>
         {% for dog in last_dogs %}
           <tr>
-            <td><a href='../../pes/{{dog.ID}}/{{dog.name|replace({' ': '-'})}}'>{{dog.name}}</a></td>
+            <td><a href='{{ path('displayDogWithDog', {dogID: dog.ID, dogname: (dog.name)|trim|replace({' ': '-'}) } ) }}'>{{dog.name}}</a></td>
             <td>{{dog.date}}</td>
-            <td>upravit</td>
+            <td><a href='../../admin/editPes/{{dog.ID}}'>upravit</a></td>
           </tr>
         {% endfor %}
       </table>

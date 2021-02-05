@@ -57,7 +57,7 @@
   {% for pes in psi %}
     <tr>
       <td>
-        <a href="../../pes/{{pes.ID}}/{{pes.pes_jmeno|replace({' ': '-'})}}-{{pes.stanice|replace({' ': '-'})}}">
+        <a href="{{ path('displayDogWithDog', {dogID: pes.ID, dogname: (pes.pes_jmeno ~ ' ' ~ pes.stanice)|trim|replace({' ': '-'}) } ) }}">
         {{pes.pes_jmeno}}
       </td>
       <td>

@@ -58,9 +58,9 @@ use App\scripts\PesBase;
       foreach ($data as $name => $value) {
         if ($value !== '') {
           if ($prvni === false) {
-            $sql .= "AND {$name} = '{$value}' ";
+            $sql .= "AND p.{$name} = '{$value}' ";
           } else {
-            $sql .= "WHERE {$name} = '{$value}' ";
+            $sql .= "WHERE p.{$name} = '{$value}' ";
             $prvni = false;
           }
         }
@@ -71,6 +71,7 @@ use App\scripts\PesBase;
       if (!$result || $result->num_rows === 0) {
         $vysl['error'] = true;
         $vysl['errormsg'] = 'Tomuto zadání neodpovídá žádný vrh v databázi.';
+        $vysl['errormsg'] = $sql;
       } elseif ($result->num_rows > 1) {
         $vysl['error'] = true;
         $vysl['errormsg'] = 'Tomuto zadání odpovídá více vrhů v databázi. Upřesněte údaje.';
