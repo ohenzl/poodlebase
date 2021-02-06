@@ -123,4 +123,19 @@ h2 {
   }
 }
 
+#pedigree_add {
+  top:50px;
+  margin-bottom: 50px;
+  width:180%;
+  position:relative;
+  left:-53%;
+}
+
+#pedigree_add {
+  tr, td {
+    border: 1px solid black;
+  }
+  border-collapse: collapse;
+}
+
 @import 'app.scss'

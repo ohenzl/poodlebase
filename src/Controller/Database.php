@@ -14,6 +14,7 @@ use App\scripts\SQLHandle;
 class Database extends AbstractController {
 
   public function overview(EntityManagerInterface $em) {
+    $result_new = [];
     // $this->entityManager = $em;
     // $qb = $this->entityManager->createQueryBuilder();
     // $qb
@@ -27,7 +28,7 @@ class Database extends AbstractController {
     // $result = $qb->getQuery()->getResult();
     $db = new SQLHandle;
     $conn = $db->databaseConnect();
-    
+
     $limit = (isset($limit)) ? $limit : '100';
 
     $sql = "SELECT p.*, v.chovatel_jmeno chovatel_jmeno, v.narozeni narozeni, v.stanice stanice, otec.pes_jmeno otec_jmeno, ovrh.stanice otec_stanice, matka.pes_jmeno matka_jmeno, mvrh.stanice matka_stanice FROM psi p LEFT JOIN vrh v on p.vrh=v.id LEFT JOIN psi otec ON v.otec_id=otec.ID LEFT JOIN vrh ovrh ON otec.vrh=ovrh.ID LEFT JOIN psi matka ON v.matka_id=matka.ID LEFT JOIN vrh mvrh ON matka.vrh=mvrh.ID";

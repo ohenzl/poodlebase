@@ -28,14 +28,14 @@
         <div>
           <a href='{{ path('admin') }}'>admin</a>
         </div>
-        <div style='flex-basis:100px;'>
+        <div style='margin-right:20px;'>
           <a href='{{ path('app_logout') }}'>logout</a>
         </div>
         <!-- <div style='flex-basis:100px;'> -->
           <!-- {{app.user.username}} -->
         <!-- </div> -->
       {% else %}
-        <div style='flex-basis:100px;'>
+        <div style='margin-right:20px;'>
           <a href='{{ path('app_login') }}'>login</a>
         </div>
       {% endif %}
