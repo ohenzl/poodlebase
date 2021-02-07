@@ -16,7 +16,7 @@ class FormToSQL {
     $vrh = new Vrh;
 
     foreach($input['vrh'] as $key => $value) {
-        $vrh->$key = $value;
+        $vrh->$key = trim($value);
       }
     return $vrh;
   }
@@ -26,7 +26,7 @@ class FormToSQL {
     foreach($input['pes'] as $number => $dog) {
       $pes[$number] = new Pes;
       foreach($dog as $nazev => $data) {
-        $pes[$number]->$nazev = $data;
+        $pes[$number]->$nazev = trim($data);
       }
     }
     return $pes;
@@ -73,13 +73,17 @@ class FormToSQL {
   function pedigreeIntoDatabase($pes, $conn, $user) {
     //předělat na to, že matka NEBO otec nejsou null
     if ($pes->otec !== null) {
-      $pes->otec_id = $this->pedigreeIntoDatabase($pes->otec, $conn, $user);
+      if ($pes->otec->pes_jmeno !== '') {
+        $pes->otec_id = $this->pedigreeIntoDatabase($pes->otec, $conn, $user);
+      }
     }
     if ($pes->matka !== null) {
-      $pes->matka_id = $this->pedigreeIntoDatabase($pes->matka, $conn, $user);
+      if ($pes->matka->pes_jmeno !== '') {
+        $pes->matka_id = $this->pedigreeIntoDatabase($pes->matka, $conn, $user);
+      }
     }
     // echo (!$pes->exists($conn, $pes->stanice));
-    if (!$pes->exists($conn, $pes->stanice)) {
+    if (!$pes->exists($conn, $pes->stanice) && $pes->pes_jmeno !== null) {
 
       $vrh = new Vrh;
       $datetime = date("Y-m-d H:i:s");
@@ -89,6 +93,7 @@ class FormToSQL {
       if ($conn->query($sql) === TRUE) {
         $this->ID = $conn->insert_id;
         $id = $pes->add($conn, $user, $this);  //získání ID
+        // echo var_dump($pes);
       } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
       }

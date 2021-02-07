@@ -7,12 +7,14 @@ use App\scripts\PesBase;
 
     function addOrEdit($conn, $user, $vrh) {
       // echo $this->pes_jmeno . " " . $vrh->stanice . "<br>";
-      $sql = "SELECT p.ID ID FROM vrh v JOIN psi p ON p.vrh=v.ID WHERE p.pes_jmeno = '$this->pes_jmeno' AND v.stanice = '$vrh->stanice'";
+      $cele_jmeno = $this->pes_jmeno . ' ' . $this->pes_jmeno;
+
+      $sql = "SELECT *, p.ID IDp FROM vrh v JOIN psi p ON p.vrh=v.ID HAVING concat(p.pes_jmeno, ' ', v.stanice) = '$cele_jmeno'";
       // echo $sql . "<br>";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
-          $this->edit($row['ID'], $user, $conn);
+          $this->edit($row['IDp'], $user, $conn);
         }
       } else {
         return $this->add($conn, $user, $vrh);
@@ -57,10 +59,17 @@ use App\scripts\PesBase;
       $data = get_object_vars($this);
       foreach ($data as $name => $value) {
         if ($value !== '') {
-          if ($prvni === false) {
-            $sql .= "AND p.{$name} = '{$value}' ";
+
+          if ($name !== 'stanice') {
+            $prefix = 'p';
           } else {
-            $sql .= "WHERE p.{$name} = '{$value}' ";
+            $prefix = 'v';
+          }
+
+          if ($prvni === false) {
+            $sql .= "AND {$prefix}.{$name} = '{$value}' ";
+          } else {
+            $sql .= "WHERE {$prefix}.{$name} = '{$value}' ";
             $prvni = false;
           }
         }

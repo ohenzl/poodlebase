@@ -40,7 +40,8 @@ namespace App\scripts;
     }
 
     function exists($conn, $stanice)  {
-      $sql = "SELECT p.ID ID FROM vrh v JOIN psi p ON p.vrh=v.ID WHERE p.pes_jmeno = '$this->pes_jmeno' AND v.stanice = '$stanice'";
+      $cele_jmeno = $this->pes_jmeno . ' ' . $stanice;
+      $sql = "SELECT * FROM vrh v JOIN psi p ON p.vrh=v.ID HAVING concat(p.pes_jmeno, ' ', v.stanice) = '$cele_jmeno'";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         return true;
