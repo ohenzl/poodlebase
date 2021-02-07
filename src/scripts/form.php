@@ -29,6 +29,7 @@ class FormToSQL {
         $pes[$number]->$nazev = trim($data);
       }
     }
+    // echo var_dump($pes);
     return $pes;
   }
 
@@ -99,6 +100,8 @@ class FormToSQL {
       }
 
       return $id;
+    } else {
+      return $pes->getID($conn, $pes->stanice);
     }
   }
 

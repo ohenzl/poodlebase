@@ -7,13 +7,14 @@ use App\scripts\PesBase;
 
     function addOrEdit($conn, $user, $vrh) {
       // echo $this->pes_jmeno . " " . $vrh->stanice . "<br>";
-      $cele_jmeno = $this->pes_jmeno . ' ' . $this->pes_jmeno;
+      $cele_jmeno = $this->pes_jmeno . ' ' . $vrh->stanice;
 
       $sql = "SELECT *, p.ID IDp FROM vrh v JOIN psi p ON p.vrh=v.ID HAVING concat(p.pes_jmeno, ' ', v.stanice) = '$cele_jmeno'";
       // echo $sql . "<br>";
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         while($row = $result->fetch_assoc()) {
+          $this->vrh = $vrh->ID;
           $this->edit($row['IDp'], $user, $conn);
         }
       } else {
@@ -40,13 +41,12 @@ use App\scripts\PesBase;
       $sql = "UPDATE psi SET ";
       foreach ($objects as $nazev => $hodnota) {
         if ($nazev !== 'ID' && $nazev !== 'stanice') {
-          if ($nazev !== 'vrh' || $hodnota !== '') {
+          if ($hodnota !== '') {
             $sql .= "{$nazev} = '{$hodnota}', ";
           }
         }
       }
       $sql .= "vloz_osoba='$user', vloz_datum='$datetime' WHERE ID='$ID'";
-
       if ($conn->query($sql) === TRUE) {
       } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
@@ -58,7 +58,7 @@ use App\scripts\PesBase;
       $prvni = true;
       $data = get_object_vars($this);
       foreach ($data as $name => $value) {
-        if ($value !== '') {
+        if ($value !== '' && $name !== 'cmku_pref') {
 
           if ($name !== 'stanice') {
             $prefix = 'p';
@@ -80,7 +80,7 @@ use App\scripts\PesBase;
       if (!$result || $result->num_rows === 0) {
         $vysl['error'] = true;
         $vysl['errormsg'] = 'Tomuto zadání neodpovídá žádný vrh v databázi.';
-        $vysl['errormsg'] = $sql;
+        // $vysl['errormsg'] = $sql;
       } elseif ($result->num_rows > 1) {
         $vysl['error'] = true;
         $vysl['errormsg'] = 'Tomuto zadání odpovídá více vrhů v databázi. Upřesněte údaje.';

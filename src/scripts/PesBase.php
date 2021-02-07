@@ -50,6 +50,21 @@ namespace App\scripts;
       }
     }
 
+    function getID($conn, $stanice)  {
+      $cele_jmeno = $this->pes_jmeno . ' ' . $stanice;
+      $sql = "SELECT *, p.ID ID FROM vrh v JOIN psi p ON p.vrh=v.ID HAVING concat(p.pes_jmeno, ' ', v.stanice) = '$cele_jmeno'";
+      $result = $conn->query($sql);
+      if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+          // echo $row['ID'];
+          return $row['ID'];
+        }
+      } else {
+        // echo $sql;
+        return false;
+      }
+    }
+
   }
 
  ?>

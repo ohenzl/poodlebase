@@ -80,7 +80,7 @@ class Admin extends AbstractController {
 
 
     return $this->render('home/admin/adding.html.twig', [
-      'post' => $pedigree
+      'post' => $vrh
     ]);
   }
 

@@ -53,7 +53,7 @@
 
     {% if form.getName() == 'cmku' %}
       <label for="cmku_pref">Prefix zápisu</label>
-      <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="[cmku_pref]" id="cmku_pref" class="form-add {{form.getClass()}}">
+      <input type="{{form.getTyp()}}" value="{{form.getValue()}}" name="{{ counter }}[cmku_pref]" id="cmku_pref" class="form-add {{form.getClass()}}">
       <br>
       <label for="{{form.getName()}}">{{form.getLabel()}}</label>
       <input type="{{form.getTyp()}}" value="" name="{{ counter }}[{{form.getName()}}]" id="{{form.getName()}}" class="form-add {{form.getClass()}}">

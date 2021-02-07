@@ -17,11 +17,11 @@ class AdminArea {
 
   public function getLastDogs() {
     $edits = [];
-    $sql = "SELECT *, p.vloz_datum datum FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.vloz_osoba = '$this->user' ORDER BY p.vloz_datum DESC LIMIT 20";
+    $sql = "SELECT *, p.ID IDp, p.vloz_datum datum FROM psi p JOIN vrh v ON p.vrh=v.ID WHERE p.vloz_osoba = '$this->user' ORDER BY p.vloz_datum DESC LIMIT 20";
     $result = $this->conn->query($sql);
     if ($result->num_rows > 0) {
       while ($row = $result->fetch_assoc()) {
-        $edits[] = new Edit($row['ID'], $row['pes_jmeno'] . " " . $row['stanice'], $row['datum']);
+        $edits[] = new Edit($row['IDp'], $row['pes_jmeno'] . " " . $row['stanice'], $row['datum']);
       }
     }
     return $edits;

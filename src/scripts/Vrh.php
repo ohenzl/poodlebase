@@ -29,12 +29,35 @@ namespace App\scripts;
       $this->matka_id = '';
     }
 
+    function getAllInfo($conn, $ID) {
+      $sql = "SELECT * FROM vrh v WHERE ID = $ID";
+      // echo $sql;
+      $result = $conn->query($sql);
+      if ($result->num_rows > 0) {
+        while($row = $result->fetch_assoc()) {
+          foreach ($row as $key => $value) {
+            if ($key !== 'vloz_datum' && $key !== 'vloz_osoba') {
+              echo $key . " " . $this->$key . " " . $value . "<br>";
+              if ($this->$key === '' || $this->$key === null) {
+                $this->$key = $value;
+              }
+            }
+          }
+          // echo var_dump($this);
+        }
+      }
+    }
+
     function addOrEdit($conn, $user) {
       $sql = "SELECT v.ID FROM vrh v JOIN psi p ON v.ID=p.vrh WHERE matka_id = '$this->matka_id' AND narozeni = '$this->narozeni'";
       // echo $sql;
       $result = $conn->query($sql);
       if ($result->num_rows > 0) {
+        // echo "edit";
         while($row = $result->fetch_assoc()) {
+          // echo $row['ID'] . "<br>";
+          $this->getAllInfo($conn, $row['ID']);
+          echo var_dump($this) . "<br>";
           $this->editVrh($row['ID'], $user, $conn);
           return $row['ID'];
         }
@@ -60,7 +83,7 @@ namespace App\scripts;
     function editVrh($ID, $user, $conn) {
       $datetime = date("Y-m-d H:i:s");
       $sql = "UPDATE vrh
-      SET otec_jmeno='$this->otec_jmeno', otec_chov='$this->otec_chov', matka_jmeno='$this->matka_jmeno', matka_chov='$this->matka_chov', narozeni='$this->narozeni', stanice='$this->stanice', chovatel_jmeno='$this->chovatel_jmeno', vloz_osoba='$user', vloz_datum='$datetime'
+      SET otec_id='$this->otec_id',  matka_id='$this->matka_id',  narozeni='$this->narozeni', stanice='$this->stanice', chovatel_jmeno='$this->chovatel_jmeno', vloz_osoba='$user', vloz_datum='$datetime'
       WHERE ID='$ID'";
       // echo $sql;
 
