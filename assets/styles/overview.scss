@@ -72,13 +72,26 @@ tr:nth-child(2n) {
   }
 
   td::before {
-
     left: 6px;
     padding-right: 10px;
     white-space: nowrap;
     text-align:left;
     font-weight: bold;
     position:absolute;
+  }
+
+  td:first-child {
+    padding: 0px;
+    text-align:center;
+    font-size:35px;
+    padding-top:20px;
+    padding-bottom:10px;
+    border-bottom: none;
+    font-weight:600;
+  }
+
+  td:first-child::before {
+    display:none;
   }
 
   td::before {
