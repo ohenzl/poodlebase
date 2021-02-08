@@ -56,36 +56,36 @@
 
   {% for pes in psi %}
     <tr>
-      <td>
+      <td data-title="Jméno">
         <a href="{{ path('displayDogWithDog', {dogID: pes.ID, dogname: (pes.pes_jmeno ~ ' ' ~ pes.stanice)|trim|replace({' ': '-'}) } ) }}">
         {{pes.pes_jmeno}}
       </td>
-      <td>
+      <td data-title="Chovná stanice">
         {{pes.stanice}}
       </td>
-      <td>
+      <td data-title="Barva">
         {{pes.barva}}
       </td>
-      <td>
+      <td data-title="Pohlaví">
         {{pes.pohlavi}}
       </td>
-      <td>
+      <td data-title="Datum narození">
         {% if pes.narozeni != '0000-00-00' %}
           {{pes.narozeni|date("d.m.Y")}}
         {% else %}
           neudáno
         {% endif %}
       </td>
-      <td>
+      <td data-title="Matka">
         {{pes.matka_jmeno}} {{pes.matka_stanice}}
       </td>
-      <td>
+      <td data-title="Otec">
         {{pes.otec_jmeno}} {{pes.otec_stanice}}
       </td>
-      <td>
+      <td data-title="Chovatel">
         {{pes.chovatel_jmeno}}
       </td>
-      <td>
+      <td data-title="Majitel">
         {{pes.majitel}}
       </td>
     </tr>

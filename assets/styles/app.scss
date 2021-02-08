@@ -29,7 +29,7 @@ nav {
   align-items: center;
   padding: 0;
   overflow: hidden;
-  transition: height ease-in-out 250ms;
+  transition: max-height ease-in-out 250ms;
 
   div {
     color:white;
@@ -135,13 +135,14 @@ nav {
   nav {
     flex-direction: column;
     display:block;
-    height: 0px;
+    height: auto;
+    max-height: 0px;
     .navlink {
     }
   }
   .hamburger:checked ~ nav {
     display:block;
-    height: 250px;
+    max-height: 250px;
   }
 
   #label_hamburger{

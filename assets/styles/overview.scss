@@ -45,3 +45,43 @@ tr:last-child {
 tr:nth-child(2n) {
   background: #FCFCFC;
 }
+
+
+//responsive
+
+@media only screen and (max-width: 970px) {
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+    white-space: normal;
+    text-align:left;
+    // top: 6px;
+
+  }
+  td, th {
+    display:block;
+  }
+
+  th {
+    position:absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  td::before {
+
+    left: 6px;
+    padding-right: 10px;
+    white-space: nowrap;
+    text-align:left;
+    font-weight: bold;
+    position:absolute;
+  }
+
+  td::before {
+    content: attr(data-title);
+  }
+}
