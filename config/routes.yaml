@@ -36,6 +36,9 @@ displayDog:
 
 
 #admin area
+exists:
+  path: /exists
+  controller: App\Controller\Admin::exists
 
 admin:
   path: /admin

@@ -84,7 +84,7 @@ class FormToSQL {
       }
     }
     // echo (!$pes->exists($conn, $pes->stanice));
-    if (!$pes->exists($conn, $pes->stanice) && $pes->pes_jmeno !== null) {
+    if (!$pes->exists($conn) && $pes->pes_jmeno !== null) {
 
       $vrh = new Vrh;
       $datetime = date("Y-m-d H:i:s");

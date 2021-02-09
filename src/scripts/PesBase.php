@@ -39,10 +39,20 @@ namespace App\scripts;
       $this->patella_r = '';
     }
 
-    function exists($conn, $stanice)  {
-      $cele_jmeno = $this->pes_jmeno . ' ' . $stanice;
-      $sql = "SELECT * FROM vrh v JOIN psi p ON p.vrh=v.ID HAVING concat(p.pes_jmeno, ' ', v.stanice) = '$cele_jmeno'";
-      $result = $conn->query($sql);
+    function exists($conn)  {
+      //změna ze exists($conn, stanice) a $cele_jmeno = $this->pes_jmeno . ' ' . $stanice;
+      $cele_jmeno = $this->pes_jmeno . ' ' . $this->stanice;
+
+      $sql = "SELECT * FROM vrh v JOIN psi p ON p.vrh=v.ID HAVING concat(p.pes_jmeno, ' ', v.stanice) = ?";
+
+      $prep = $conn->prepare($sql);
+      $prep->bind_param("s", $cele_jmeno);
+      $prep->execute();
+      $result = $prep->get_result();
+
+      // $user = $result->fetch_assoc();
+      //
+      // $result = $conn->query($sql);
       if ($result->num_rows > 0) {
         return true;
       } else {

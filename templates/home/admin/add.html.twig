@@ -38,9 +38,9 @@
                   {% endif %}
                   <!-- <br> -->
                   <label for="jmeno{{g}}{{i}}">J:</label>
-                  <input type="text" placeholder="Jméno" value="" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][jmeno]" id="jmeno{{g}}{{i}}" class="form-add">
+                  <input type="text" placeholder="Jméno" value="" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][jmeno]" id="jmeno{{g}}{{i}}" class="form-add pedigree">
                   <label for="stanice{{g}}{{i}}">S:</label>
-                  <input type="text" placeholder="Stanice" value="" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][stanice]" id="stanice{{g}}{{i}}" class="form-add">
+                  <input type="text" placeholder="Stanice" value="" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][stanice]" id="stanice{{g}}{{i}}" class="form-add pedigree">
                 </td>
               {% endif %}
 
@@ -91,6 +91,9 @@
   </div>
     <input id='odeslat' type="submit" disabled>
   </form>
+
+  <button onclick='checkExists()'>Exists?</button>
+
   <button id='kontrola'>Zkontrolovat</button>
   <div id='pridatButton'>Přidat psa</div>
 {% endblock %}
@@ -98,4 +101,5 @@
 
 {% block javascripts %}
   {{ encore_entry_script_tags('form_check') }}
+  <script src="{{ asset('javascript/add.js') }}"></script>
 {% endblock %}

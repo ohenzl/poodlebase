@@ -14,6 +14,7 @@ use App\scripts\FormToSQL;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use App\scripts\AdminArea;
+use App\scripts\PesBase;
 
 class Admin extends AbstractController {
 
@@ -262,6 +263,26 @@ class Admin extends AbstractController {
       'post' => $sql
     ]);
   }
+
+  public function exists(Request $request) {
+
+    $request = Request::createFromGlobals();
+    $rq = $request->query->all();
+
+    $db = new SQLHandle;
+    $conn = $db->databaseConnect();
+
+    $dog = new PesBase;
+    $dog->pes_jmeno = trim($rq['name']);
+    $dog->stanice = trim($rq['stanice']);
+    $exists = $dog->exists($conn);
+
+    return new JsonResponse(
+            $exists,
+        200);
+
+  }
+
 
 }
  ?>
