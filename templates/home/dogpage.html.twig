@@ -124,11 +124,15 @@
 
 
 </table>
+<button onclick='checkRelationship()'>check</button>
 {{dump(dogs)}}
+
+
+
 
 {% endblock %}
 
 
 {% block javascripts %}
-  {{ encore_entry_script_tags('overview') }}
+  <script src="{{ asset('javascript/dogpage.js') }}"></script>
 {% endblock %}

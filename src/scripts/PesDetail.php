@@ -87,7 +87,7 @@ use App\scripts\PesBase;
 
     function printInfo() {
       if ($this->ID !== null) {
-        return "<div><a href='../../pes/{$this->ID}/" . str_replace(' ', '-', ($this->pes_jmeno . " " . $this->stanice)) . "'>{$this->pes_jmeno} {$this->stanice}</a></div>";
+        return "<div><a class='dogname' href='../../pes/{$this->ID}/" . str_replace(' ', '-', ($this->pes_jmeno . " " . $this->stanice)) . "'>{$this->pes_jmeno} {$this->stanice}</a></div>";
       } else {
         return "<div>{$this->pes_jmeno} {$this->stanice}</div>";
       }
