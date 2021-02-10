@@ -18,6 +18,7 @@ pedigree.forEach(addListener => {
       }
       name.style.backgroundColor = color;
       stanice.style.backgroundColor = color;
+      // console.log(name.parentElement.attributes[0].value, name.parentElement.attributes[0].value.slice(4, 5), name.parentElement.attributes[0].value.slice(7, -1))
     })
   });
 })

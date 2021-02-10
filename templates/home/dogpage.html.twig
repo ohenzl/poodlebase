@@ -16,6 +16,10 @@
 
 <h1>{{dog.getJmeno}}</h1>
 
+{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+<div><a href='{{ path('editPes', {dogID: dog.ID})}}'>upravit</a></div>
+{% endif %}
+
 <h2>Informace</h2>
 <table id='info'>
   <tr>
@@ -103,15 +107,26 @@
 <br>
 
 <h2>Rodokmen</h2>
+
+<h3>Zobrazení:</h3>
+
+
+<button onclick='changeDisplay("name")'>Jména</button>
+<button onclick='changeDisplay("height"), showHeights()'>Výška</button>
+<button onclick='changeDisplay("color"), showColors()'>Barva</button>
+<button onclick='changeDisplay("patella")'>Patelly</button>
+
+<div id='detailedInfoPedigree'></div>
+
 <table id='pedigree'>
 
 {% for g in 0 .. (rows)-1 %}
-  <tr>
+  <tr class='parentrow' data-row='{{g}}'>
     {% for i in 1 .. gens %}
 
 
       {% if g % (rows/dogs[i]|length) == 0 %}
-        <td rowspan='{{rows/dogs[i]|length}}'>
+        <td rowspan='{{rows/dogs[i]|length}}' class='parentname pn{{i}}'>
           {{dogs[i][(g/(rows/dogs[i]|length))].printInfo | raw }}
         </td>
       {% endif %}
@@ -125,7 +140,7 @@
 
 </table>
 <button onclick='checkRelationship()'>check</button>
-{{dump(dogs)}}
+{# {{dump(dogs)}} #}
 
 
 

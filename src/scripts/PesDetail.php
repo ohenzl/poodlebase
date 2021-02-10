@@ -87,7 +87,20 @@ use App\scripts\PesBase;
 
     function printInfo() {
       if ($this->ID !== null) {
-        return "<div><a class='dogname' href='../../pes/{$this->ID}/" . str_replace(' ', '-', ($this->pes_jmeno . " " . $this->stanice)) . "'>{$this->pes_jmeno} {$this->stanice}</a></div>";
+        if ($this->vyska === "0.00") {
+          $this->vyska = "--";
+        } else {
+          $this->vyska = number_format(round($this->vyska, 1), 1);
+        }
+        if ($this->barva === "") {
+          $this->barva = "--";
+        } else {
+          $this->barva = strtolower($this->barva);
+        }
+        return "<div class='display name'><a class='dogname' href='../../pes/{$this->ID}/" . str_replace(' ', '-', ($this->pes_jmeno . " " . $this->stanice)) . "'>{$this->pes_jmeno} {$this->stanice}</a></div>
+        <div class='display height'>{$this->vyska}</div>
+        <div class='display color'>{$this->barva}</div>
+        <div class='display patella'>{$this->patella_l}/{$this->patella_r}</div>";
       } else {
         return "<div>{$this->pes_jmeno} {$this->stanice}</div>";
       }

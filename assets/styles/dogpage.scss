@@ -4,8 +4,24 @@
 
 
 #pedigree td {
-  border: 1px solid black;
+  border-left: 1px solid rgba(240, 240, 240, 0.5);
+  border-right: 1px solid rgba(240, 240, 240, 0.5);
 }
+
+#pedigree td:nth-child(1) {
+  border-left: none;
+}
+
+#pedigree tr {
+  border: 1px solid black;
+  border-left:none;
+  border-right:none;
+}
+
+#pedigree tr:nth-child(1), #pedigree tr:nth-child(16) {
+  border: none;
+}
+
 
 #info {
   width:50%;
@@ -16,7 +32,8 @@ h2 {
 }
 
 table {
-  width: 80%;
+  width: calc(1920px - 15%);
+  max-width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
   text-align:center;
@@ -32,4 +49,85 @@ td {
 
 table div {
   padding:10px;
+}
+
+@media only screen and (max-width: 800px) {
+  table {
+  }
+}
+
+.pn4 {
+  // display: none;
+}
+
+// .pn1::before, .pn1::after {
+//   height: 60px;
+// }
+//
+// .pn2::before, .pn2::after {
+//   height: 30px;
+// }
+//
+// .pn3::before, .pn3::after {
+//   height: 15px;
+// }
+//
+// .pn4::before, .pn4::after {
+//   height: 7.5px;
+// }
+//
+// .pn1::after {
+//   transform: translate(400%, -80px);
+// }
+//
+// .pn2::after {
+//   transform: translate(400%, -50px);
+// }
+//
+// .pn3::after {
+//   transform: translate(400%, -35px);
+// }
+//
+// .pn4::after {
+//   transform: translate(400%, -27.5px);
+// }
+//
+// .parentname::before, .parentname::after {
+//   content: '';
+//   width: 2%;
+//   position:absolute;
+// }
+//
+// .parentname::before {
+//   margin: 0;
+//   border-top: 1px solid black;
+//   border-right: 1px solid black;
+//   transform: translate(400%, 20px);
+//   border-top-right-radius: 35px;
+// }
+//
+// .parentname::after {
+//   margin: 0;
+//   border-right: 1px solid black;
+//   border-bottom: 1px solid black;
+//   border-bottom-right-radius: 35px;
+//   position:absolute;
+// }
+//
+// .dogname::before {
+//   content: '';
+//   margin: 0;
+//   height:30px;
+//   width:2%;
+//   border-right: 1px solid black;
+//   border-bottom: 1px solid black;
+//   border-bottom-right-radius: 35px;
+//   position:absolute;
+//   border-top: 1px solid black;
+//   border-right: 1px solid black;
+// }
+
+
+.height, .color, .patella {
+  display:none;
 }

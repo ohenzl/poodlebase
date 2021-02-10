@@ -69,7 +69,7 @@
           <tr>
             <td><a href='{{ path('displayDogWithDog', {dogID: dog.ID, dogname: (dog.name)|trim|replace({' ': '-'}) } ) }}'>{{dog.name}}</a></td>
             <td>{{dog.date}}</td>
-            <td><a href='../../admin/editPes/{{dog.ID}}'>upravit</a></td>
+            <td><a href='{{ path('editPes', {dogID: dog.ID})}}'>upravit</a></td>
           </tr>
         {% endfor %}
       </table>
