@@ -53,6 +53,22 @@ use App\scripts\PesBase;
       }
     }
 
+    function fullEdit($ID, $user, $conn) {
+      $datetime = date("Y-m-d H:i:s");
+      $objects = get_object_vars($this);
+      $sql = "UPDATE psi SET ";
+      foreach ($objects as $nazev => $hodnota) {
+        if ($nazev !== 'ID' && $nazev !== 'stanice') {
+          $sql .= "{$nazev} = '{$hodnota}', ";
+        }
+      }
+      $sql .= "vloz_osoba='$user', vloz_datum='$datetime' WHERE ID='$ID'";
+      if ($conn->query($sql) === TRUE) {
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
+    }
+
     function checkSql($conn) {
       $sql = '';
       $prvni = true;

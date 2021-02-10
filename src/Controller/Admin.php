@@ -164,7 +164,7 @@ class Admin extends AbstractController {
     $conn = $db->databaseConnect();
     $form_handle = new FormToSQL;
     $pes = $form_handle->parsePostPes($_POST);
-    current($pes)->edit(current($pes)->ID, $user, $conn);
+    current($pes)->fullEdit(current($pes)->ID, $user, $conn);
 
     return $this->render('home/admin/adding.html.twig', [
       'post' => $pes
