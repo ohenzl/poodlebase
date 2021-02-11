@@ -64,10 +64,10 @@
         {{pes.stanice}}
       </td>
       <td data-title="Barva">
-        {{pes.barva}}
+        {{pes.barva|lower}}
       </td>
       <td data-title="Pohlaví">
-        {{pes.pohlavi}}
+        {{pes.pohlavi|lower}}
       </td>
       <td data-title="Datum narození">
         {% if pes.narozeni != '0000-00-00' %}

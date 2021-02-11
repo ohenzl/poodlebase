@@ -131,3 +131,16 @@ table div {
 .height, .color, .patella {
   display:none;
 }
+
+.changeDisplay {
+  border-radius: 4px;
+  padding: 6px 20px;
+  border: 2px solid #4CAF50;;
+  background-color: inherit;
+}
+
+.changeDisplay:hover {
+  background-color: #4CAF50;;
+  color: white;
+  transition: all ease-out 0.1s;
+}
