@@ -15,10 +15,64 @@ table {
   text-align:center;
 }
 
+
 td {
   min-height: 30px;
 }
 
 table div {
   padding:5px;
+}
+
+
+.cellAdd {
+  text-align:center;
+}
+
+.form-add {
+  border-radius:5px;
+}
+
+form {
+  padding-left:20px;
+  left:30%;
+  position:relative;
+  width:50%;
+  // text-align:center;
+}
+
+form {
+  label {
+    width:150px;
+    display:inline-block;
+    text-align:right;
+    padding-right:20px;
+  }
+}
+
+.pedigreeLabel {
+  padding-right:10px;
+  width:auto;
+}
+
+button {
+  text-align:center;
+  display:block;
+  margin:auto;
+  margin-bottom:100px;
+}
+
+#pedigree_add {
+  top:50px;
+  margin-bottom: 50px;
+  width:180%;
+  position:relative;
+  left:-53%;
+}
+
+#pedigree_add {
+  tr, td {
+    border: 1px solid black;
+  }
+  border-collapse: collapse;
 }

@@ -9,17 +9,24 @@ pedigree.forEach(addListener => {
   addListener.addEventListener('blur', checkIfExists => {
     let color = 'inherit';
     let name = checkIfExists.originalTarget.parentElement.children[2];
-    let stanice = checkIfExists.originalTarget.parentElement.children[4];
-    checkExistsSQL(name.value, stanice.value).then((value) => {
-      if (value === 'true') {
-        color = 'rgba(76,175,80,0.6)'
-      } else {
-        color = 'rgba(255,205,210,1)'
-      }
+    let stanice = checkIfExists.originalTarget.parentElement.children[5];
+    console.log(name.value, stanice.value)
+    // console.log(stanice.value === '', name.value === '');
+
+    if (stanice.value !== '' || name.value !== '') {
+      checkExistsSQL(name.value, stanice.value).then((value) => {
+        if (value === 'true') {
+          color = 'rgba(76,175,80,0.6)'
+        } else {
+          color = 'rgba(255,205,210,1)'
+        }
+        name.style.backgroundColor = color;
+        stanice.style.backgroundColor = color;
+      })
+    } else {
       name.style.backgroundColor = color;
       stanice.style.backgroundColor = color;
-      // console.log(name.parentElement.attributes[0].value, name.parentElement.attributes[0].value.slice(4, 5), name.parentElement.attributes[0].value.slice(7, -1))
-    })
+    }
   });
 })
 

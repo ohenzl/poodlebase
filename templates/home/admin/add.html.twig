@@ -7,7 +7,7 @@
 
 {% block stylesheets %}
   {{ parent() }}
-  {{ encore_entry_link_tags('admin') }}
+  {{ encore_entry_link_tags('add') }}
 {% endblock %}
 
 {% block body %}
@@ -28,7 +28,7 @@
 
 
               {% if g % (rows/pedigree[i]) == 0 %}
-                <td name='gen[{{i}}][{{g/(rows/pedigree[i])}}]' rowspan='{{rows/pedigree[i]}}'>
+                <td name='gen[{{i}}][{{g/(rows/pedigree[i])}}]' rowspan='{{rows/pedigree[i]}}' class='cellAdd'>
                   <!-- {{i}} {{g/(rows/pedigree[i])}} -->
                   {% if g % ((rows*2)/pedigree[i]) == 0 %}
                     <!-- otec -->
@@ -38,9 +38,10 @@
                     <input type="text" value="Fena" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][pohlavi]" id="pohlavi{{g}}{{i}}" class="form-add" style='display:none;'>
                   {% endif %}
                   <!-- <br> -->
-                  <label for="jmeno{{g}}{{i}}">J:</label>
+                  <label class="pedigreeLabel" for="jmeno{{g}}{{i}}">J:</label>
                   <input type="text" placeholder="Jméno" value="" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][jmeno]" id="jmeno{{g}}{{i}}" class="form-add pedigree">
-                  <label for="stanice{{g}}{{i}}">S:</label>
+                  <br>
+                  <label class="pedigreeLabel" for="stanice{{g}}{{i}}">S:</label>
                   <input type="text" placeholder="Stanice" value="" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][stanice]" id="stanice{{g}}{{i}}" class="form-add pedigree">
                 </td>
               {% endif %}
