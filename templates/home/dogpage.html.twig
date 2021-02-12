@@ -149,5 +149,6 @@
 
 
 {% block javascripts %}
+  {{ parent() }}
   <script src="{{ asset('javascript/dogpage.js') }}"></script>
 {% endblock %}

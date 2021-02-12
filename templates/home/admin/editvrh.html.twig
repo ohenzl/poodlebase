@@ -54,5 +54,6 @@
 
 
 {% block javascripts %}
+  {{ parent() }}
   {{ encore_entry_script_tags('form_edit') }}
 {% endblock %}
