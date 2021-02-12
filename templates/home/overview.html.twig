@@ -3,8 +3,8 @@
 {% block title %}Databáze pudlů{% endblock %}
 
 {% block stylesheets %}
+  {{ parent() }}
   {{ encore_entry_link_tags('overview') }}
-  {{ encore_entry_link_tags('app') }}
 {% endblock %}
 
 {% block body %}
