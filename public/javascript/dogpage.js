@@ -90,7 +90,9 @@ function showHeights() {
   //sort them by numbers
   heights.sort(function(a, b){return a - b});
   let text = 'Nejnižší: ' + heights[0] + " Nejvyšší: " + heights[heights.length-1] + " Průměrná: " + Math.round(heights.reduce(getSum, 0)/(heights.length))/10;
-  document.getElementById('detailedInfoPedigree').innerHTML = text;
+  if (heights.length > 0) {
+    document.getElementById('detailedInfoPedigree').innerHTML = text;
+  }
 
 }
 
@@ -98,10 +100,10 @@ function getSum(total, input) {
   return parseInt(total) + parseInt(input*10);
 }
 
-function showColors() {
+function countItems(source) {
   let colors = [];
   let output = [];
-  let colorsInput = document.getElementsByClassName('color');
+  let colorsInput = document.getElementsByClassName(source);
 
   for (i = 0; i < colorsInput.length; i++) {
     if (colorsInput[i].innerHTML !== '--') {
@@ -111,7 +113,6 @@ function showColors() {
   colors.sort();
   colors.forEach(write => {
     if (output[write] === undefined) {
-      console.log('undefined')
       output[write] = 1;
     } else {
       output[write] += 1;
@@ -126,5 +127,4 @@ function showColors() {
 
   document.getElementById('detailedInfoPedigree').innerHTML = text;
 
-  console.log(colors, output)
 }

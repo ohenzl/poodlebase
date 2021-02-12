@@ -97,10 +97,15 @@ use App\scripts\PesBase;
         } else {
           $this->barva = strtolower($this->barva);
         }
+        if ($this->patella_l === "" || $this->patella_r === "") {
+          $this->patella = "--";
+        } else {
+          $this->patella = $this->patella_l . "/" . $this->patella_r;
+        }
         return "<div class='display name'><a class='dogname' href='../../pes/{$this->ID}/" . str_replace(' ', '-', ($this->pes_jmeno . " " . $this->stanice)) . "'>{$this->pes_jmeno} {$this->stanice}</a></div>
         <div class='display height'>{$this->vyska}</div>
         <div class='display color'>{$this->barva}</div>
-        <div class='display patella'>{$this->patella_l}/{$this->patella_r}</div>";
+        <div class='display patella'>$this->patella</div>";
       } else {
         return "<div>{$this->pes_jmeno} {$this->stanice}</div>";
       }
