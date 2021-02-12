@@ -55,6 +55,8 @@
           </div>
         </div>
       </header>
+      {{ dump(app.request.cookies) }}
+      {{ dump(app.request.cookies.get('mode')) }}
 
         {% block body %}{% endblock %}
 

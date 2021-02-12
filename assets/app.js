@@ -25,11 +25,11 @@ document.getElementById('mode-button').addEventListener('click', show => {
     link.media = 'all';
     head.appendChild(link);
 
-    document.cookie = "mode=dark";
+    document.cookie = "mode=dark" + ";path=/";
   } else {
 
     let remove = document.getElementById('darkCss');
     remove.parentNode.removeChild(remove);
-    document.cookie = "mode=light";
+    document.cookie = "mode=light" + ";path=/";
   }
 })
