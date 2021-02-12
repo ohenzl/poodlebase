@@ -12,3 +12,24 @@ import './styles/app.scss';
 // import $ from 'jquery';
 
 // console.log('Hello Webpack Encore! Edit me in assets/app.js');
+
+
+document.getElementById('mode-button').addEventListener('click', show => {
+  if (!document.getElementById('darkCss')) {
+    let head  = document.getElementsByTagName('head')[0];
+    let link  = document.createElement('link');
+    link.id = 'darkCss'
+    link.rel  = 'stylesheet';
+    link.type = 'text/css';
+    link.href = '../../build/app_dark.css'
+    link.media = 'all';
+    head.appendChild(link);
+
+    document.cookie = "mode=dark";
+  } else {
+
+    let remove = document.getElementById('darkCss');
+    remove.parentNode.removeChild(remove);
+    document.cookie = "mode=light";
+  }
+})

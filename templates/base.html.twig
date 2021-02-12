@@ -6,7 +6,13 @@
           {% block title %}Welcome!{% endblock %}
         </title>
         {% block stylesheets %}
+
           {{ encore_entry_link_tags('app') }}
+
+          {% if app.request.cookies.get('mode') == 'dark' %}
+            <link id="darkCss" rel="stylesheet" type="text/css" href="../../build/app_dark.css" media="all">
+          {% endif %}
+
         {% endblock %}
     </head>
     <body>
@@ -43,7 +49,7 @@
         {% endif %}
         <!-- mode dark/light -->
         </nav>
-        <div class="mode-outer">
+        <div id='mode-button' class="mode-outer">
           <div class="mode-inner">
 
           </div>
@@ -51,8 +57,10 @@
       </header>
 
         {% block body %}{% endblock %}
+
         {% block javascripts %}
           {{ encore_entry_script_tags('app') }}
         {% endblock %}
+
     </body>
 </html>

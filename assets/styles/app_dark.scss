@@ -1,6 +1,12 @@
-@import 'app.scss';
-
 body {
   background-color:black;
   color:white;
+}
+
+.mode-outer {
+  transform: rotate(180deg);
+}
+
+.mode-outer:hover {
+  // transform: rotate(0deg);
 }
