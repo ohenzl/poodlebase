@@ -98,3 +98,22 @@ tr:nth-child(2n) {
     content: attr(data-title);
   }
 }
+
+#filtrButton, #filtr {
+  text-align:center;
+  margin:auto;
+}
+
+#filtrButton {
+  cursor: pointer;
+  width:50px;
+}
+
+#filtrButton::before {
+  content: attr(data-open);
+}
+
+#filtr {
+  max-height: 0px;
+  overflow: hidden;
+}

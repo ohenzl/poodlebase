@@ -93,3 +93,11 @@ removeVrh:
 removingVrh:
   path: /admin/removingVrh
   controller: App\Controller\Admin::removingVrh
+
+#API
+
+overviewAPI:
+  path: /API/database
+  controller: App\Controller\API::databaseAPI
+  options:
+    expose: true

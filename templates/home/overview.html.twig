@@ -8,21 +8,44 @@
 {% endblock %}
 
 {% block body %}
-<div id='background'></div>
+
 <h1>Databáze</h1>
+<div id='filtrButton' data-open="+">filtr</div>
+<div id='filtr'>
+  <div>
+    Jméno/chovná stanice
+    <input class='filterInput' id='name'></input>
+  </div>
+  <div>
+    Barva
+    <input class='filterInput' id='color'></input>
+  </div>
+  <div>
+    Pohlaví
+    <input class='filterInput' id='sex'></input>
+  </div>
+  <div>
+    Narození
+    <input class='filterInput' id='birth'></input>
+  </div>
+  <div>
+    Otec
+    <input class='filterInput' id='father'></input>
+  </div>
+  <div>
+    Matka
+    <input class='filterInput' id='mother'></input>
+  </div>
+  <div>
+    Chovatel
+    <input class='filterInput' id='breeder'></input>
+  </div>
+  <div>
+    Majitel
+    <input class='filterInput' id='owner'></input>
+  </div>
+</div>
 
-<!-- <div class='stripe' id='stripe'>
-</div>
-<div class='stripe' id='stripe2'>
-</div>
-<div class='stripe' id='stripe3'>
-</div>
-<div class='stripe' id='stripe4'>
-</div>
-<div class='stripe' id='stripe5'>
-</div> -->
-
-</div>
 <table>
   <tr>
     <th>
@@ -96,4 +119,11 @@
 {# {{dump(psi)}} #}
 
 
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+  {{ encore_entry_script_tags('overview') }}
 {% endblock %}
