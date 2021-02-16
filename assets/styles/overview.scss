@@ -42,10 +42,13 @@ tr:last-child {
   }
 }
 
-tr:nth-child(2n) {
+tr:nth-child(2n+1) {
   background: #FCFCFC;
 }
 
+thead tr {
+  background: #F1F1F1 !important;
+}
 
 //responsive
 

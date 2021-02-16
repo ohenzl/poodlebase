@@ -25,8 +25,12 @@
     <input class='filterInput' id='sex'></input>
   </div>
   <div>
-    Narození
-    <input class='filterInput' id='birth'></input>
+    Narození min
+    <input type='date' class='filterInput' id='birthMin'></input>
+  </div>
+  <div>
+    Narození max
+    <input type='date' class='filterInput' id='birthMax'></input>
   </div>
   <div>
     Otec
@@ -47,74 +51,77 @@
 </div>
 
 <table>
-  <tr>
-    <th>
-      Jméno
-    </th>
-    <th>
-      Chovná stanice
-    </th>
-    <th>
-      Barva
-    </th>
-    <th>
-      Pohlaví
-    </th>
-    <th>
-      Narození
-    </th>
-    <th>
-      Otec
-    </th>
-    <th>
-      Matka
-    </th>
-    <th>
-      Chovatel
-    </th>
-    <th>
-      Majitel
-    </th>
-  </tr>
-
-  {% for pes in psi %}
+  <thead id='tableHead'>
     <tr>
-      <td data-title="Jméno">
-        <a href="{{ path('displayDogWithDog', {dogID: pes.ID, dogname: (pes.pes_jmeno ~ ' ' ~ pes.stanice)|trim|replace({' ': '-'}) } ) }}">
-        {{pes.pes_jmeno}}
-      </td>
-      <td data-title="Chovná stanice">
-        {{pes.stanice}}
-      </td>
-      <td data-title="Barva">
-        {{pes.barva|lower}}
-      </td>
-      <td data-title="Pohlaví">
-        {{pes.pohlavi|lower}}
-      </td>
-      <td data-title="Datum narození">
-        {% if pes.narozeni != '0000-00-00' %}
-          {{pes.narozeni|date("d.m.Y")}}
-        {% else %}
-          neudáno
-        {% endif %}
-      </td>
-      <td data-title="Matka">
-        {{pes.matka_jmeno}} {{pes.matka_stanice}}
-      </td>
-      <td data-title="Otec">
-        {{pes.otec_jmeno}} {{pes.otec_stanice}}
-      </td>
-      <td data-title="Chovatel">
-        {{pes.chovatel_jmeno}}
-      </td>
-      <td data-title="Majitel">
-        {{pes.majitel}}
-      </td>
+      <th>
+        Jméno
+      </th>
+      <th>
+        Chovná stanice
+      </th>
+      <th>
+        Barva
+      </th>
+      <th>
+        Pohlaví
+      </th>
+      <th>
+        Narození
+      </th>
+      <th>
+        Otec
+      </th>
+      <th>
+        Matka
+      </th>
+      <th>
+        Chovatel
+      </th>
+      <th>
+        Majitel
+      </th>
     </tr>
-  {% endfor %}
+  </thead>
+  <tbody id='tableBody'>
 
+    <!-- {% for pes in psi %}
+      <tr>
+        <td data-title="Jméno">
+          <a href="{{ path('displayDogWithDog', {dogID: pes.ID, dogname: (pes.pes_jmeno ~ ' ' ~ pes.stanice)|trim|replace({' ': '-'}) } ) }}">
+          {{pes.pes_jmeno}}
+        </td>
+        <td data-title="Chovná stanice">
+          {{pes.stanice}}
+        </td>
+        <td data-title="Barva">
+          {{pes.barva|lower}}
+        </td>
+        <td data-title="Pohlaví">
+          {{pes.pohlavi|lower}}
+        </td>
+        <td data-title="Datum narození">
+          {% if pes.narozeni != '0000-00-00' %}
+            {{pes.narozeni|date("d.m.Y")}}
+          {% else %}
+            neudáno
+          {% endif %}
+        </td>
+        <td data-title="Matka">
+          {{pes.matka_jmeno}} {{pes.matka_stanice}}
+        </td>
+        <td data-title="Otec">
+          {{pes.otec_jmeno}} {{pes.otec_stanice}}
+        </td>
+        <td data-title="Chovatel">
+          {{pes.chovatel_jmeno}}
+        </td>
+        <td data-title="Majitel">
+          {{pes.majitel}}
+        </td>
+      </tr>
+    {% endfor %} -->
 
+  </tbody>
 </table>
 {# {{dump(psi)}} #}
 

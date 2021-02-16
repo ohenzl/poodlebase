@@ -29,6 +29,8 @@ database:
 displayDogWithDog:
   path: /pes/{dogID}/{dogname}
   controller: App\Controller\Database::displayDog
+  options:
+    expose: true
 
 displayDog:
   path: /pes/{dogID}
