@@ -41,6 +41,9 @@ displayDog:
 exists:
   path: /exists
   controller: App\Controller\Admin::exists
+  options:
+    expose: true
+
 
 admin:
   path: /admin

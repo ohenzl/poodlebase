@@ -37,6 +37,12 @@ class Process {
           case "name":
             $where .= "concat(p.pes_jmeno, ' ', v.stanice)";
             break;
+          case "name_strict":
+            $where .= "p.pes_jmeno";
+            break;
+          case "kennel":
+            $where .= "v.stanice";
+            break;
           case "color":
             $where .= "p.barva";
             break;

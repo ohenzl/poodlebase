@@ -43,6 +43,7 @@
                   <br>
                   <label class="pedigreeLabel" for="stanice{{g}}{{i}}">S:</label>
                   <input type="text" placeholder="Stanice" value="" name="gen[{{i}}][{{g/(rows/pedigree[i])}}][stanice]" id="stanice{{g}}{{i}}" class="form-add pedigree">
+                  <div class='choice'></div>
                 </td>
               {% endif %}
 
@@ -105,4 +106,6 @@
   {{ parent() }}
   {{ encore_entry_script_tags('form_check') }}
   <script src="{{ asset('javascript/add.js') }}"></script>
+  <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+  <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
 {% endblock %}

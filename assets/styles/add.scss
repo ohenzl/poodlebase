@@ -76,3 +76,22 @@ button {
   }
   border-collapse: collapse;
 }
+
+.choice {
+  position:absolute;
+  background-color: grey;
+  color:white;
+  padding:0px;
+  max-height:290px;
+  overflow-y: hidden;
+}
+
+.choice:hover {
+  overflow-y: auto;
+}
+
+.option {
+  font-size: 14px;
+  padding:5px 15px;
+  border-bottom: 1px solid black;
+}
