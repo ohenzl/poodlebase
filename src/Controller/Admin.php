@@ -19,9 +19,6 @@ use App\scripts\PesBase;
 class Admin extends AbstractController
 {
 
-    // require_once('../src/scripts/logincheck.php');
-
-    // require '../src/scripts/logincheck.php';
 
     public $session;
 
@@ -38,7 +35,6 @@ class Admin extends AbstractController
         $admin_info = new AdminArea($conn, $authenticationUtils->getLastUsername());
         $last_dogs = $admin_info->getLastDogs();
 
-        // $user = $authenticationUtils->getLastUsername();
 
         return $this->render(
             'home/admin.html.twig', [

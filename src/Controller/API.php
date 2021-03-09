@@ -19,12 +19,9 @@ class API extends AbstractController
     {
 
         $request = Request::createFromGlobals()->query;
-
         $conn = SQLHandle::databaseConnect();
-
         $sql = new Process($conn, $request);
         $output = $sql->build();
-
 
         return new JsonResponse(
             $output,
