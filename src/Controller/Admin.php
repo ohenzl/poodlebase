@@ -31,7 +31,6 @@ class Admin extends AbstractController
     {
 
         $conn = SQLHandle::databaseConnect();
-        // $conn = $db->databaseConnect();
         $admin_info = new AdminArea($conn, $authenticationUtils->getLastUsername());
         $last_dogs = $admin_info->getLastDogs();
 
@@ -189,7 +188,6 @@ class Admin extends AbstractController
         $form_handle = new FormToSQL;
         $rq = $request->query->all();
         $pes = $form_handle->parsePostPes($rq);
-        // echo var_dump($form_handle);
         $sql = current($pes)->checkSql($conn);
 
         return new JsonResponse(

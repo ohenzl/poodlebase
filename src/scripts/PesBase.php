@@ -43,7 +43,6 @@ class PesBase
 
     function exists($conn)
     {
-        //změna ze exists($conn, stanice) a $cele_jmeno = $this->pes_jmeno . ' ' . $stanice;
         $cele_jmeno = $this->pes_jmeno . ' ' . $this->stanice;
 
         $sql = "SELECT * FROM vrh v JOIN psi p ON p.vrh=v.ID HAVING concat(p.pes_jmeno, ' ', v.stanice) = ?";
@@ -53,9 +52,6 @@ class PesBase
         $prep->execute();
         $result = $prep->get_result();
 
-        // $user = $result->fetch_assoc();
-        //
-        // $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             return true;
         } else {
@@ -70,11 +66,9 @@ class PesBase
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
-                // echo $row['ID'];
                 return $row['ID'];
             }
         } else {
-            // echo $sql;
             return false;
         }
     }
