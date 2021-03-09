@@ -12,8 +12,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class AuthController extends AbstractController
 {
 
-     public function login(AuthenticationUtils $authenticationUtils, BruteForceChecker $bruteForceChecker, Request $request): Response
-     {
+    public function login(AuthenticationUtils $authenticationUtils, BruteForceChecker $bruteForceChecker, Request $request): Response
+    {
 
         if (!$bruteForceChecker->canLogin($request)) {
             return new Response('Too many login attempts');

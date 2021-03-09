@@ -119,4 +119,15 @@ thead tr {
 #filtr {
   max-height: 0px;
   overflow: hidden;
+  width:350px;
+
+  div {
+    text-align:right;
+  }
+
+  input {
+    width: 150px;
+    margin-left:10px;
+  }
+
 }

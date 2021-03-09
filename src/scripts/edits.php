@@ -3,19 +3,21 @@
 namespace App\scripts;
 
 
-class Edit {
+class Edit
+{
 
-  public $name;
-  public $ID;
-  public $date;
+    public $name;
+    public $ID;
+    public $date;
 
-  public function __construct($ID, $name, $date) {
-    $this->name = $name;
-    $this->ID = $ID;
-    $this->date = $date;
-  }
+    public function __construct($ID, $name, $date)
+    {
+        $this->name = $name;
+        $this->ID = $ID;
+        $this->date = $date;
+    }
 
 }
 
 
- ?>
+?>

@@ -1,8 +1,9 @@
 <?php
 
-namespace App\scripts;
+namespace App\scripts\API;
 
-  class Dog {
+class Dog
+{
 
     public $ID;
     public $name;
@@ -18,6 +19,6 @@ namespace App\scripts;
     public $birth;
     public $breeder;
 
-  }
+}
 
- ?>
+?>
