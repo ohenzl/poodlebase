@@ -46,7 +46,6 @@ class Vrh
                         }
                     }
                 }
-                // echo var_dump($this);
             }
         }
     }
@@ -54,12 +53,9 @@ class Vrh
     function addOrEdit($conn, $user)
     {
         $sql = "SELECT v.ID FROM vrh v JOIN psi p ON v.ID=p.vrh WHERE matka_id = '$this->matka_id' AND narozeni = '$this->narozeni'";
-        // echo $sql;
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
-            // echo "edit";
             while($row = $result->fetch_assoc()) {
-                // echo $row['ID'] . "<br>";
                 $this->getAllInfo($conn, $row['ID']);
                 echo var_dump($this) . "<br>";
                 $this->editVrh($row['ID'], $user, $conn);
@@ -91,7 +87,6 @@ class Vrh
         $sql = "UPDATE vrh
       SET otec_id='$this->otec_id',  matka_id='$this->matka_id',  narozeni='$this->narozeni', stanice='$this->stanice', chovatel_jmeno='$this->chovatel_jmeno', vloz_osoba='$user', vloz_datum='$datetime'
       WHERE ID='$ID'";
-        // echo $sql;
 
         if ($conn->query($sql) === true) {
         } else {
