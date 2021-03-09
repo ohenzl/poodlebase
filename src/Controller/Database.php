@@ -67,7 +67,6 @@ class Database extends AbstractController
             'dogs' => $ancestors
             ]
         );
-
     }
 
     public function makeRouteWithDogsName($dogID, EntityManagerInterface $em)

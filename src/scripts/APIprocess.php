@@ -87,8 +87,6 @@ class Process
 
         $sql->execute();
 
-        // return $what;
-
         $result = $sql->get_result();
 
         if ($result->num_rows > 0) {

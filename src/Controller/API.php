@@ -18,12 +18,11 @@ class API extends AbstractController
     public function databaseAPI(Request $request)
     {
 
-        $request = Request::createFromGlobals();
-        $rq = $request->query;
+        $request = Request::createFromGlobals()->query;
 
         $conn = SQLHandle::databaseConnect();
 
-        $sql = new Process($conn, $rq);
+        $sql = new Process($conn, $request);
         $output = $sql->build();
 
 
