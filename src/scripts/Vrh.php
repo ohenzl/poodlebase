@@ -123,7 +123,6 @@ class Vrh
                 $vysl = json_encode($row);
             }
         }
-        // $vysl = json_encode($sql);
         return $vysl;
     }
 }

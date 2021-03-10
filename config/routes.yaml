@@ -1,6 +1,6 @@
 index:
    path: /
-   controller: App\Controller\HomeController::homepage
+   controller: App\Controller\Database::overview
 
 show:
    path: /show
