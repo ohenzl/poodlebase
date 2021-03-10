@@ -106,3 +106,13 @@ overviewAPI:
   controller: App\Controller\API::databaseAPI
   options:
     expose: true
+
+
+
+#API v1
+
+overviewAPIv1:
+  path: /API/v1/database
+  controller: App\Controller\APIv1::databaseAPI
+  options:
+    expose: true
