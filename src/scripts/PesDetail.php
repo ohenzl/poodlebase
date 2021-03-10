@@ -11,10 +11,6 @@ class PesDetail extends Pes
 
     }
 
-    public $otec_jmeno;
-    public $otec_chov;
-    public $matka_jmeno;
-    public $matka_chov;
     public $otec;
     public $matka;
     public $stanice;
