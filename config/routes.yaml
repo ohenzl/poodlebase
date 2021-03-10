@@ -111,8 +111,16 @@ overviewAPI:
 
 #API v1
 
-overviewAPIv1:
-  path: /API/v1/database
-  controller: App\Controller\APIv1::databaseAPI
+overviewAPIv1_all:
+  path: /API/v1/list
+  controller: App\Controller\APIv1::getAllDogs
+  methods: GET
+  options:
+    expose: true
+
+overviewAPIv1_one:
+  path: /API/v1/database/{id}
+  controller: App\Controller\APIv1::getDog
+  methods: GET
   options:
     expose: true
