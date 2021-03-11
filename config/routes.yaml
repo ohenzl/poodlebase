@@ -111,16 +111,30 @@ overviewAPI:
 
 #API v1
 
-overviewAPIv1_all:
+overviewAPIv1_dogs_all:
   path: /API/v1/list
   controller: App\Controller\APIv1::getAllDogs
   methods: GET
   options:
     expose: true
 
-overviewAPIv1_one:
-  path: /API/v1/database/{id}
+overviewAPIv1_dog_one:
+  path: /API/v1/dog/{id}
   controller: App\Controller\APIv1::getDog
   methods: GET
+  options:
+    expose: true
+
+overviewAPIv1_dogs_edit_full:
+  path: /API/v1/dog/{id}
+  controller: App\Controller\APIv1::editDogFull
+  methods: PUT
+  options:
+    expose: true
+
+overviewAPIv1_dog_edit_partial:
+  path: /API/v1/dog/{id}
+  controller: App\Controller\APIv1::editDogPart
+  methods: PATCH
   options:
     expose: true

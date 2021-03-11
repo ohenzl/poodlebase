@@ -91,7 +91,13 @@ class Process
     }
 
 
-    public function editDog() {
+    //full edit, including name changes and empty fields
+    public function editDogFull($id) {
+
+    }
+
+    //partial edit, only filled fields
+    public function editDogPart($id) {
 
     }
 
