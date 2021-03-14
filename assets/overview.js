@@ -87,14 +87,14 @@ function filterOutput() {
 
  function retrieveTableFromSQL(link) {
    // console.log(link)
-   let url = Routing.generate('overviewAPI');
+   let url = Routing.generate('overviewAPIv1_dogs_all');
    // console.log(url)
 
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         let body = document.getElementById('tableBody');
-        let dogs = JSON.parse(this.responseText);
+        let dogs = JSON.parse(this.responseText)['dogs'];
         let nodes = [];
 
         let newbody = createBody(body.parentElement);
@@ -114,6 +114,7 @@ function filterOutput() {
       }
     }
     xmlhttp.open('GET',url+link,true);
+    console.log(url+link)
     xmlhttp.send();
 }
 

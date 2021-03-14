@@ -28,9 +28,12 @@ class APIv1 extends AbstractController
 
         $request = Request::createFromGlobals();
         $page = $request->query->get('page');
+        $limit = $request->query->get('limit');
+        $all_info = $request->query;
 
         $sql = new Process($this->conn);
-        $output = $sql->getAll($page);
+        $in = $sql->createInputs($all_info);
+        $output = $sql->getAll($page, $limit, $in);
 
         return new JsonResponse(
             $output,
@@ -52,6 +55,7 @@ class APIv1 extends AbstractController
 
     public function editDogFull($id)
     {
+        $request = Request::createFromGlobals();
         $sql = new Process($this->conn);
         $output = $sql->editDogFull($id);
 
