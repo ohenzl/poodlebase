@@ -10,12 +10,14 @@ class Process
     private $conn;
     private $input;
 
-    function __construct($conn) {
+    function __construct($conn)
+    {
         $this->conn = $conn;
     }
 
     //create inputs for getAll
-    public function createInputs($input) {
+    public function createInputs($input)
+    {
         $this->input = $input;
         $where = '';
         $types = '';
@@ -32,6 +34,7 @@ class Process
                         $where .=  ' AND ';
                     }
 
+                    //add type for each variable
                     $types .= 's';
 
                     switch ($key) {
@@ -92,7 +95,8 @@ class Process
     }
 
     //select all dogs with possible offset
-    public function getAll($page = 1, $limit = 50, $in) {
+    public function getAll($page = 1, $limit = 50, $in)
+    {
 
         //get offset from page number
         $limit = is_int($limit) ? $limit : 50;
@@ -147,7 +151,8 @@ class Process
 
 
     //get dog by ID
-    public function getOne($id) {
+    public function getOne($id)
+    {
 
         $parents_next = array();
         $dog = new PesDetail;
@@ -176,12 +181,14 @@ class Process
 
 
     //full edit, including name changes and empty fields
-    public function editDogFull($id) {
+    public function editDogFull($id)
+    {
 
     }
 
     //partial edit, only filled fields
-    public function editDogPart($id) {
+    public function editDogPart($id)
+    {
 
     }
 
